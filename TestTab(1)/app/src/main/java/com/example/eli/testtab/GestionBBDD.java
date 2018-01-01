@@ -189,10 +189,10 @@ public class GestionBBDD {
 
                 // Calculo distancia y la guardo para ordenar por distancia
 
-                distancia= distance(longi,ltg,caf_long,caf_ltg);
-                if(distancia<2.5) {
+               distancia= distance(longi,ltg,caf_long,caf_ltg);
+               // if(distancia<2.5) {
                     listCafeterias.add(new Cafeteria(nom, address, descripcion, caf_long,caf_ltg, valoracion, distancia));
-                }
+               // }
             }
 
             rs.close();

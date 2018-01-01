@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.sql.Array;
@@ -29,57 +30,58 @@ import java.util.ListIterator;
 
 
     public class Listing extends Fragment {
-        int mNum;
-        ListView cafes;
-        Cafeteria [] cafeterias;
-        String resultat;
+    int mNum;
+    ListView cafes;
+    Cafeteria[] cafeterias;
+    String resultat;
+    TextView Tnom, adreça, tCafe;
 
     CharSequence text = "No funciona";
     int duration = Toast.LENGTH_SHORT;
 
 
     private static String Classe = "com.mysql.jdbc.Driver";
-    private static String datosConexion="jdbc:mysql://e80760-mysql.services.easyname.eu/";
+    private static String datosConexion = "jdbc:mysql://e80760-mysql.services.easyname.eu/";
     private static String baseDatos = "u125322db1";
     private static String usuario = "u125322db1";
-    private static String pass="Proyecto2018";
+    private static String pass = "Proyecto2018";
     private Connection con;
     Descarga nuevaDescarga; //async Task
-    Cafeteria miCafeteria=null;
+    Cafeteria miCafeteria = null;
 
 
+    static Listing newInstance(int num) {
+        Listing l = new Listing();
+
+        // Supply num input as an argument.
+        Bundle args = new Bundle();
+        args.putInt("num", num);
+        l.setArguments(args);
+
+        return l;
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        mNum = getArguments() != null ? getArguments().getInt("num") : 1;
+    }
 
 
-        static Listing newInstance(int num) {
-            Listing l = new Listing();
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
 
-            // Supply num input as an argument.
-            Bundle args = new Bundle();
-            args.putInt("num", num);
-            l.setArguments(args);
+        View view = inflater.inflate(R.layout.listing, container, false);
 
-            return l;
-        }
+        return view;
+    }
 
-        @Override
-        public void onCreate(Bundle savedInstanceState) {
-            super.onCreate(savedInstanceState);
-            mNum = getArguments() != null ? getArguments().getInt("num") : 1;
-        }
-
-
-        @Override
-        public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                                 Bundle savedInstanceState) {
-
-            View view = inflater.inflate(R.layout.listing, container, false);
-            cafes = (ListView) view.findViewById(R.id.cafeteria_list);
-            return view;
-        }
-
-        @Override
+    @Override
         public void onActivityCreated(Bundle state) {
             super.onActivityCreated(state);
+
+            cafes = (ListView) getView().findViewById(R.id.cafeteria_list);
             Descarga nuevaDescarga = new Descarga();
             nuevaDescarga.execute();
 
@@ -96,7 +98,7 @@ import java.util.ListIterator;
 
             try {
                 GestionBBDD baseDatos = new GestionBBDD(); // conecta con servidor SQL
-                cafeterias= baseDatos.verListCafeterias(1, 1).toArray(new Cafeteria[cafeterias.length]); // obtiene cafeteria
+                cafeterias= baseDatos.verListCafeterias(1, 1).toArray(new Cafeteria[100]); // obtiene cafeteria
             } catch (SQLException se) {
                 System.out.println("oops! No se puede conectar. Error: " + se.toString());
                 resultat = "SQLex";
@@ -117,4 +119,51 @@ import java.util.ListIterator;
     }
     }
 
+    /*public void onActivityCreated(Bundle state) {
+
+        View V = getView();
+        super.onActivityCreated(state);
+
+        Tnom = (TextView) getView().findViewById(R.id.nom_Cafeteria);
+        adreça = (TextView) getView().findViewById(R.id.address_Cafeteria);
+        tCafe = (TextView) getView().findViewById(R.id.tCafe_Cafeteria);
+        nuevaDescarga = new Descarga();
+        nuevaDescarga.execute();
+
+    }
+
+    public class Descarga extends AsyncTask<String, Integer, String> {
+
+        @Override
+        protected void onPreExecute() {
+
+        }
+
+        @Override
+        protected String doInBackground(String... urls) {
+
+            try {
+                GestionBBDD baseDatos = new GestionBBDD(); // conecta con servidor SQL
+                cafeterias = baseDatos.verListCafeterias(1, 1).toArray(new Cafeteria[cafeterias.length]); // listado cafeterias proximas
+            } catch (SQLException se) {
+                System.out.println("oops! No se puede conectar. Error: " + se.toString());
+                resultat = "SQLex";
+            } finally {
+                return resultat;
+            }
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            String sDistancia = String.valueOf(cafeterias[1].getDistancia());
+            Tnom.setText(cafeterias[1].getNombre_cafeteria());
+            adreça.setText(cafeterias[3].getNombre_cafeteria());
+            // para ver que distancia ha calculado...
+            tCafe.setText(sDistancia);
+
+            // imatge.setImageBitmap(miCafeteria.getImg());
+
+        }
+    }
+}*/
 
