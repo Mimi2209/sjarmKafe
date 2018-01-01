@@ -32,24 +32,12 @@ import java.util.ListIterator;
     public class Listing extends Fragment {
     int mNum;
     ListView cafes;
-    Cafeteria[] cafeterias;
+    ArrayList<Cafeteria>misCafeterias= new ArrayList<Cafeteria>();
     String resultat;
     TextView Tnom, adreça, tCafe;
 
     CharSequence text = "No funciona";
     int duration = Toast.LENGTH_SHORT;
-
-
-    private static String Classe = "com.mysql.jdbc.Driver";
-    private static String datosConexion = "jdbc:mysql://e80760-mysql.services.easyname.eu/";
-    private static String baseDatos = "u125322db1";
-    private static String usuario = "u125322db1";
-    private static String pass = "Proyecto2018";
-    private Connection con;
-    Descarga nuevaDescarga; //async Task
-    Cafeteria miCafeteria = null;
-
-
     static Listing newInstance(int num) {
         Listing l = new Listing();
 
@@ -98,7 +86,7 @@ import java.util.ListIterator;
 
             try {
                 GestionBBDD baseDatos = new GestionBBDD(); // conecta con servidor SQL
-                cafeterias= baseDatos.verListCafeterias(1, 1).toArray(new Cafeteria[100]); // obtiene cafeteria
+                misCafeterias= baseDatos.verListCafeterias(1, 1); // obtiene cafeteria
             } catch (SQLException se) {
                 System.out.println("oops! No se puede conectar. Error: " + se.toString());
                 resultat = "SQLex";
@@ -111,7 +99,7 @@ import java.util.ListIterator;
 
         @Override
         protected void onPostExecute(String result) {
-
+            Cafeteria[] cafeterias = misCafeterias.toArray(new Cafeteria[misCafeterias.size()]);
             MyAdapter adapter = new MyAdapter(getActivity(), cafeterias,"cafe");
             cafes.setAdapter(adapter);
 
