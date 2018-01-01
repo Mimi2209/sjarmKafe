@@ -34,10 +34,8 @@ import java.util.ListIterator;
     ListView cafes;
     ArrayList<Cafeteria>misCafeterias= new ArrayList<Cafeteria>();
     String resultat;
-    TextView Tnom, adreça, tCafe;
 
-    CharSequence text = "No funciona";
-    int duration = Toast.LENGTH_SHORT;
+
     static Listing newInstance(int num) {
         Listing l = new Listing();
 
@@ -89,9 +87,7 @@ import java.util.ListIterator;
                 misCafeterias= baseDatos.verListCafeterias(1, 1); // obtiene cafeteria
             } catch (SQLException se) {
                 System.out.println("oops! No se puede conectar. Error: " + se.toString());
-                resultat = "SQLex";
-                Toast toast = Toast.makeText(getActivity(), text, duration);
-                toast.show();
+
             } finally {
                 return resultat;
             }
@@ -105,53 +101,6 @@ import java.util.ListIterator;
 
         }
     }
-    }
+}
 
-    /*public void onActivityCreated(Bundle state) {
-
-        View V = getView();
-        super.onActivityCreated(state);
-
-        Tnom = (TextView) getView().findViewById(R.id.nom_Cafeteria);
-        adreça = (TextView) getView().findViewById(R.id.address_Cafeteria);
-        tCafe = (TextView) getView().findViewById(R.id.tCafe_Cafeteria);
-        nuevaDescarga = new Descarga();
-        nuevaDescarga.execute();
-
-    }
-
-    public class Descarga extends AsyncTask<String, Integer, String> {
-
-        @Override
-        protected void onPreExecute() {
-
-        }
-
-        @Override
-        protected String doInBackground(String... urls) {
-
-            try {
-                GestionBBDD baseDatos = new GestionBBDD(); // conecta con servidor SQL
-                cafeterias = baseDatos.verListCafeterias(1, 1).toArray(new Cafeteria[cafeterias.length]); // listado cafeterias proximas
-            } catch (SQLException se) {
-                System.out.println("oops! No se puede conectar. Error: " + se.toString());
-                resultat = "SQLex";
-            } finally {
-                return resultat;
-            }
-        }
-
-        @Override
-        protected void onPostExecute(String result) {
-            String sDistancia = String.valueOf(cafeterias[1].getDistancia());
-            Tnom.setText(cafeterias[1].getNombre_cafeteria());
-            adreça.setText(cafeterias[3].getNombre_cafeteria());
-            // para ver que distancia ha calculado...
-            tCafe.setText(sDistancia);
-
-            // imatge.setImageBitmap(miCafeteria.getImg());
-
-        }
-    }
-}*/
 
