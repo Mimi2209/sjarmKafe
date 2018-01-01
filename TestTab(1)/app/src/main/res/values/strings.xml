@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">SjarmKafe</string>
+    <string name="tab_map">MAP</string>
+    <string name="tab_listing">LISTING</string>
+    <string name="tab_search">SEARCH</string>
+    <string name="tab_add">ADD</string>
+    <string name="tab_info">INFO</string>
+    <string name="tab_rating">RATING</string>
+    <string name="tab_comments">COMMENTS</string>
+    <string name="tab_events">EVENTS</string>
+    <string name="action_settings">Settings</string>
+    <string name="section_format">Hello World from section: %1$d</string>
+</resources>
