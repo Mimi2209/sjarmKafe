@@ -1,6 +1,7 @@
 package com.example.eli.testtab;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -98,7 +99,7 @@ public class MyAdapter extends BaseAdapter {
                 case "cafe":
                     elemento = inflador.inflate(R.layout.cafeteria, parent, false);
 
-                    TextView ncafe = (TextView) elemento.findViewById(R.id.cafe);
+                    final TextView ncafe = (TextView) elemento.findViewById(R.id.cafe);
                     TextView hcafe = (TextView) elemento.findViewById(R.id.horario);
                     TextView dire = (TextView) elemento.findViewById(R.id.cafe_address);
                     RatingBar rating = (RatingBar) elemento.findViewById(R.id.rating);
@@ -110,6 +111,15 @@ public class MyAdapter extends BaseAdapter {
                     dire.setText(cafeterias.get(position).getAddress());
                     rating.setRating(cafeterias.get(position).getValoracion_global());
                     image.setImageBitmap(cafeterias.get(position).getImg());
+                    lNom.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Intent intent = new Intent(c,
+                                    CafeteriaActivity.class);
+                            intent.putExtra("idCafeteria", ncafe.toString());
+                            c.startActivity(intent);
+                        }
+                    });
                     break;
                 case "event":
                     elemento = inflador.inflate(R.layout.event, parent, false);
@@ -142,4 +152,4 @@ public class MyAdapter extends BaseAdapter {
 
             return elemento;
         }
-    }
+}
