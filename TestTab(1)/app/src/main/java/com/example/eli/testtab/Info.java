@@ -20,17 +20,28 @@ import java.sql.SQLException;
  */
 
     public class Info extends Fragment {
-        int idCafeteria=3;
+        int idCafeteria;
         Cafeteria miCafeteria;
         String resultat;
         CheckBox cTerrace, cTables, cWifi, cShop, cMeals, cXpress, cDogs;
         TextView tNameCafe, tAddress, tHorario, tDescrip ;
         RatingBar rRating2;
+
+    static Info newInstance(int num) {
+        Info i = new Info();
+
+        // Supply num input as an argument.
+        Bundle args = new Bundle();
+        args.putInt("idCafeteria", num);
+        i.setArguments(args);
+
+        return i;
+    }
         @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         // no peta pq lo he controlado pero de Error, no recupera la info
-        idCafeteria = getArguments() != null ? getArguments().getInt("id_Cafeteria") : 3;
+        idCafeteria = getArguments() != null ? getArguments().getInt("idCafeteria") : 1;
     }
         @Nullable
         @Override
@@ -41,6 +52,7 @@ import java.sql.SQLException;
             //-------------------------------------------------
 
             //here is your list array
+           // idCafeteria=getArguments().getInt("idCafeteria");
                         return inflater.inflate(R.layout.info, container, false);
         }
 
