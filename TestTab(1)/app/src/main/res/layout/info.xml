@@ -9,7 +9,9 @@
         android:id="@+id/items"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/time">
+        android:layout_below="@+id/time"
+        android:paddingBottom="30dp"
+        android:paddingTop="15dp">
 
         <TableRow
             android:layout_width="match_parent"
@@ -101,9 +103,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical|start"
+            android:layout_marginEnd="30dp"
             android:text="@string/cafe"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
-            android:textSize="14sp"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="18sp"
             android:textStyle="bold" />
 
         <RatingBar
@@ -111,7 +115,7 @@
             style="@style/Widget.AppCompat.RatingBar.Small"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="end"
+            android:layout_gravity="center"
             android:isIndicator="true"
             android:numStars="5"
             android:stepSize="0.5" />
@@ -124,23 +128,23 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/linea_nom"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:paddingBottom="15dp">
 
         <ImageView
             android:id="@+id/direction"
-            android:src="@android:drawable/ic_menu_mylocation"
             android:layout_width="wrap_content"
             android:layout_height="30dp"
-            android:layout_weight="1"
             android:contentDescription="@string/todo"
-            android:scaleType="fitStart" />
+            android:scaleType="fitStart"
+            android:src="@android:drawable/ic_menu_mylocation" />
 
         <TextView
             android:id="@+id/cafe_address"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_weight="2"
+            android:layout_weight="1"
             android:ems="10"
             android:inputType="textMultiLine" />
 
@@ -152,25 +156,25 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/dir"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:paddingBottom="15dp">
 
 
         <ImageView
             android:id="@+id/clock"
-            android:src="@android:drawable/ic_menu_recent_history"
             android:layout_width="wrap_content"
             android:layout_height="30dp"
-            android:layout_weight="1"
             android:contentDescription="@string/todo"
-            android:scaleType="fitStart" />
+            android:scaleType="fitStart"
+            android:src="@android:drawable/ic_menu_recent_history" />
 
         <TextView
             android:id="@+id/horario"
             style="@android:style/Widget.DeviceDefault.TextView"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_weight="2"
+            android:layout_weight="1"
             android:ems="10"
             android:inputType="time" />
 
@@ -182,23 +186,23 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/items"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:paddingBottom="15dp">
 
         <ImageView
             android:id="@+id/description"
             android:layout_width="wrap_content"
             android:layout_height="30dp"
-            android:layout_weight="1"
             android:contentDescription="@string/todo"
             android:scaleType="fitStart"
             android:src="@android:drawable/ic_menu_edit" />
 
         <TextView
             android:id="@+id/cafe_descript"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_weight="2"
+            android:layout_weight="1"
             android:ems="10"
             android:inputType="textMultiLine" />
 

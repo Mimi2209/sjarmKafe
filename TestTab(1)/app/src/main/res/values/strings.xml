@@ -22,5 +22,7 @@
     <string name="add_schedule">Add Schedule</string>
     <string name="cafe">Coffee Shop</string>
     <string name="todo">TODO</string>
+    <string name="distance">Distance</string>
+    <string name="rating">Rating</string>
 
 </resources>

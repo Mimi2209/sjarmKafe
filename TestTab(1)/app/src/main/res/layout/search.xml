@@ -2,15 +2,103 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent" android:layout_height="match_parent">
-    <LinearLayout
+
+    <TableLayout
+        android:id="@+id/items"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/cap"
+        android:paddingBottom="30dp"
+        android:paddingTop="15dp">
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <CheckBox
+                android:id="@+id/Terrace"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/terrace"
+                android:textColor="@color/colorPrimary" />
+
+            <CheckBox
+                android:id="@+id/Tables"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:text="@string/tables"
+                android:textColor="@color/colorPrimary" />
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <CheckBox
+                android:id="@+id/Wifi"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/wifi"
+                android:textColor="@color/colorPrimary" />
+
+            <CheckBox
+                android:id="@+id/shop"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/shop"
+                android:textColor="@color/colorPrimary" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <CheckBox
+                android:id="@+id/Meals"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/meals"
+                android:textColor="@color/colorPrimary" />
+
+            <CheckBox
+                android:id="@+id/Xpress"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/express_service"
+                android:textColor="@color/colorPrimary" />
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <CheckBox
+                android:id="@+id/Dogs"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/dogs"
+                android:textColor="@color/colorPrimary" />
+        </TableRow>
+    </TableLayout>
+
+    <LinearLayout
+        android:id="@+id/cap"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="17dp"
+        android:layout_marginBottom="20dp"
+        android:layout_marginTop="20dp"
         android:orientation="vertical">
 
         <LinearLayout
+            android:id="@+id/distant"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
@@ -21,7 +109,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="Distance"
+                android:text="@string/distance"
                 android:textAppearance="@style/TextAppearance.AppCompat"
                 android:textColor="@color/colorPrimaryDark" />
 
@@ -29,7 +117,7 @@
                 android:id="@+id/seekBar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="2" />
+                android:layout_weight="1" />
         </LinearLayout>
 
         <LinearLayout
@@ -41,12 +129,12 @@
 
             <TextView
                 android:id="@+id/Rating"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_weight="2"
+                android:layout_weight="1"
                 android:gravity="center"
-                android:text="Rating"
+                android:text="@string/rating"
                 android:textColor="@color/colorPrimaryDark" />
 
             <RatingBar
@@ -57,89 +145,6 @@
                 android:isIndicator="true"
                 android:numStars="5"
                 android:stepSize="0.1" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="2"
-            android:orientation="vertical"
-            android:paddingTop="15dp">
-
-            <CheckBox
-                android:id="@+id/Terrace"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_weight="1"
-                android:text="Terrace"
-                android:textColor="@color/colorPrimary" />
-
-            <CheckBox
-                android:id="@+id/Wifi"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_weight="1"
-                android:text="Wifi"
-                android:textColor="@color/colorPrimary" />
-
-            <CheckBox
-                android:id="@+id/shop"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_weight="1"
-                android:text="Shop"
-                android:textColor="@color/colorPrimary" />
-
-            <CheckBox
-                android:id="@+id/Xpress"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_weight="1"
-                android:text="Express Service"
-                android:textColor="@color/colorPrimary" />
-
-            <CheckBox
-                android:id="@+id/Tables"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_weight="1"
-                android:text="Tables"
-                android:textColor="@color/colorPrimary" />
-
-            <CheckBox
-                android:id="@+id/Dogs"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_weight="1"
-                android:text="Dogs"
-                android:textColor="@color/colorPrimary" />
-
-            <CheckBox
-                android:id="@+id/Open"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_weight="1"
-                android:text="Open"
-                android:textColor="@color/colorPrimary" />
-
-            <CheckBox
-                android:id="@+id/Meals"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_weight="1"
-                android:text="Meals"
-                android:textColor="@color/colorPrimary" />
-
-
 
         </LinearLayout>
 
@@ -156,6 +161,6 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
         android:layout_marginRight="26dp"
-        android:layout_marginBottom="16dp"/>
+        android:layout_marginBottom="16dp" android:focusable="true" android:layout_alignParentEnd="true" android:layout_marginEnd="26dp" />
 
 </RelativeLayout>
