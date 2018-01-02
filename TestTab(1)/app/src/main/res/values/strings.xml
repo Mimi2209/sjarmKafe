@@ -24,5 +24,7 @@
     <string name="todo">TODO</string>
     <string name="distance">Distance</string>
     <string name="rating">Rating</string>
+    <string name="user">user1</string>
+    <string name="comment">Comment title</string>
 
 </resources>
