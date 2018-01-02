@@ -19,44 +19,42 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                app:srcCompat="@android:drawable/ic_menu_mylocation" />
+                app:srcCompat="@android:drawable/ic_menu_mylocation" android:contentDescription="@string/todo" />
 
             <EditText
                 android:id="@+id/editText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:autoText="false"
                 android:ems="10"
-                android:hint="Add Direction"
+                android:hint="@string/add_direction"
                 android:inputType="textPostalAddress" />
 
         </LinearLayout>
 
-        <LinearLayout
+        <Spinner
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_weight="0" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
             android:layout_weight="1"
             android:orientation="horizontal">
 
             <ImageButton
                 android:id="@+id/imageButton"
-                android:layout_width="wrap_content"
+                android:layout_width="200dp"
                 android:layout_height="match_parent"
-                android:layout_weight="2"
+                android:contentDescription="@string/todo"
                 app:srcCompat="@android:drawable/ic_menu_camera" />
 
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="200dp"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
                 android:orientation="vertical"
                 android:paddingTop="15dp">
-
-                <Spinner
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1" />
 
                 <CheckBox
                     android:id="@+id/Terrace"
@@ -64,7 +62,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_weight="1"
-                    android:text="Terrace"
+                    android:text="@string/terrace"
                     android:textColor="@color/colorPrimary" />
 
                 <CheckBox
@@ -73,7 +71,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_weight="1"
-                    android:text="Wifi"
+                    android:text="@string/wifi"
                     android:textColor="@color/colorPrimary" />
 
                 <CheckBox
@@ -82,7 +80,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_weight="1"
-                    android:text="Shop"
+                    android:text="@string/shop"
                     android:textColor="@color/colorPrimary" />
 
                 <CheckBox
@@ -91,7 +89,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_weight="1"
-                    android:text="Express Service"
+                    android:text="@string/express_service"
                     android:textColor="@color/colorPrimary" />
 
                 <CheckBox
@@ -100,7 +98,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_weight="1"
-                    android:text="Tables"
+                    android:text="@string/tables"
                     android:textColor="@color/colorPrimary" />
 
                 <CheckBox
@@ -109,7 +107,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_weight="1"
-                    android:text="Dogs"
+                    android:text="@string/dogs"
                     android:textColor="@color/colorPrimary" />
 
                 <CheckBox
@@ -118,7 +116,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_weight="1"
-                    android:text="Open"
+                    android:text="@string/open"
                     android:textColor="@color/colorPrimary" />
 
                 <CheckBox
@@ -127,7 +125,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_weight="1"
-                    android:text="Meals"
+                    android:text="@string/meals"
                     android:textColor="@color/colorPrimary" />
 
 
@@ -148,6 +146,6 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
         android:layout_marginRight="26dp"
-        android:layout_marginBottom="16dp"/>
+        android:layout_marginBottom="16dp" android:layout_alignParentEnd="true" android:layout_marginEnd="26dp" android:focusable="true" />
 
 </RelativeLayout>
