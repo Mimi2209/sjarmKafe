@@ -1,6 +1,7 @@
 package com.example.eli.testtab;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,6 +9,7 @@ import android.widget.Adapter;
 import android.widget.BaseAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
@@ -95,11 +97,14 @@ public class MyAdapter extends BaseAdapter {
             switch (type){
                 case "cafe":
                     elemento = inflador.inflate(R.layout.cafeteria, parent, false);
+
                     TextView ncafe = (TextView) elemento.findViewById(R.id.cafe);
-                    EditText hcafe = (EditText) elemento.findViewById(R.id.horario);
-                    EditText dire = (EditText) elemento.findViewById(R.id.cafe_address);
+                    TextView hcafe = (TextView) elemento.findViewById(R.id.horario);
+                    TextView dire = (TextView) elemento.findViewById(R.id.cafe_address);
                     RatingBar rating = (RatingBar) elemento.findViewById(R.id.rating);
-                    final ImageView image = (ImageView) elemento.findViewById(R.id.cafe_image);
+                    ImageView image = (ImageView) elemento.findViewById(R.id.cafe_image);
+                    LinearLayout lNom = (LinearLayout) elemento.findViewById(R.id.linea_nom);
+                    lNom.setBackgroundColor(Color.LTGRAY);
                     ncafe.setText(cafeterias.get(position).getNombre_cafeteria());
                     hcafe.setText(cafeterias.get(position).getHorario());
                     dire.setText(cafeterias.get(position).getAddress());
