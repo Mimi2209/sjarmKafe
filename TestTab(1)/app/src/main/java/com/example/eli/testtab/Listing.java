@@ -11,6 +11,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -58,9 +59,9 @@ import java.util.ListIterator;
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        View view = inflater.inflate(R.layout.listing, container, false);
-
-        return view;
+  //      View view = inflater.inflate(R.layout.listing, container, false);
+ //    return view;
+        return inflater.inflate(R.layout.listing, container, false);
     }
 
     @Override
@@ -72,6 +73,7 @@ import java.util.ListIterator;
             nuevaDescarga.execute();
 
         }
+//---------------------------------------------------------------------------
     public class Descarga extends AsyncTask<String, Integer, String> {
 
         @Override
@@ -95,9 +97,13 @@ import java.util.ListIterator;
 
         @Override
         protected void onPostExecute(String result) {
-            Cafeteria[] cafeterias = misCafeterias.toArray(new Cafeteria[misCafeterias.size()]);
-            MyAdapter adapter = new MyAdapter(getActivity(), cafeterias,"cafe");
-            cafes.setAdapter(adapter);
+      //      Cafeteria[] cafeterias = misCafeterias.toArray(new Cafeteria[misCafeterias.size()]);
+      //      MyAdapter adapter = new MyAdapter(getActivity(), cafeterias,"cafe");
+              MyAdapter adapter = new MyAdapter(getActivity(), misCafeterias,"cafe");
+                cafes.setAdapter(adapter);
+            // carga de solo array list
+
+
 
         }
     }
