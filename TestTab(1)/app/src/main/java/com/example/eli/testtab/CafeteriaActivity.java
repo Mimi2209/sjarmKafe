@@ -1,5 +1,6 @@
 package com.example.eli.testtab;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -13,6 +14,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class CafeteriaActivity extends AppCompatActivity {
 
@@ -25,6 +27,7 @@ public class CafeteriaActivity extends AppCompatActivity {
      * {@link android.support.v4.app.FragmentStatePagerAdapter}.
      */
     private SectionsPagerAdapter mSectionsPagerAdapter;
+    static String idCafeteria=null;
 
     /**
      * The {@link ViewPager} that will host the section contents.
@@ -35,9 +38,19 @@ public class CafeteriaActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.cafeteria_main);
+        // recupero por Intent (FUNCIONA BIEN !!) ----------------------------------------
 
-        // Create the adapter that will return a fragment for each of the three
-        // primary sections of the activity.
+        idCafeteria =getIntent().getExtras().getString("idCafeteria");
+
+        // Envio a Fragment ---------------------NO PETA  pero no se si envia???
+        Bundle bundle=new Bundle();
+        bundle.putString("id_Cafeteria", idCafeteria);
+        //set Fragmentclass Arguments
+        Info fragobj=new Info();
+        fragobj.setArguments(bundle);
+        //---------------------------------------------------------------------------
+       // Toast.makeText(getApplicationContext(), " Cafe "+idCafeteria, Toast.LENGTH_SHORT).show();
+             // primary sections of the activity.
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
 
         // Set up the ViewPager with the sections adapter.
@@ -48,6 +61,7 @@ public class CafeteriaActivity extends AppCompatActivity {
 
         mViewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
         tabLayout.addOnTabSelectedListener(new TabLayout.ViewPagerOnTabSelectedListener(mViewPager));
+
     }
 
 
@@ -82,8 +96,7 @@ public class CafeteriaActivity extends AppCompatActivity {
          * fragment.
          */
         private static final String ARG_SECTION_NUMBER = "section_number";
-
-        public PlaceholderFragment() {
+         public PlaceholderFragment() {
         }
 
         /**
@@ -94,6 +107,7 @@ public class CafeteriaActivity extends AppCompatActivity {
             PlaceholderFragment fragment = new PlaceholderFragment();
             Bundle args = new Bundle();
             args.putInt(ARG_SECTION_NUMBER, sectionNumber);
+    //        args.putString("idCafeteria", idCafeteria);
             fragment.setArguments(args);
             return fragment;
         }
