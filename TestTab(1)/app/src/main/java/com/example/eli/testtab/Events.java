@@ -26,7 +26,8 @@ import java.util.List;
     ListView events;
     Timestamp timeStamp = new Timestamp(1);
 
-    Evento[] eventos = {new Evento(1, "ejemplo", "ejemplo", "ejemplo", timeStamp, timeStamp)};
+    ArrayList<Evento> eventos = new ArrayList<Evento>();
+
 
     static Events newInstance(int num) {
         Events e = new Events();
@@ -41,6 +42,7 @@ import java.util.List;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
+        eventos.add(new Evento(1, "ejemplo", "ejemplo", "ejemplo", timeStamp, timeStamp));
         super.onCreate(savedInstanceState);
         mNum = getArguments() != null ? getArguments().getInt("num") : 1;
     }

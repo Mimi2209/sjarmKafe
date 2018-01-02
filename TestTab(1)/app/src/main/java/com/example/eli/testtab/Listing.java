@@ -99,7 +99,7 @@ import java.util.ListIterator;
         protected void onPostExecute(String result) {
       //      Cafeteria[] cafeterias = misCafeterias.toArray(new Cafeteria[misCafeterias.size()]);
       //      MyAdapter adapter = new MyAdapter(getActivity(), cafeterias,"cafe");
-              MyAdapter adapter = new MyAdapter(getActivity(), misCafeterias,"cafe");
+              MyAdapter adapter = new MyAdapter(getActivity(), misCafeterias,"cafe","");
                 cafes.setAdapter(adapter);
             // carga de solo array list
 

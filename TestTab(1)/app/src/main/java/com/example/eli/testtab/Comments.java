@@ -12,6 +12,7 @@ import android.widget.ListView;
 
 import java.security.Timestamp;
 import java.time.Instant;
+import java.util.ArrayList;
 import java.util.Date;
 
 /**
@@ -23,8 +24,8 @@ import java.util.Date;
     //declaraciones
     ListView comments;
 
-    Valoracion[] comentarios;
-    Usuario [] users;
+    ArrayList<Valoracion> comentarios;
+    ArrayList<Usuario> users;
 
     static Comments newInstance(int num) {
         Comments c = new Comments();
