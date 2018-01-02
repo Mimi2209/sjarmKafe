@@ -116,7 +116,7 @@ public class MyAdapter extends BaseAdapter {
                         public void onClick(View v) {
                             Intent intent = new Intent(c,
                                     CafeteriaActivity.class);
-                            intent.putExtra("idCafeteria", ncafe.toString());
+                            intent.putExtra("idCafeteria", ncafe.getText().toString());
                             c.startActivity(intent);
                         }
                     });
