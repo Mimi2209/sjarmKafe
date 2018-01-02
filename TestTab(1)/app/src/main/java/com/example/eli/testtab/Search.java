@@ -78,11 +78,13 @@ import android.view.ViewGroup;
 
             @Override
             protected void onPostExecute(String result) {
-                String sDistancia = String.valueOf(mis_cafeterias.get(1).getDistancia());
-                terraza.setChecked(mis_cafeterias.get(1).isTerraza());
-                wifi.setChecked(mis_cafeterias.get(3).isWifi());
+                Bitmap foto = Bitmap.createBitmap(1,1, Bitmap.Config.ARGB_8888);
+                mis_cafeterias.add(new Cafeteria("Nomad","Passatge Sert, 12, 08003 Barcelona","Una de las mejores cafeterias de Barcelona",1,true,false,true,true,false,false,"17",true,4,foto));
+                String sDistancia = String.valueOf(mis_cafeterias.get(0).getDistancia());
+                terraza.setChecked(mis_cafeterias.get(0).isTerraza());
+                wifi.setChecked(mis_cafeterias.get(0).isWifi());
                 // para ver que distancia ha calculado...
-                shop.setChecked(mis_cafeterias.get(3).isTienda());
+                shop.setChecked(mis_cafeterias.get(0).isTienda());
 
                 // imatge.setImageBitmap(miCafeteria.getImg());
 
