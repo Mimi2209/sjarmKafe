@@ -102,8 +102,8 @@ public class GestionBBDD {
         }
     }
     // ------- Recupero info cafeteria ----- Class Cafeteria --------------------------------------------------------------------------------
-    public Cafeteria verCafeteria(int id_cafeteria) throws SQLException{
-        String query ="SELECT * FROM u125322db1.cafeteria  where id_cafeteria = "+id_cafeteria+";";
+    public Cafeteria verCafeteria(String id_cafeteria) throws SQLException{
+        String query ="SELECT * FROM u125322db1.cafeteria  where id_cafeteria = '"+id_cafeteria+"';";
         Statement stmt = null;
         Cafeteria miCafeteria=null;
         try {
@@ -173,6 +173,7 @@ public class GestionBBDD {
             Integer valoracion;
             double  distancia;
             Bitmap bitmap = null;
+            Bitmap bitmap_sortida = null;
             byte[] image = null;
             while(rs.next()) {
                 nom = rs.getString(2);
@@ -185,7 +186,6 @@ public class GestionBBDD {
                 image = rs.getBytes(17); // array de bytes
                 BitmapFactory.Options options = new BitmapFactory.Options();
                 bitmap = BitmapFactory.decodeByteArray(image, 0, image.length, options); //Convert bytearray to bitmap
-
                 // Calculo distancia y la guardo para ordenar por distancia
 
                distancia= distance(longi,ltg,caf_long,caf_ltg);
