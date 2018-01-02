@@ -96,8 +96,8 @@ public class MyAdapter extends BaseAdapter {
                 case "cafe":
                     elemento = inflador.inflate(R.layout.cafeteria, parent, false);
                     TextView ncafe = (TextView) elemento.findViewById(R.id.cafe);
-                    EditText hcafe = (EditText) elemento.findViewById(R.id.horario);
-                    EditText dire = (EditText) elemento.findViewById(R.id.cafe_address);
+                    TextView hcafe = (TextView) elemento.findViewById(R.id.horario);
+                    TextView dire = (TextView) elemento.findViewById(R.id.cafe_address);
                     RatingBar rating = (RatingBar) elemento.findViewById(R.id.rating);
                     final ImageView image = (ImageView) elemento.findViewById(R.id.cafe_image);
                     ncafe.setText(cafeterias.get(position).getNombre_cafeteria());
