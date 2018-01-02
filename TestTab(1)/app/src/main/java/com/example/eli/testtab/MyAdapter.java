@@ -91,7 +91,7 @@ public class MyAdapter extends BaseAdapter {
         }
 
         @Override
-        public View getView(int position, View convertView, ViewGroup parent) {
+        public View getView(final int position, View convertView, ViewGroup parent) {
 
             LayoutInflater inflador = (LayoutInflater) c.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             View elemento= new View(c);
@@ -116,7 +116,7 @@ public class MyAdapter extends BaseAdapter {
                         public void onClick(View v) {
                             Intent intent = new Intent(c,
                                     CafeteriaActivity.class);
-                            intent.putExtra("idCafeteria", ncafe.getText().toString());
+                            intent.putExtra("idCafeteria", cafeterias.get(position).getId_cafeteria());
                             c.startActivity(intent);
                         }
                     });

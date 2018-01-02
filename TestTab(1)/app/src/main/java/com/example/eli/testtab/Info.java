@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.ListView;
+import android.widget.RatingBar;
 import android.widget.TextView;
 
 import java.sql.SQLException;
@@ -19,15 +20,17 @@ import java.sql.SQLException;
  */
 
     public class Info extends Fragment {
-        String idCafeteria="Cafeteria 1";
+        int idCafeteria=3;
         Cafeteria miCafeteria;
         String resultat;
-        TextView test_info;
+        CheckBox cTerrace, cTables, cWifi, cShop, cMeals, cXpress, cDogs;
+        TextView tNameCafe, tAddress, tHorario, tDescrip ;
+        RatingBar rRating2;
         @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         // no peta pq lo he controlado pero de Error, no recupera la info
-        idCafeteria = getArguments() != null ? getArguments().getString("id_Cafeteria") : "Error";
+        idCafeteria = getArguments() != null ? getArguments().getInt("id_Cafeteria") : 3;
     }
         @Nullable
         @Override
@@ -45,8 +48,18 @@ import java.sql.SQLException;
     public void onActivityCreated(Bundle state) {
         super.onActivityCreated(state);
 
-        test_info = (TextView) getView().findViewById(R.id.test_info);
-
+        tNameCafe = (TextView) getView().findViewById(R.id.cafe);
+        tAddress = (TextView) getView().findViewById(R.id.cafe_address);
+        tHorario = (TextView) getView().findViewById(R.id.horario);
+        tDescrip = (TextView) getView().findViewById(R.id.cafe_descript);
+        cTerrace = (CheckBox) getView().findViewById(R.id.Terrace);
+        cTables = (CheckBox) getView().findViewById(R.id.Tables);
+        cWifi = (CheckBox) getView().findViewById(R.id.Wifi);
+        cShop = (CheckBox) getView().findViewById(R.id.shop);
+        cMeals = (CheckBox) getView().findViewById(R.id.Meals);
+        cXpress = (CheckBox) getView().findViewById(R.id.Xpress);
+        cDogs = (CheckBox) getView().findViewById(R.id.Dogs);
+        rRating2 = (RatingBar) getView().findViewById(R.id.rating2);
 
         Info.Descarga nuevaDescarga = new Info.Descarga();
         nuevaDescarga.execute();
@@ -78,7 +91,18 @@ import java.sql.SQLException;
         protected void onPostExecute(String result) {
             //      Cafeteria[] cafeterias = misCafeterias.toArray(new Cafeteria[misCafeterias.size()]);
             //      MyAdapter adapter = new MyAdapter(getActivity(), cafeterias,"cafe");
-            test_info.setText(idCafeteria);
+            tNameCafe.setText(miCafeteria.getNombre_cafeteria());
+            tAddress.setText(miCafeteria.getAddress());
+            tHorario.setText(miCafeteria.getHorario());
+            tDescrip.setText(miCafeteria.getDescripcion());
+            cTerrace.setChecked(miCafeteria.isTerraza());
+            cTables.setChecked(miCafeteria.isMesas());
+            cWifi.setChecked(miCafeteria.isWifi());
+            cMeals.setChecked(miCafeteria.isComida());
+            cXpress.setChecked(miCafeteria.isServicio_expres());
+            cDogs.setChecked(miCafeteria.isPerros());
+            rRating2.setRating(miCafeteria.getValoracion_global());
+
             //        misCafeterias.add(new Cafeteria("Nomad","Passatge Sert, 12, 08003 Barcelona","Una de las mejores cafeterias de Barcelona",1,true,false,true,true,false,false,"17",true,4,foto));
 
             // carga de solo array list

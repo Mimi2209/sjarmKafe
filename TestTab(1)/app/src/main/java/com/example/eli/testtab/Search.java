@@ -79,7 +79,7 @@ import android.view.ViewGroup;
             @Override
             protected void onPostExecute(String result) {
                 Bitmap foto = Bitmap.createBitmap(1,1, Bitmap.Config.ARGB_8888);
-                mis_cafeterias.add(new Cafeteria("Nomad","Passatge Sert, 12, 08003 Barcelona","Una de las mejores cafeterias de Barcelona",1,true,false,true,true,false,false,"17",true,4,foto));
+                mis_cafeterias.add(new Cafeteria(3,"Nomad","Passatge Sert, 12, 08003 Barcelona","Una de las mejores cafeterias de Barcelona",1,true,false,true,true,false,false,"17",true,4,foto));
                 String sDistancia = String.valueOf(mis_cafeterias.get(0).getDistancia());
                 terraza.setChecked(mis_cafeterias.get(0).isTerraza());
                 wifi.setChecked(mis_cafeterias.get(0).isWifi());

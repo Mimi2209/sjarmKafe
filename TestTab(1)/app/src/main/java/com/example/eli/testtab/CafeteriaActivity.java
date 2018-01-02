@@ -27,7 +27,7 @@ public class CafeteriaActivity extends AppCompatActivity {
      * {@link android.support.v4.app.FragmentStatePagerAdapter}.
      */
     private SectionsPagerAdapter mSectionsPagerAdapter;
-    static String idCafeteria=null;
+    static int idCafeteria;
 
     /**
      * The {@link ViewPager} that will host the section contents.
@@ -40,11 +40,11 @@ public class CafeteriaActivity extends AppCompatActivity {
         setContentView(R.layout.cafeteria_main);
         // recupero por Intent (FUNCIONA BIEN !!) ----------------------------------------
 
-        idCafeteria =getIntent().getExtras().getString("idCafeteria");
+        idCafeteria =getIntent().getExtras().getInt("idCafeteria");
 
         // Envio a Fragment ---------------------NO PETA  pero no se si envia???
         Bundle bundle=new Bundle();
-        bundle.putString("id_Cafeteria", idCafeteria);
+        bundle.putInt("id_Cafeteria", idCafeteria);
         //set Fragmentclass Arguments
         Info fragobj=new Info();
         fragobj.setArguments(bundle);

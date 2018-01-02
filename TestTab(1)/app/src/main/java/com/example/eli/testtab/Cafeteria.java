@@ -49,8 +49,9 @@ public class Cafeteria {
         this.img = img;
     }
     // class para info
-    public Cafeteria(String nombre_cafeteria, String address, String descripcion, int tip_cafe, boolean mesas, boolean terraza, boolean wifi, boolean comida,
+    public Cafeteria(int id_cafeteria, String nombre_cafeteria, String address, String descripcion, int tip_cafe, boolean mesas, boolean terraza, boolean wifi, boolean comida,
                      boolean tienda, boolean perros, String horario, boolean servicio_expres, int valoracion_global, Bitmap img) {
+        this.id_cafeteria=id_cafeteria;
         this.nombre_cafeteria = nombre_cafeteria;
         this.address = address;
         this.descripcion = descripcion;

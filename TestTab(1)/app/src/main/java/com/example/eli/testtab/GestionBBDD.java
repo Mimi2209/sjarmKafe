@@ -102,8 +102,8 @@ public class GestionBBDD {
         }
     }
     // ------- Recupero info cafeteria ----- Class Cafeteria --------------------------------------------------------------------------------
-    public Cafeteria verCafeteria(String id_cafeteria) throws SQLException{
-        String query ="SELECT * FROM u125322db1.cafeteria  where id_cafeteria = '"+id_cafeteria+"';";
+    public Cafeteria verCafeteria(int id_cafeteria) throws SQLException{
+        String query ="SELECT * FROM u125322db1.cafeteria  where id_cafeteria = "+id_cafeteria+";";
         Statement stmt = null;
         Cafeteria miCafeteria=null;
         try {
@@ -142,7 +142,7 @@ public class GestionBBDD {
                 image = rs.getBytes(17); // array de bytes
                 BitmapFactory.Options options = new BitmapFactory.Options();
                 bitmap = BitmapFactory.decodeByteArray(image, 0, image.length, options); //Convert bytearray to bitmap
-                miCafeteria = new Cafeteria(nom, address, descripcion, tip_cafe, mesas, terraza, wifi, comida, tienda, perros, horario, servicio_expres, valoracion, bitmap);
+                miCafeteria = new Cafeteria(id_cafeteria,nom, address, descripcion, tip_cafe, mesas, terraza, wifi, comida, tienda, perros, horario, servicio_expres, valoracion, bitmap);
             }
 
             rs.close();
