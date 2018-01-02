@@ -167,31 +167,30 @@ public class GestionBBDD {
             String nom;
             String address;
             String descripcion;
+            String horario;
             float  caf_long;
             float  caf_ltg;
             Integer valoracion;
             double  distancia;
-            Blob blob;
-
-            byte[] image = null;
             Bitmap bitmap = null;
+            byte[] image = null;
             while(rs.next()) {
                 nom = rs.getString(2);
                 address = rs.getString(3);
                 descripcion = rs.getString(4);
                 caf_long = rs.getFloat(6);
                 caf_ltg = rs.getFloat(7);
+                horario = rs.getString(14);
                 valoracion = rs.getInt(16);
-                //    blob=rs.getBlob(17);
-                //    image = blob.getBytes(0, (int)blob.length()); //Convert blob to bytearray
-                //    BitmapFactory.Options options = new BitmapFactory.Options();
-                //    bitmap = BitmapFactory.decodeByteArray(image, 0, image.length, options); //Convert bytearray to bitmap
+                image = rs.getBytes(17); // array de bytes
+                BitmapFactory.Options options = new BitmapFactory.Options();
+                bitmap = BitmapFactory.decodeByteArray(image, 0, image.length, options); //Convert bytearray to bitmap
 
                 // Calculo distancia y la guardo para ordenar por distancia
 
                distancia= distance(longi,ltg,caf_long,caf_ltg);
                // if(distancia<2.5) {
-                    listCafeterias.add(new Cafeteria(nom, address, descripcion, caf_long,caf_ltg, valoracion, distancia));
+                    listCafeterias.add(new Cafeteria(nom, address, descripcion, caf_long,caf_ltg, horario, valoracion, distancia, bitmap));
                // }
             }
 

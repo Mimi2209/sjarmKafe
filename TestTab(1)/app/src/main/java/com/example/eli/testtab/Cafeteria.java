@@ -48,7 +48,7 @@ public class Cafeteria {
         this.valoracion_global = valoracion_global;
         this.img = img;
     }
-    // class para listing
+    // class para info
     public Cafeteria(String nombre_cafeteria, String address, String descripcion, int tip_cafe, boolean mesas, boolean terraza, boolean wifi, boolean comida,
                      boolean tienda, boolean perros, String horario, boolean servicio_expres, int valoracion_global, Bitmap img) {
         this.nombre_cafeteria = nombre_cafeteria;
@@ -67,14 +67,16 @@ public class Cafeteria {
         this.img = img;
     }
     // class para ubicacion mapa y calculo distancias
-    public Cafeteria(String nombre_cafeteria, String address, String descripcion, float longitut, float latitut, int valoracion_global, double distancia) {
+    public Cafeteria(String nombre_cafeteria, String address, String descripcion, float longitut, float latitut, String horario,int valoracion_global, double distancia,  Bitmap img) {
         this.nombre_cafeteria = nombre_cafeteria;
         this.address = address;
         this.descripcion = descripcion;
         this.longitut = longitut;
         this.latitut = latitut;
+        this.horario = horario;
         this.valoracion_global = valoracion_global;
         this.distancia = distancia;
+        this.img = img;
     }
 
     public int getId_cafeteria() {
