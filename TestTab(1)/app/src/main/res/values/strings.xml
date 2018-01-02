@@ -10,4 +10,21 @@
     <string name="tab_events">EVENTS</string>
     <string name="action_settings">Settings</string>
     <string name="section_format">Hello World from section: %1$d</string>
+    <string name="meals">Meals</string>
+    <string name="terrace">Terrace</string>
+    <string name="wifi">Wifi</string>
+    <string name="shop">Shop</string>
+    <string name="express_service">Express Service</string>
+    <string name="tables">Tables</string>
+    <string name="dogs">Dogs</string>
+    <string name="open">Open</string>
+    <string name="add_direction">Add Direction</string>
+    <string name="add_schedule">Add Schedule</string>
+    <string name="cafe">Coffee Shop</string>
+    <string name="todo">TODO</string>
+    <string name="distance">Distance</string>
+    <string name="rating">Rating</string>
+    <string name="user">user1</string>
+    <string name="comment">Comment title</string>
+
 </resources>
