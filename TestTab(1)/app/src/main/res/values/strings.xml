@@ -26,5 +26,8 @@
     <string name="rating">Rating</string>
     <string name="user">user1</string>
     <string name="comment">Comment title</string>
+    <string name="cafet">Coffee Type</string>
+    <string name="add_description">Add Description</string>
+    <string name="add_coffee_shop_name">Add Coffee Shop Name</string>
 
 </resources>
