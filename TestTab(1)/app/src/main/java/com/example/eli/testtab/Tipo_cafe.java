@@ -9,7 +9,8 @@ public class Tipo_cafe {
     String nombre_cafe;
     String caracteristicas;
 
-    public Tipo_cafe(String nombre_cafe, String caracteristicas) {
+    public Tipo_cafe(int id_cafe, String nombre_cafe, String caracteristicas) {
+        this.id_cafe = id_cafe;
         this.nombre_cafe = nombre_cafe;
         this.caracteristicas = caracteristicas;
     }

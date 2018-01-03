@@ -375,6 +375,40 @@ public class GestionBBDD {
         }
 
     }
+
+    // ------- Recupero info cafeteria ----- Class Cafeteria --------------------------------------------------------------------------------
+    public ArrayList<Tipo_cafe> verTipCafe() throws SQLException{
+        String query ="SELECT * FROM u125322db1.tipo_Cafe;";
+        Statement stmt = null;
+        ArrayList<Tipo_cafe> miTipCafe= new ArrayList<>();
+        try {
+            stmt = con.createStatement();
+            ResultSet rs =stmt.executeQuery(query);
+            int id;
+            String nom;
+            String caract;
+
+            while(rs.next()) {
+                id = rs.getInt(1);
+                nom = rs.getString(2);
+                caract = rs.getString(3);
+
+                miTipCafe.add( new Tipo_cafe(id,nom,caract));
+            }
+
+            rs.close();
+            stmt.close();
+        } catch (SQLException se) {
+            System.out.println("oops! No se puede conectar. Error: " + se.toString());
+
+        } finally {
+            return miTipCafe;
+        }
+
+    }
+
+
+
     //-----------------------------------------------------------------------------------------------------------------
 //---------- Calculo distancia entre 2 cafeteries     ----------------------------------------------------------------
     private double distance(float lat1, float lon1, float lat2, float lon2) {
