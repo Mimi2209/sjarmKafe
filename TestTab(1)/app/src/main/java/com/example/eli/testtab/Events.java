@@ -2,6 +2,7 @@ package com.example.eli.testtab;
 
 import android.app.Activity;
 import android.graphics.Bitmap;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -10,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 
+import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -21,10 +23,10 @@ import java.util.List;
 
     public class Events extends Fragment {
     int mNum;
-    //declaraciones
-    Activity mActivity;
     ListView events;
     Timestamp timeStamp = new Timestamp(1);
+    int id_cafeteria;
+    String resultat;
 
     ArrayList<Evento> eventos = new ArrayList<Evento>();
 
@@ -42,7 +44,6 @@ import java.util.List;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        eventos.add(new Evento(1, "ejemplo", "ejemplo", "ejemplo", timeStamp, timeStamp));
         super.onCreate(savedInstanceState);
         mNum = getArguments() != null ? getArguments().getInt("num") : 1;
     }
@@ -52,16 +53,51 @@ import java.util.List;
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        View view = inflater.inflate(R.layout.events, container, false);
-        events = (ListView) view.findViewById(R.id.event_list);
-        return view;
+        return inflater.inflate(R.layout.events, container, false);
+
     }
 
     @Override
     public void onActivityCreated(Bundle state) {
         super.onActivityCreated(state);
-        MyAdapter adapter = new MyAdapter(getActivity(), eventos,"event");
-        events.setAdapter(adapter);
+        events = (ListView) getView().findViewById(R.id.event_list);
+        Descarga nuevaDescarga = new Descarga();
+        nuevaDescarga.execute();
 
+    }
+
+    //---------------------------------------------------------------------------
+    public class Descarga extends AsyncTask<String, Integer, String> {
+
+        @Override
+        protected void onPreExecute() {
+
+        }
+
+        @Override
+        protected String doInBackground(String... urls) {
+
+            try {
+                GestionBBDD baseDatos = new GestionBBDD(); // conecta con servidor SQL
+                eventos= baseDatos.verEventos(id_cafeteria); // obtiene eventos de la cafetería
+            } catch (SQLException se) {
+                System.out.println("oops! No se puede conectar. Error: " + se.toString());
+
+            } finally {
+                return resultat;
+            }
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            //      Cafeteria[] cafeterias = misCafeterias.toArray(new Cafeteria[misCafeterias.size()]);
+            //      MyAdapter adapter = new MyAdapter(getActivity(), cafeterias,"cafe");
+            Bitmap foto = Bitmap.createBitmap(1,1, Bitmap.Config.ARGB_8888);
+            eventos.add(new Evento(1, "ejemplo", "ejemplo", "ejemplo", timeStamp, timeStamp));
+            MyAdapter adapter = new MyAdapter(getActivity(), eventos,"event");
+            events.setAdapter(adapter);
+            // carga de solo array list
+
+        }
     }
 }

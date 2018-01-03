@@ -2,6 +2,7 @@ package com.example.eli.testtab;
 
 import android.app.Activity;
 import android.graphics.Bitmap;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -11,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.ListView;
 
 import java.security.Timestamp;
+import java.sql.SQLException;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Date;
@@ -21,11 +23,12 @@ import java.util.Date;
 
     public class Comments extends Fragment {
     int mNum;
-    //declaraciones
     ListView comments;
+    int id_cafeteria;
+    String resultat;
 
-    ArrayList<Valoracion> comentarios;
-    ArrayList<Usuario> users;
+    ArrayList<Valoracion> comentarios = new ArrayList<Valoracion>();
+    ArrayList<Usuario> users = new ArrayList<Usuario>();
 
     static Comments newInstance(int num) {
         Comments c = new Comments();
@@ -49,16 +52,51 @@ import java.util.Date;
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        View view = inflater.inflate(R.layout.comments, container, false);
-        comments = (ListView) view.findViewById(R.id.comment_list);
-        return view;
+        return inflater.inflate(R.layout.comments, container, false);
     }
 
     @Override
     public void onActivityCreated(Bundle state) {
         super.onActivityCreated(state);
-        MyAdapter adapter = new MyAdapter(getActivity(), comentarios,"comment",users);
-        comments.setAdapter(adapter);
+        comments = (ListView) getView().findViewById(R.id.comment_list);
+        Descarga nuevaDescarga = new Descarga();
+        nuevaDescarga.execute();
 
+    }
+
+    //---------------------------------------------------------------------------
+    public class Descarga extends AsyncTask<String, Integer, String> {
+
+        @Override
+        protected void onPreExecute() {
+
+        }
+
+        @Override
+        protected String doInBackground(String... urls) {
+
+            try {
+                GestionBBDD baseDatos = new GestionBBDD(); // conecta con servidor SQL
+                comentarios= baseDatos.verComentarios(id_cafeteria); // obtiene eventos de la cafetería
+            } catch (SQLException se) {
+                System.out.println("oops! No se puede conectar. Error: " + se.toString());
+
+            } finally {
+                return resultat;
+            }
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            //      Cafeteria[] cafeterias = misCafeterias.toArray(new Cafeteria[misCafeterias.size()]);
+            //      MyAdapter adapter = new MyAdapter(getActivity(), cafeterias,"cafe");
+            Date data = new Date();
+            comentarios.add(new Valoracion(1, id_cafeteria, 4, 4, 4, 4,
+            4, 4, 4, 4, 4, "Me gustaria volver", "Esta cafetería es espectacular", data));
+            MyAdapter adapter = new MyAdapter(getActivity(), comentarios,"comment",users);
+            comments.setAdapter(adapter);
+            // carga de solo array list
+
+        }
     }
 }
