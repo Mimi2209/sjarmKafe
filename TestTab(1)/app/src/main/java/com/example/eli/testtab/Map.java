@@ -111,10 +111,13 @@ public class Map extends Fragment implements OnMapReadyCallback,
                         markerOptions.title("You're here");
                         markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_MAGENTA));
                         mCurrLocationMarker = mMap.addMarker(markerOptions);
+// guardo en variables globales
+                        GlobalState gs = (GlobalState) getActivity().getApplication();
+                        gs.setLatitut((float) location.getLatitude());
+                        gs.setLongitut((float) location.getLongitude());
 
                         //move map camera
-                        mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
-                        mMap.animateCamera(CameraUpdateFactory.zoomTo(18));
+                        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(location.getLatitude(), location.getLongitude()), 18.0f));
 
                         if (location != null) {
                             // Logic to handle location object
@@ -236,9 +239,8 @@ public class Map extends Fragment implements OnMapReadyCallback,
         mCurrLocationMarker = mMap.addMarker(markerOptions);
 
         //move map camera
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
-        mMap.animateCamera(CameraUpdateFactory.zoomTo(18));
-
+        //move map camera
+        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(location.getLatitude(), location.getLongitude()), 18.0f));
         //stop location updates
         if (mGoogleApiClient != null) {
             LocationServices.FusedLocationApi.removeLocationUpdates(mGoogleApiClient, (com.google.android.gms.location.LocationListener) this);
