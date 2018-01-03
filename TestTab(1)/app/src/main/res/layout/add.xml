@@ -45,7 +45,8 @@
             android:layout_weight="1"
             android:ems="10"
             android:hint="@string/add_schedule"
-            android:inputType="textPostalAddress" />
+            android:inputType="textPostalAddress"
+            android:textSize="14sp" />
 
 
     </LinearLayout>
@@ -73,7 +74,8 @@
             android:layout_weight="1"
             android:ems="10"
             android:hint="@string/add_direction"
-            android:inputType="textPostalAddress" />
+            android:inputType="textPostalAddress"
+            android:textSize="14sp" />
 
     </LinearLayout>
 

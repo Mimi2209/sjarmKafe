@@ -52,8 +52,9 @@
 
     <LinearLayout
         android:id="@+id/time"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="match_parent"
+        android:layout_gravity="center"
         android:orientation="horizontal">
 
 
@@ -81,8 +82,9 @@
 
     <LinearLayout
         android:id="@+id/address"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="match_parent"
+        android:layout_gravity="center"
         android:orientation="horizontal">
 
         <ImageView
