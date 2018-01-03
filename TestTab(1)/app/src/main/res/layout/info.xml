@@ -5,14 +5,14 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-       <TableLayout
+
+    <TableLayout
         android:id="@+id/items"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/time"
         android:paddingBottom="30dp"
         android:paddingTop="15dp">
-    <!-- >>>>>>> 41e31a9f8901bb9db1563cd774e44466a692b339 -->
 
         <TableRow
             android:layout_width="match_parent"
