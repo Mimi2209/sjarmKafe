@@ -116,8 +116,10 @@ public class MyAdapter extends BaseAdapter {
                     lNom.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
+                            int id =cafeterias.get(position).getId_cafeteria();
                             Intent intent = new Intent(c,
                                     CafeteriaActivity.class);
+
                             // set
                             intent.putExtra("idCafeteria", cafeterias.get(position).getId_cafeteria());
                             c.startActivity(intent);
