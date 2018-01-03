@@ -40,14 +40,16 @@ public class CafeteriaActivity extends AppCompatActivity {
         setContentView(R.layout.cafeteria_main);
         // recupero por Intent (FUNCIONA BIEN !!) ----------------------------------------
 
-        idCafeteria =getIntent().getExtras().getInt("idCafeteria");
-
+       idCafeteria =getIntent().getExtras().getInt("idCafeteria");
+        GlobalState gs = (GlobalState) getApplication();
+        Toast.makeText(getApplicationContext(), " Cafe "+idCafeteria, Toast.LENGTH_SHORT).show();
+        gs.setId_cafeteria(idCafeteria);
         // Envio a Fragment ---------------------NO PETA  pero no se si envia???
-        Bundle bundle=new Bundle();
-        bundle.putInt("id_Cafeteria", idCafeteria);
+ //       Bundle bundle=new Bundle();
+ //       bundle.putInt("id_Cafeteria", idCafeteria);
         //set Fragmentclass Arguments
-        Info fragobj=new Info();
-        fragobj.setArguments(bundle);
+ //       Info fragobj=new Info();
+ //       fragobj.setArguments(bundle);
         //---------------------------------------------------------------------------
        // Toast.makeText(getApplicationContext(), " Cafe "+idCafeteria, Toast.LENGTH_SHORT).show();
              // primary sections of the activity.

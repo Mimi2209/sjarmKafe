@@ -164,6 +164,7 @@ public class GestionBBDD {
         try {
             stmt = con.createStatement();
             ResultSet rs =stmt.executeQuery(query);
+            int    id_cafeteria;
             String nom;
             String address;
             String descripcion;
@@ -176,6 +177,7 @@ public class GestionBBDD {
             Bitmap bitmap_sortida = null;
             byte[] image = null;
             while(rs.next()) {
+                id_cafeteria= rs.getInt(1);
                 nom = rs.getString(2);
                 address = rs.getString(3);
                 descripcion = rs.getString(4);
@@ -190,7 +192,7 @@ public class GestionBBDD {
 
                distancia= distance(longi,ltg,caf_long,caf_ltg);
                // if(distancia<2.5) {
-                    listCafeterias.add(new Cafeteria(nom, address, descripcion, caf_long,caf_ltg, horario, valoracion, distancia, bitmap));
+                    listCafeterias.add(new Cafeteria(id_cafeteria,nom, address, descripcion, caf_long,caf_ltg, horario, valoracion, distancia, bitmap));
                // }
             }
 

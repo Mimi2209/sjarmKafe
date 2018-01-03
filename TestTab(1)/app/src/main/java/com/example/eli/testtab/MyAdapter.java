@@ -1,5 +1,6 @@
 package com.example.eli.testtab;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
@@ -13,6 +14,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RatingBar;
 import android.widget.TextView;
+import android.app.Application;
 
 
 import java.util.ArrayList;
@@ -116,6 +118,7 @@ public class MyAdapter extends BaseAdapter {
                         public void onClick(View v) {
                             Intent intent = new Intent(c,
                                     CafeteriaActivity.class);
+                            // set
                             intent.putExtra("idCafeteria", cafeterias.get(position).getId_cafeteria());
                             c.startActivity(intent);
                         }

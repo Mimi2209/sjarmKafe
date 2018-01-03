@@ -1,5 +1,6 @@
 package com.example.eli.testtab;
 
+import android.app.Activity;
 import android.graphics.Bitmap;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -12,6 +13,7 @@ import android.widget.CheckBox;
 import android.widget.ListView;
 import android.widget.RatingBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.sql.SQLException;
 
@@ -30,7 +32,8 @@ import java.sql.SQLException;
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         // no peta pq lo he controlado pero de Error, no recupera la info
-        idCafeteria = getArguments() != null ? getArguments().getInt("id_Cafeteria") : 3;
+  //      idCafeteria = getArguments() != null ? getArguments().getInt("id_Cafeteria") : 3;
+
     }
         @Nullable
         @Override
@@ -39,9 +42,12 @@ import java.sql.SQLException;
             // Bundle b1= getArguments();
             // idCafeteria =  b1.getString("id_Cafeteria");
             //-------------------------------------------------
+            // Get values
 
-            //here is your list array
-                        return inflater.inflate(R.layout.info, container, false);
+            GlobalState gs = (GlobalState) getActivity().getApplication();
+            idCafeteria = gs.getId_cafeteria();
+             Toast.makeText(getActivity().getApplicationContext(), " Cafe "+idCafeteria, Toast.LENGTH_SHORT).show();
+            return inflater.inflate(R.layout.info, container, false);
         }
 
     @Override

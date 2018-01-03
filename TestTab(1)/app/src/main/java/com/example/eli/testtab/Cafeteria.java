@@ -68,7 +68,8 @@ public class Cafeteria {
         this.img = img;
     }
     // class para ubicacion mapa y calculo distancias
-    public Cafeteria(String nombre_cafeteria, String address, String descripcion, float longitut, float latitut, String horario,int valoracion_global, double distancia,  Bitmap img) {
+    public Cafeteria(int id_cafeteria,String nombre_cafeteria, String address, String descripcion, float longitut, float latitut, String horario,int valoracion_global, double distancia,  Bitmap img) {
+        this.id_cafeteria=id_cafeteria;
         this.nombre_cafeteria = nombre_cafeteria;
         this.address = address;
         this.descripcion = descripcion;
