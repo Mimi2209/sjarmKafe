@@ -6,82 +6,46 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <LinearLayout
-        android:id="@+id/name"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:paddingBottom="15dp">
+        android:layout_height="match_parent">
 
-        <ImageView
-            android:id="@+id/cafe"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_weight="1"
-            android:contentDescription="@string/todo"
-            android:scaleType="fitStart"
-            android:src="@drawable/cafecaliente" />
-
-        <EditText
-            android:id="@+id/cname"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:ems="10"
-            android:hint="@string/add_coffee_shop_name"
-            android:inputType="textPostalAddress"
-            android:textSize="14sp" />
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/name"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:paddingBottom="15dp">
+
+                <ImageView
+                    android:id="@+id/cafe"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_weight="1"
+                    android:contentDescription="@string/todo"
+                    android:scaleType="fitStart"
+                    android:src="@drawable/cafecaliente" />
+
+                <EditText
+                    android:id="@+id/cname"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:ems="10"
+                    android:hint="@string/add_coffee_shop_name"
+                    android:inputType="textPostalAddress"
+                    android:textSize="14sp" />
 
 
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/des"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/dir"
-        android:orientation="horizontal"
-        android:paddingBottom="15dp">
-
-        <ImageView
-            android:id="@+id/description"
-            android:layout_width="wrap_content"
-            android:layout_height="30dp"
-            android:layout_weight="1"
-            android:contentDescription="@string/todo"
-            android:scaleType="fitStart"
-            android:src="@android:drawable/ic_menu_edit" />
-
-        <EditText
-            android:id="@+id/horario2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:ems="10"
-            android:hint="@string/add_description"
-            android:inputType="textPostalAddress"
-            android:textSize="14sp" />
+            </LinearLayout>
 
 
-    </LinearLayout>
-
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/addCafeteria"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:layout_gravity="bottom|end"
-        android:layout_marginBottom="16dp"
-        android:layout_marginEnd="26dp"
-        android:layout_marginRight="26dp"
-        android:clickable="true"
-        android:focusable="true"
-        app:elevation="4dp"
-        app:srcCompat="@android:drawable/ic_input_add" />
-
-    <LinearLayout
+            <LinearLayout
         android:id="@+id/time"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -139,106 +103,153 @@
 
     </LinearLayout>
 
-    <Spinner
-        android:id="@+id/tcafe"
-        style="@style/Widget.AppCompat.Spinner.DropDown"
-        android:layout_width="match_parent"
+            <LinearLayout
+                android:id="@+id/des"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/dir"
+                android:orientation="horizontal"
+                android:paddingBottom="25dp">
+
+                <ImageView
+                    android:id="@+id/description"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_weight="1"
+                    android:contentDescription="@string/todo"
+                    android:scaleType="fitStart"
+                    android:src="@android:drawable/ic_menu_edit" />
+
+                <EditText
+                    android:id="@+id/descript"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:ems="10"
+                    android:hint="@string/add_description"
+                    android:inputType="textPostalAddress"
+                    android:textSize="14sp" />
+
+
+            </LinearLayout>
+
+            <Spinner
+                android:id="@+id/tcafe"
+                style="@style/Widget.AppCompat.Spinner.DropDown"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/des"
+                android:entries="@string/cafet"
+                android:paddingBottom="25dp" />
+
+            <ImageButton
+                android:id="@+id/imageButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/items"
+                android:contentDescription="@string/todo"
+                android:paddingBottom="25dp"
+                android:paddingTop="25dp"
+                app:srcCompat="@android:drawable/ic_menu_camera" />
+
+            <TableLayout
+                android:id="@+id/items"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tcafe"
+                android:paddingTop="15dp">
+                <!-- >>>>>>> 41e31a9f8901bb9db1563cd774e44466a692b339 -->
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <CheckBox
+                        android:id="@+id/Terrace"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/terrace"
+                        android:textColor="@color/colorPrimary" />
+
+                    <CheckBox
+                        android:id="@+id/Tables"
+                        android:layout_width="200dp"
+                        android:layout_height="wrap_content"
+                        android:text="@string/tables"
+                        android:textColor="@color/colorPrimary" />
+
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <CheckBox
+                        android:id="@+id/Wifi"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/wifi"
+                        android:textColor="@color/colorPrimary" />
+
+                    <CheckBox
+                        android:id="@+id/shop"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/shop"
+                        android:textColor="@color/colorPrimary" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <CheckBox
+                        android:id="@+id/Meals"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/meals"
+                        android:textColor="@color/colorPrimary" />
+
+                    <CheckBox
+                        android:id="@+id/Xpress"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/express_service"
+                        android:textColor="@color/colorPrimary" />
+
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <CheckBox
+                        android:id="@+id/Dogs"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/dogs"
+                        android:textColor="@color/colorPrimary" />
+                </TableRow>
+            </TableLayout>
+</LinearLayout>
+    </ScrollView>
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/addCafeteria"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/des"
-        android:entries="@string/cafet"
-        android:paddingBottom="15dp" />
-
-    <ImageButton
-        android:id="@+id/imageButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/items"
-        android:contentDescription="@string/todo"
-        app:srcCompat="@android:drawable/ic_menu_camera" />
-
-    <TableLayout
-        android:id="@+id/items"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/tcafe"
-        android:paddingBottom="30dp"
-        android:paddingTop="15dp">
-        <!-- >>>>>>> 41e31a9f8901bb9db1563cd774e44466a692b339 -->
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <CheckBox
-                android:id="@+id/Terrace"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/terrace"
-                android:textColor="@color/colorPrimary" />
-
-            <CheckBox
-                android:id="@+id/Tables"
-                android:layout_width="200dp"
-                android:layout_height="wrap_content"
-                android:text="@string/tables"
-                android:textColor="@color/colorPrimary" />
-
-        </TableRow>
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <CheckBox
-                android:id="@+id/Wifi"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/wifi"
-                android:textColor="@color/colorPrimary" />
-
-            <CheckBox
-                android:id="@+id/shop"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/shop"
-                android:textColor="@color/colorPrimary" />
-        </TableRow>
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <CheckBox
-                android:id="@+id/Meals"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/meals"
-                android:textColor="@color/colorPrimary" />
-
-            <CheckBox
-                android:id="@+id/Xpress"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/express_service"
-                android:textColor="@color/colorPrimary" />
-
-        </TableRow>
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <CheckBox
-                android:id="@+id/Dogs"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/dogs"
-                android:textColor="@color/colorPrimary" />
-        </TableRow>
-    </TableLayout>
-
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_gravity="bottom|end"
+        android:layout_marginBottom="16dp"
+        android:layout_marginEnd="26dp"
+        android:layout_marginRight="26dp"
+        android:clickable="true"
+        android:focusable="true"
+        app:elevation="4dp"
+        app:srcCompat="@android:drawable/ic_input_add" />
 </RelativeLayout>

@@ -64,7 +64,7 @@ public class Add extends Fragment {
         tNameCafe = (EditText) getView().findViewById(R.id.cname);
         tAddress = (EditText) getView().findViewById(R.id.address);
         tHorario = (EditText) getView().findViewById(R.id.horario);
-        tDescrip = (EditText) getView().findViewById(R.id.horario2);
+        tDescrip = (EditText) getView().findViewById(R.id.descript);
         cTerrace = (CheckBox) getView().findViewById(R.id.Terrace);
         cTables = (CheckBox) getView().findViewById(R.id.Tables);
         cWifi = (CheckBox) getView().findViewById(R.id.Wifi);
