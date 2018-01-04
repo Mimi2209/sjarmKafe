@@ -132,9 +132,9 @@ public class MyAdapter extends BaseAdapter {
                 case "event":
                     elemento = inflador.inflate(R.layout.event, parent, false);
                     TextView nevent = (TextView) elemento.findViewById(R.id.event);
-                    EditText hevent = (EditText) elemento.findViewById(R.id.time_event);
+                    TextView hevent = (TextView) elemento.findViewById(R.id.time_event);
                     TextView location = (TextView) elemento.findViewById(R.id.location);
-                    EditText desevent = (EditText) elemento.findViewById(R.id.event_descript);
+                    TextView desevent = (TextView) elemento.findViewById(R.id.event_descript);
                     nevent.setText(eventos.get(position).getEvent_name());
                     Date inicio=eventos.get(position).getEvent_inicio();
                     Date fin=eventos.get(position).getEvent_fin();

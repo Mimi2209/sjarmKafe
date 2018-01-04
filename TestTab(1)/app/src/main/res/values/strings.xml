@@ -37,5 +37,6 @@
     <string name="dise_o">Diseño</string>
     <string name="accesibilidad">Accesibilidad</string>
     <string name="aparcar">Aparcar</string>
+    <string name="event">Event</string>
 
 </resources>
