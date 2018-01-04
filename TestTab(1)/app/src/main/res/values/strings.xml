@@ -29,5 +29,13 @@
     <string name="cafet">Coffee Type</string>
     <string name="add_description">Add Description</string>
     <string name="add_coffee_shop_name">Add Coffee Shop Name</string>
+    <string name="trato">Trato</string>
+    <string name="rapidez">Rapidez</string>
+    <string name="limpieza">Limpieza</string>
+    <string name="ambiente">Ambiente</string>
+    <string name="precios">Precios</string>
+    <string name="dise_o">Diseño</string>
+    <string name="accesibilidad">Accesibilidad</string>
+    <string name="aparcar">Aparcar</string>
 
 </resources>
