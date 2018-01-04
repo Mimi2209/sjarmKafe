@@ -17,7 +17,10 @@ import android.widget.TextView;
 import android.app.Application;
 
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -129,11 +132,18 @@ public class MyAdapter extends BaseAdapter {
                 case "event":
                     elemento = inflador.inflate(R.layout.event, parent, false);
                     TextView nevent = (TextView) elemento.findViewById(R.id.event);
-                    EditText hevent = (EditText) elemento.findViewById(R.id.time_event);
+                    TextView hevent = (TextView) elemento.findViewById(R.id.time_event);
                     TextView location = (TextView) elemento.findViewById(R.id.location);
-                    EditText desevent = (EditText) elemento.findViewById(R.id.event_descript);
+                    TextView desevent = (TextView) elemento.findViewById(R.id.event_descript);
                     nevent.setText(eventos.get(position).getEvent_name());
-                    hevent.setText((CharSequence) eventos.get(position).getEvent_inicio()+"-"+eventos.get(position).getEvent_fin());
+                    Date inicio=eventos.get(position).getEvent_inicio();
+                    Date fin=eventos.get(position).getEvent_fin();
+                    Calendar cal=Calendar.getInstance();
+                    cal.setTime(inicio);
+                    Calendar cal1=Calendar.getInstance();
+                    cal1.setTime(fin);
+                    String showTime=String.format("%1$tI:%1$tM:%1$tS %1$Tp",cal)+"-"+String.format("%1$tI:%1$tM:%1$tS %1$Tp",cal1);
+                    hevent.setText(showTime);
                     location.setText(eventos.get(position).getEvent_location());
                     desevent.setText(eventos.get(position).getEvent_descrip());
                     break;
@@ -141,20 +151,29 @@ public class MyAdapter extends BaseAdapter {
                     elemento = inflador.inflate(R.layout.comentario, parent, false);
                     TextView ncomment = (TextView) elemento.findViewById(R.id.comment);
                     TextView nuser = (TextView) elemento.findViewById(R.id.user);
-                    EditText hcomment = (EditText) elemento.findViewById(R.id.horario);
-                    EditText descomment = (EditText) elemento.findViewById(R.id.comment_descript);
+                    TextView hcomment = (TextView) elemento.findViewById(R.id.horario);
+                    TextView descomment = (TextView) elemento.findViewById(R.id.comment_descript);
                     RatingBar crating = (RatingBar) elemento.findViewById(R.id.rating);
                     final ImageView uimage = (ImageView) elemento.findViewById(R.id.user_image);
                     ncomment.setText(comments.get(position).getCom_titulo());
-                    int Userid = comments.get(position).id_val_usuario;
-                    nuser.setText(users.get(Userid).getNombre());
-                    hcomment.setText((CharSequence) comments.get(position).data);
+                    //int Userid = comments.get(position).id_val_usuario;
+                    //nuser.setText(users.get(Userid).getNombre());
+                    Date data=comments.get(position).data;
+                    Calendar cal2=Calendar.getInstance();
+                    cal2.setTime(data);
+                    String showTimeC=String.format("%1$tI:%1$tM:%1$tS %1$Tp",cal2);
+                    hcomment.setText(showTimeC);
                     descomment.setText(comments.get(position).getCom_text());
-                    crating.setRating(comments.get(position).getValoracion_global());
-                    uimage.setImageBitmap(users.get(Userid).getFoto());
+                    try {
+                        crating.setRating(comments.get(position).getValoracion_global());
+                    }catch (NullPointerException e){
+
+                    }
+                    //uimage.setImageBitmap(users.get(Userid).getFoto());
                     break;
             }
 
             return elemento;
         }
+
 }
