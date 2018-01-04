@@ -29,7 +29,7 @@ public class GlobalState extends Application
         this.id_user = id_user;
     }
 
-    public float getLatitut() {
+    public float getLatitut(double latitude) {
         return latitut;
     }
 
