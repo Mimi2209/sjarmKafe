@@ -25,7 +25,7 @@
             android:textStyle="bold" />
 
         <RatingBar
-            android:id="@+id/rating2"
+            android:id="@+id/rating"
             style="@style/Widget.AppCompat.RatingBar.Small"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -42,8 +42,9 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/linea_nom"
-        android:layout_marginStart="50dp"
-        android:layout_marginTop="50dp">
+        android:layout_marginEnd="25dp"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="25dp">
 
         <TableRow
             android:layout_width="match_parent"
@@ -278,4 +279,20 @@
         </TableRow>
 
     </TableLayout>
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/addCafeteria"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_gravity="bottom|end"
+        android:layout_marginBottom="16dp"
+        android:layout_marginEnd="26dp"
+        android:layout_marginRight="26dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:elevation="4dp"
+        android:src="@android:drawable/ic_menu_add" />
 </RelativeLayout>
