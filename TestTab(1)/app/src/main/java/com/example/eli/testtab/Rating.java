@@ -23,31 +23,24 @@ import java.util.ArrayList;
 
 
     public class Rating extends Fragment {
-
+    GlobalState gs;
     int idCafeteria;
-    Cafeteria miCafeteria;
     String resultat;
     TextView tNameCafe;
     RatingBar ratGlobal, ratLimpieza, ratRapidez,ratTrato,ratAmbiente, ratPrecios,ratDiseño,ratAccesibilidad,ratAparcar;
 
-    ArrayList<Valoracion> valoraciones = new ArrayList<Valoracion>();
+    Valoracion valoraciones;
 
     static Rating newInstance(int num) {
         Rating r = new Rating();
-
-        // Supply num input as an argument.
-        Bundle args = new Bundle();
-        args.putInt("idCafeteria", num);
-        r.setArguments(args);
-
         return r;
     }
+
         @Nullable
         @Override
         public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-            GlobalState gs = (GlobalState) getActivity().getApplication();
-            idCafeteria = gs.getId_cafeteria();
-            Toast.makeText(getActivity().getApplicationContext(), " Cafe "+idCafeteria, Toast.LENGTH_SHORT).show();
+            gs = (GlobalState) getActivity().getApplication();
+     //       Toast.makeText(getActivity().getApplicationContext(), " Cafe "+gs.getNom_cafeteria(), Toast.LENGTH_SHORT).show();
             return inflater.inflate(R.layout.rating, container, false);
         }
 
@@ -67,6 +60,7 @@ import java.util.ArrayList;
         ratAccesibilidad = (RatingBar) getView().findViewById(R.id.ratingAccesib);
         ratAparcar = (RatingBar) getView().findViewById(R.id.ratingAparcar);
 
+
         Descarga nuevaDescarga = new Descarga();
         nuevaDescarga.execute();
 
@@ -77,7 +71,7 @@ import java.util.ArrayList;
 
         @Override
         protected void onPreExecute() {
-
+            idCafeteria=gs.getId_cafeteria(); // recupero id cafeteria de la variable global
         }
 
         @Override
@@ -97,6 +91,16 @@ import java.util.ArrayList;
         @Override
         protected void onPostExecute(String result) {
 
+            tNameCafe.setText( gs.getNom_cafeteria());
+            ratGlobal.setRating(idCafeteria);
+            ratLimpieza.setRating(valoraciones.getLimpieza());
+            ratRapidez.setRating(valoraciones.getRapidez_servicio());
+            ratTrato.setRating(valoraciones.getTrato());
+            ratAmbiente.setRating(valoraciones.getAmbiente());
+            ratPrecios.setRating(valoraciones.getPrecios());
+            ratDiseño.setRating(valoraciones.getDisenyo());
+            ratAccesibilidad.setRating(valoraciones.getAccesibilidad());
+            ratAparcar.setRating(valoraciones.getFacil_aparcar());
 
         }
     }

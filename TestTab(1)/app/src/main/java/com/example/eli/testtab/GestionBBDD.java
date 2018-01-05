@@ -21,15 +21,16 @@ import java.util.Date;
 
 public class GestionBBDD {
     private static String Classe = "com.mysql.jdbc.Driver";
-    private static String datosConexion="jdbc:mysql://e80760-mysql.services.easyname.eu/";
+    private static String datosConexion = "jdbc:mysql://e80760-mysql.services.easyname.eu/";
     private static String baseDatos = "u125322db1";
     private static String usuario = "u125322db1";
-    private static String pass="Proyecto2018";
+    private static String pass = "Proyecto2018";
     private Connection con;
-    public GestionBBDD(){
+
+    public GestionBBDD() {
         try {
             Class.forName(Classe);
-            con = DriverManager.getConnection(datosConexion+baseDatos,usuario,pass);
+            con = DriverManager.getConnection(datosConexion + baseDatos, usuario, pass);
 
 
         } catch (SQLException e) {
@@ -38,8 +39,9 @@ public class GestionBBDD {
             System.out.println("oops! No se encuentra la clase. Error: " + e.getMessage());
         }
     }
+
     //   ----------------------- INSERTAR USUARIO -------------------------------------------------------------
-    public boolean insertUsuario(Usuario miUsuario) throws SQLException{
+    public boolean insertUsuario(Usuario miUsuario) throws SQLException {
 
         PreparedStatement st = con.prepareStatement("INSERT INTO `u125322db1`.`usuario` (`nombre_usuario`, `pwd`, `ultima_conexion`, `email`, `foto`) VALUES  (?,?,?,?,?)");
         st.setString(1, miUsuario.getNombre());
@@ -50,22 +52,21 @@ public class GestionBBDD {
         ByteArrayOutputStream bos = new ByteArrayOutputStream();
         bitmap.compress(Bitmap.CompressFormat.JPEG, 0, bos);
         byte[] image = bos.toByteArray();
-        st.setBytes(5,image);
+        st.setBytes(5, image);
         try {
             st.executeUpdate();
         } catch (SQLException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
             return false;
-        }
-        finally{
+        } finally {
             st.close();
             return true;
         }
     }
 
     // ------- Insert Cafeteria  --------------------------------------------------------------------------------
-    public boolean insertCafeteria(Cafeteria miCafeteria) throws SQLException{
+    public boolean insertCafeteria(Cafeteria miCafeteria) throws SQLException {
         PreparedStatement st = con.prepareStatement("INSERT INTO u125322db1.cafeteria (`nombre`, `address`, `descripción`, `tip_cafe`, `longitud`, `latitud`, `mesas`, `terraza`, `wifi`, `comida`, `tienda`, `perros`, `horario`, `servicio_express`, `valoracion` , `img`) VALUES  (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
         st.setString(1, miCafeteria.getNombre_cafeteria());
         st.setString(2, miCafeteria.getAddress());
@@ -87,7 +88,7 @@ public class GestionBBDD {
         ByteArrayOutputStream bos = new ByteArrayOutputStream();
         bitmap.compress(Bitmap.CompressFormat.JPEG, 0, bos);
         byte[] image = bos.toByteArray();
-        st.setBytes(16,image);
+        st.setBytes(16, image);
 
         try {
             st.executeUpdate();
@@ -95,20 +96,20 @@ public class GestionBBDD {
             // TODO Auto-generated catch block
             e.printStackTrace();
             return false;
-        }
-        finally{
+        } finally {
             st.close();
             return true;
         }
     }
+
     // ------- Recupero info cafeteria ----- Class Cafeteria --------------------------------------------------------------------------------
-    public Cafeteria verCafeteria(int id_cafeteria) throws SQLException{
-        String query ="SELECT * FROM u125322db1.cafeteria  where id_cafeteria = "+id_cafeteria+";";
+    public Cafeteria verCafeteria(int id_cafeteria) throws SQLException {
+        String query = "SELECT * FROM u125322db1.cafeteria  where id_cafeteria = " + id_cafeteria + ";";
         Statement stmt = null;
-        Cafeteria miCafeteria=null;
+        Cafeteria miCafeteria = null;
         try {
             stmt = con.createStatement();
-            ResultSet rs =stmt.executeQuery(query);
+            ResultSet rs = stmt.executeQuery(query);
             String nom;
             String address;
             String descripcion;
@@ -125,7 +126,7 @@ public class GestionBBDD {
             byte[] image = null;
             Bitmap bitmap = null;
 
-            while(rs.next()) {
+            while (rs.next()) {
                 nom = rs.getString(2);
                 address = rs.getString(3);
                 descripcion = rs.getString(4);
@@ -142,7 +143,7 @@ public class GestionBBDD {
                 image = rs.getBytes(17); // array de bytes
                 BitmapFactory.Options options = new BitmapFactory.Options();
                 bitmap = BitmapFactory.decodeByteArray(image, 0, image.length, options); //Convert bytearray to bitmap
-                miCafeteria = new Cafeteria(id_cafeteria,nom, address, descripcion, tip_cafe, mesas, terraza, wifi, comida, tienda, perros, horario, servicio_expres, valoracion, bitmap);
+                miCafeteria = new Cafeteria(id_cafeteria, nom, address, descripcion, tip_cafe, mesas, terraza, wifi, comida, tienda, perros, horario, servicio_expres, valoracion, bitmap);
             }
 
             rs.close();
@@ -155,29 +156,30 @@ public class GestionBBDD {
         }
 
     }
-    // ------- Recupero lista  cafeterias por distancia (para Listing y para Map)
-    public ArrayList<Cafeteria> verListCafeterias(float longi, float ltg) throws SQLException{
 
-        String query ="SELECT * FROM u125322db1.cafeteria ;";
+    // ------- Recupero lista  cafeterias por distancia (para Listing y para Map)
+    public ArrayList<Cafeteria> verListCafeterias(float longi, float ltg) throws SQLException {
+
+        String query = "SELECT * FROM u125322db1.cafeteria ;";
         Statement stmt = null;
-        ArrayList<Cafeteria> listCafeterias=new ArrayList<>();
+        ArrayList<Cafeteria> listCafeterias = new ArrayList<>();
         try {
             stmt = con.createStatement();
-            ResultSet rs =stmt.executeQuery(query);
-            int    id_cafeteria;
+            ResultSet rs = stmt.executeQuery(query);
+            int id_cafeteria;
             String nom;
             String address;
             String descripcion;
             String horario;
-            float  caf_long;
-            float  caf_ltg;
+            float caf_long;
+            float caf_ltg;
             Integer valoracion;
-            double  distancia;
+            double distancia;
             Bitmap bitmap = null;
             Bitmap bitmap_sortida = null;
             byte[] image = null;
-            while(rs.next()) {
-                id_cafeteria= rs.getInt(1);
+            while (rs.next()) {
+                id_cafeteria = rs.getInt(1);
                 nom = rs.getString(2);
                 address = rs.getString(3);
                 descripcion = rs.getString(4);
@@ -190,10 +192,10 @@ public class GestionBBDD {
                 bitmap = BitmapFactory.decodeByteArray(image, 0, image.length, options); //Convert bytearray to bitmap
                 // Calculo distancia y la guardo para ordenar por distancia
 
-               distancia= distance(longi,ltg,caf_long,caf_ltg);
-               // if(distancia<2.5) {
-                    listCafeterias.add(new Cafeteria(id_cafeteria,nom, address, descripcion, caf_long,caf_ltg, horario, valoracion, distancia, bitmap));
-               // }
+                distancia = distance(longi, ltg, caf_long, caf_ltg);
+                // if(distancia<2.5) {
+                listCafeterias.add(new Cafeteria(id_cafeteria, nom, address, descripcion, caf_long, caf_ltg, horario, valoracion, distancia, bitmap));
+                // }
             }
 
             rs.close();
@@ -206,8 +208,9 @@ public class GestionBBDD {
         }
 
     }
+
     //   ----------------------- INSERTAR VALORACION -------------------------------------------------------------
-    public boolean insertValoracion(Valoracion miValoracion) throws SQLException{
+    public boolean insertValoracion(Valoracion miValoracion) throws SQLException {
 
         PreparedStatement st = con.prepareStatement("INSERT INTO `u125322db1`.`valoracion` (`id_val_usuario`, `id_val_cafeteria`, `valoracion_gobal`, `limpieza`, `rapidez_servicio`, `trato`, `ambiente`, `precios`, `disenyo`, `accesibilidad`, `facil_aparcar`, `titulo_comentario`, `texto_comentario`, `date_val`) VALUES  (?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
         st.setInt(1, miValoracion.getId_val_usuario());
@@ -232,23 +235,25 @@ public class GestionBBDD {
             // TODO Auto-generated catch block
             e.printStackTrace();
             return false;
-        }
-        finally{
+        } finally {
             st.close();
             return true;
         }
     }
 
     // ------- Recupero valoracion cafeteria --(ArrayList) -----------------------------------------------------------------------------------
-    public ArrayList<Valoracion> verValoracion(int id_cafeteria) throws SQLException{
+    public Valoracion verValoracion(int id_cafeteria) throws SQLException {
         // Vis libro
 
-        String query ="SELECT * FROM u125322db1.valoracion  where id_val_cafeteria = "+id_cafeteria+";";
+        String query = "SELECT * FROM u125322db1.valoracion  where id_val_cafeteria = " + id_cafeteria + ";";
         Statement stmt = null;
-        ArrayList<Valoracion> valoraciones=new ArrayList<>();
+        ArrayList<Valoracion> valoraciones = new ArrayList<>();
+        Valoracion valParcial;
+        Valoracion valoracion_cafeteria=null;
+
         try {
             stmt = con.createStatement();
-            ResultSet rs =stmt.executeQuery(query);
+            ResultSet rs = stmt.executeQuery(query);
             int val_global;
             int limpieza;
             int rapidez;
@@ -258,7 +263,7 @@ public class GestionBBDD {
             int disenyo;
             int acceso;
             int aparcar;
-            while(rs.next()) {
+            while (rs.next()) {
                 val_global = rs.getInt(4);
                 limpieza = rs.getInt(5);
                 rapidez = rs.getInt(6);
@@ -268,42 +273,66 @@ public class GestionBBDD {
                 disenyo = rs.getInt(10);
                 acceso = rs.getInt(11);
                 aparcar = rs.getInt(12);
-                valoraciones.add( new Valoracion(val_global, limpieza, rapidez, trato, ambiente, precios, disenyo, acceso, aparcar));
+                valoraciones.add(new Valoracion(val_global, limpieza, rapidez, trato, ambiente, precios, disenyo, acceso, aparcar));
             }
+            val_global = 0;
+            limpieza = 0;
+            rapidez = 0;
+            trato = 0;
+            ambiente = 0;
+            precios = 0;
+            disenyo = 0;
+            acceso = 0;
+            aparcar = 0;
+            int numVal = valoraciones.size();
+            for (int i = 0; i < valoraciones.size(); i++) { // calculo promedios
+                valParcial = valoraciones.get(i);
+                limpieza += valParcial.getLimpieza();
+                rapidez += valParcial.getRapidez_servicio();
+                trato += valParcial.getTrato();
+                ambiente += valParcial.getAmbiente();
+                precios += valParcial.getPrecios();
+                disenyo += valParcial.getDisenyo();
+                acceso += valParcial.getAccesibilidad();
+                aparcar += valParcial.getFacil_aparcar();
+            }
+
+            valoracion_cafeteria = new Valoracion(val_global, limpieza / numVal, rapidez / numVal, trato / numVal, ambiente / numVal, precios / numVal, disenyo / numVal, acceso / numVal, aparcar / numVal);
             rs.close();
             stmt.close();
         } catch (SQLException se) {
             System.out.println("oops! No se puede conectar. Error: " + se.toString());
 
         } finally {
-            return valoraciones;
+            return valoracion_cafeteria;
         }
 
     }
+
     // ------- Recupero comentarios cafeteria -(ArrayList) ------------------------------------------------------------------------------------
-    public ArrayList<Valoracion> verComentarios(int id_cafeteria) throws SQLException{
+    public ArrayList<Valoracion> verComentarios(int id_cafeteria) throws SQLException {
         // Vis libro
 
-        String query ="SELECT * FROM u125322db1.valoracion  where id_val_cafeteria = "+id_cafeteria+";";
+        String query = "SELECT * FROM u125322db1.valoracion  where id_val_cafeteria = " + id_cafeteria + ";";
         Statement stmt = null;
-        ArrayList<Valoracion> comentarios=new ArrayList<>();
+        ArrayList<Valoracion> comentarios = new ArrayList<>();
         try {
             stmt = con.createStatement();
-            ResultSet rs =stmt.executeQuery(query);
+            ResultSet rs = stmt.executeQuery(query);
             int com_usuario;
             int com_val;
             String com_titulo;
             String com_text;
             Date com_fecha;
 
-            while(rs.next()) {
+            while (rs.next()) {
                 com_usuario = rs.getInt(2);
                 com_val = rs.getInt(4);
                 com_titulo = rs.getString(13);
                 com_text = rs.getString(14);
                 com_fecha = rs.getDate(15);
 
-                comentarios.add( new Valoracion(com_usuario, com_val, com_titulo, com_text, com_fecha));
+                comentarios.add(new Valoracion(com_usuario, com_val, com_titulo, com_text, com_fecha));
             }
             rs.close();
             stmt.close();
@@ -316,7 +345,8 @@ public class GestionBBDD {
 
     }
     //   ----------------------- INSERTAR EVENTO -------------------------------------------------------------
-    public boolean insertEvento(Evento miEvento) throws SQLException{
+
+    public boolean insertEvento(Evento miEvento) throws SQLException {
 
         PreparedStatement st = con.prepareStatement("INSERT INTO `u125322db1`.`evento` (`event_id_cafeteria`, `event_id_usr`, `event_name`, `event_descripcion`, `event_location`, `event_inicio`, `event_fin`) VALUES  (?,?,?,?,?,?,?)");
         st.setInt(1, miEvento.getId_evento_cafeteria());
@@ -333,21 +363,21 @@ public class GestionBBDD {
             // TODO Auto-generated catch block
             e.printStackTrace();
             return false;
-        }
-        finally{
+        } finally {
             st.close();
             return true;
         }
     }
-    // ------- Recupero Eventos cafeteria -(ArrayList) ------------------------------------------------------------------------------------
-    public ArrayList<Evento> verEventos(int id_cafeteria) throws SQLException{
 
-        String query ="SELECT * FROM u125322db1.comentario  where event_id_cafeteria = "+id_cafeteria+";";
+    // ------- Recupero Eventos cafeteria -(ArrayList) ------------------------------------------------------------------------------------
+    public ArrayList<Evento> verEventos(int id_cafeteria) throws SQLException {
+
+        String query = "SELECT * FROM u125322db1.comentario  where event_id_cafeteria = " + id_cafeteria + ";";
         Statement stmt = null;
-        ArrayList<Evento> eventos=new ArrayList<>();
+        ArrayList<Evento> eventos = new ArrayList<>();
         try {
             stmt = con.createStatement();
-            ResultSet rs =stmt.executeQuery(query);
+            ResultSet rs = stmt.executeQuery(query);
             int evento_usuario;
             String evento_titulo;
             String evento_descripcion;
@@ -355,7 +385,7 @@ public class GestionBBDD {
             Timestamp com_fecha_ini;
             Timestamp com_fecha_fin;
 
-            while(rs.next()) {
+            while (rs.next()) {
                 evento_usuario = rs.getInt(3);
                 evento_titulo = rs.getString(4);
                 evento_descripcion = rs.getString(5);
@@ -363,7 +393,7 @@ public class GestionBBDD {
                 com_fecha_ini = rs.getTimestamp(7);
                 com_fecha_fin = rs.getTimestamp(8);
 
-                eventos.add( new Evento(evento_usuario, evento_titulo, evento_descripcion, evento_locaclizacion,com_fecha_ini,com_fecha_fin ));
+                eventos.add(new Evento(evento_usuario, evento_titulo, evento_descripcion, evento_locaclizacion, com_fecha_ini, com_fecha_fin));
             }
             rs.close();
             stmt.close();
@@ -377,23 +407,23 @@ public class GestionBBDD {
     }
 
     // ------- Recupero info cafeteria ----- Class Cafeteria --------------------------------------------------------------------------------
-    public ArrayList<Tipo_cafe> verTipCafe() throws SQLException{
-        String query ="SELECT * FROM u125322db1.tipo_Cafe;";
+    public ArrayList<Tipo_cafe> verTipCafe() throws SQLException {
+        String query = "SELECT * FROM u125322db1.tipo_Cafe;";
         Statement stmt = null;
-        ArrayList<Tipo_cafe> miTipCafe= new ArrayList<>();
+        ArrayList<Tipo_cafe> miTipCafe = new ArrayList<>();
         try {
             stmt = con.createStatement();
-            ResultSet rs =stmt.executeQuery(query);
+            ResultSet rs = stmt.executeQuery(query);
             int id;
             String nom;
             String caract;
 
-            while(rs.next()) {
+            while (rs.next()) {
                 id = rs.getInt(1);
                 nom = rs.getString(2);
                 caract = rs.getString(3);
 
-                miTipCafe.add( new Tipo_cafe(id,nom,caract));
+                miTipCafe.add(new Tipo_cafe(id, nom, caract));
             }
 
             rs.close();
@@ -408,7 +438,6 @@ public class GestionBBDD {
     }
 
 
-
     //-----------------------------------------------------------------------------------------------------------------
 //---------- Calculo distancia entre 2 cafeteries     ----------------------------------------------------------------
     private double distance(float lat1, float lon1, float lat2, float lon2) {
@@ -420,6 +449,7 @@ public class GestionBBDD {
         dist = dist * 1.609344; // KM
         return (dist);
     }
+
     /*:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::*/
     /*::  This function converts decimal degrees to radians             :*/
     /*:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::*/

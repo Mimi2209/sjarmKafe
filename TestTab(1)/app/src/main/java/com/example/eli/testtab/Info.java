@@ -30,14 +30,10 @@ import java.sql.SQLException;
         CheckBox cTerrace, cTables, cWifi, cShop, cMeals, cXpress, cDogs;
         TextView tNameCafe, tAddress, tHorario, tDescrip ;
         RatingBar rRating2;
+        GlobalState gs;
 
     static Info newInstance(int num) {
         Info i = new Info();
-
-        // Supply num input as an argument.
-        Bundle args = new Bundle();
-        args.putInt("idCafeteria", num);
-        i.setArguments(args);
 
         return i;
     }
@@ -55,7 +51,7 @@ import java.sql.SQLException;
             //-------------------------------------------------
             // Get values
 
-            GlobalState gs = (GlobalState) getActivity().getApplication();
+            gs = (GlobalState) getActivity().getApplication();
             idCafeteria = gs.getId_cafeteria();
              Toast.makeText(getActivity().getApplicationContext(), " Cafe "+idCafeteria, Toast.LENGTH_SHORT).show();
             return inflater.inflate(R.layout.info, container, false);
@@ -121,6 +117,8 @@ import java.sql.SQLException;
             cXpress.setChecked(miCafeteria.isServicio_expres());
             cDogs.setChecked(miCafeteria.isPerros());
             rRating2.setRating(miCafeteria.getValoracion_global());
+            gs.setNom_cafeteria(miCafeteria.getNombre_cafeteria());
+            gs.setRating_cafeteria(miCafeteria.getValoracion_global());
 
             //        misCafeterias.add(new Cafeteria("Nomad","Passatge Sert, 12, 08003 Barcelona","Una de las mejores cafeterias de Barcelona",1,true,false,true,true,false,false,"17",true,4,foto));
 

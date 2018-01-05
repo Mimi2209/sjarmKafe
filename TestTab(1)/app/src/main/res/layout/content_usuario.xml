@@ -29,7 +29,7 @@
             android:layout_height="75dp"
             android:layout_weight="1"
             android:contentDescription="@string/todo"
-            app:srcCompat="@drawable/Usericon" />
+            app:srcCompat="@drawable/usericon" />
 
     </LinearLayout>
 
