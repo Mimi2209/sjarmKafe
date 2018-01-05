@@ -437,7 +437,41 @@ public class GestionBBDD {
 
     }
 
+    // ------- Recupero info usuario ----- Class Usuario --------------------------------------------------------------------------------
+    public Usuario verUsuario(String email) throws SQLException {
+        String query = "SELECT * FROM u125322db1.user  where email = " + email + ";";
+        Statement stmt = null;
+        Usuario miUsuario = null;
+        try {
+            stmt = con.createStatement();
+            ResultSet rs = stmt.executeQuery(query);
+            String nom;
+            String password;
+            Timestamp uconexion;
+            String uemail;
+            byte[] image = null;
+            Bitmap bitmap = null;
 
+            while (rs.next()) {
+                nom = rs.getString(2);
+                password = rs.getString(3);
+                uconexion = rs.getTimestamp(4);
+                uemail = rs.getString(5);
+                image = rs.getBytes(6); // array de bytes
+                BitmapFactory.Options options = new BitmapFactory.Options();
+                bitmap = BitmapFactory.decodeByteArray(image, 0, image.length, options); //Convert bytearray to bitmap
+                miUsuario=new Usuario(nom,password,uconexion,uemail,bitmap);}
+
+            rs.close();
+            stmt.close();
+        } catch (SQLException se) {
+            System.out.println("oops! No se puede conectar. Error: " + se.toString());
+
+        } finally {
+            return miUsuario;
+        }
+
+    }
     //-----------------------------------------------------------------------------------------------------------------
 //---------- Calculo distancia entre 2 cafeteries     ----------------------------------------------------------------
     private double distance(float lat1, float lon1, float lat2, float lon2) {

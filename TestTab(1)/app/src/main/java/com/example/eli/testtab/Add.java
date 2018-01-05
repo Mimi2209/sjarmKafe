@@ -1,6 +1,8 @@
 package com.example.eli.testtab;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
@@ -25,6 +27,8 @@ import android.widget.Toast;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import static android.app.Activity.RESULT_OK;
+
 /**
  * Created by Eli on 27/12/2017.
  */
@@ -44,6 +48,7 @@ public class Add extends Fragment {
     ArrayAdapter<String> adapter;
     int tip_cafe;
     RatingBar rRating2;
+    static final int USER_REQUEST = 1;
     Descarga nuevaDescarga;
     Descarga_cafe nuevaDescarga_cafe;
     @Nullable
@@ -73,14 +78,6 @@ public class Add extends Fragment {
         cXpress = (CheckBox) getView().findViewById(R.id.Xpress);
         cDogs = (CheckBox) getView().findViewById(R.id.Dogs);
         sItems = (Spinner) getView().findViewById(R.id.tcafe);
-        FloatingActionButton fab = (FloatingActionButton) getActivity().findViewById(R.id.addCafeteria);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                nuevaDescarga = new Descarga();
-                nuevaDescarga.execute();
-            }
-        });
         sItems.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 
             public void onItemSelected(AdapterView<?> parentView,
@@ -92,13 +89,40 @@ public class Add extends Fragment {
             }
 
             public void onNothingSelected(AdapterView<?> arg0) {
-                tip_cafe=1;
+                tip_cafe =1;
             }
 
         });
+        FloatingActionButton fab = (FloatingActionButton) getActivity().findViewById(R.id.addCafeteria);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
 
+
+                Intent intent = new Intent(getActivity(),
+                        UsuarioActivity.class);
+                startActivityForResult(intent,USER_REQUEST);
+                getActivity().startActivity(intent);
+
+            }
+        });
 
     }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == USER_REQUEST) {
+            // Make sure the request was successful
+            if (resultCode == RESULT_OK) {
+                String returnValue = data.getStringExtra("user");//no deberiamos pasar el usuario que la crea?
+                nuevaDescarga = new Descarga();
+                nuevaDescarga.execute();
+                }
+
+            }
+        }
+
 
     //---------------------------------------------------------------------------
     public class Descarga extends AsyncTask<String, Integer, String> {

@@ -40,7 +40,6 @@ public class CafeteriaActivity extends AppCompatActivity {
         setContentView(R.layout.cafeteria_main);
         // recupero por Intent (FUNCIONA BIEN !!) ----------------------------------------
 
-
        idCafeteria =getIntent().getExtras().getInt("idCafeteria");
         GlobalState gs = (GlobalState) getApplication();
         Toast.makeText(getApplicationContext(), " Cafe "+idCafeteria, Toast.LENGTH_SHORT).show();
