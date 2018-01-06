@@ -17,6 +17,7 @@
 
 
         <ImageView
+            android:id="@+id/pic_cafeteria"
             android:layout_width="match_parent"
             android:layout_height="195dp"
             android:src="@drawable/tacita" />

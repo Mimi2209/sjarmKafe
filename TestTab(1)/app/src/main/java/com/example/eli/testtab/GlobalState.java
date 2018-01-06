@@ -12,6 +12,7 @@ public class GlobalState extends Application
     private int id_cafeteria;
     private String nom_cafeteria;
     private int rating_cafeteria;
+    private Bitmap pict_cafeteria;
     private int id_usr;
     private String nom_usr;
     private Bitmap pict_usr;
@@ -40,6 +41,14 @@ public class GlobalState extends Application
 
     public void setRating_cafeteria(int rating_cafeteria) {
         this.rating_cafeteria = rating_cafeteria;
+    }
+
+    public Bitmap getPict_cafeteria() {
+        return pict_cafeteria;
+    }
+
+    public void setPict_cafeteria(Bitmap pict_cafeteria) {
+        this.pict_cafeteria = pict_cafeteria;
     }
 
     public int getId_usr() {

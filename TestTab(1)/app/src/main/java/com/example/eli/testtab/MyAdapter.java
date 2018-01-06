@@ -35,6 +35,7 @@ public class MyAdapter extends BaseAdapter {
         ArrayList<Usuario> users;
         Context c;
         String type;
+        GlobalState gs;
 
         public MyAdapter(Context c, ArrayList<Cafeteria> cafeterias, String type, String junk) {
             this.c = c;
@@ -97,6 +98,7 @@ public class MyAdapter extends BaseAdapter {
 
         @Override
         public View getView(final int position, View convertView, ViewGroup parent) {
+            gs = (GlobalState) c.getApplicationContext();
 
             LayoutInflater inflador = (LayoutInflater) c.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             View elemento= new View(c);
@@ -120,11 +122,10 @@ public class MyAdapter extends BaseAdapter {
                         @Override
                         public void onClick(View v) {
                             int id =cafeterias.get(position).getId_cafeteria();
+                            gs.setPict_cafeteria(cafeterias.get(position).getImg());
+                            gs.setId_cafeteria(cafeterias.get(position).getId_cafeteria());
                             Intent intent = new Intent(c,
-                                    CafeteriaActivity.class);
-
-                            // set
-                            intent.putExtra("idCafeteria", cafeterias.get(position).getId_cafeteria());
+                            CafeteriaActivity.class);
                             c.startActivity(intent);
                         }
                     });

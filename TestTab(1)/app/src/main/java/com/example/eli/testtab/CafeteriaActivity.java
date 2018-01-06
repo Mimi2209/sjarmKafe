@@ -1,6 +1,7 @@
 package com.example.eli.testtab;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -13,6 +14,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -28,6 +30,8 @@ public class CafeteriaActivity extends AppCompatActivity {
      */
     private SectionsPagerAdapter mSectionsPagerAdapter;
     static int idCafeteria;
+    static Bitmap pict_cafeteria;
+    GlobalState gs;
 
     /**
      * The {@link ViewPager} that will host the section contents.
@@ -38,12 +42,12 @@ public class CafeteriaActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.cafeteria_main);
-        // recupero por Intent (FUNCIONA BIEN !!) ----------------------------------------
+       gs = (GlobalState) getApplication();
+        idCafeteria=gs.getId_cafeteria();
+        pict_cafeteria=gs.getPict_cafeteria();
+        ImageView image = (ImageView) findViewById(R.id.pic_cafeteria);
+        image.setImageBitmap(pict_cafeteria);
 
-       idCafeteria =getIntent().getExtras().getInt("idCafeteria");
-        GlobalState gs = (GlobalState) getApplication();
-        Toast.makeText(getApplicationContext(), " Cafe "+idCafeteria, Toast.LENGTH_SHORT).show();
-        gs.setId_cafeteria(idCafeteria);
         //---------------------------------------------------------------------------
        // Toast.makeText(getApplicationContext(), " Cafe "+idCafeteria, Toast.LENGTH_SHORT).show();
              // primary sections of the activity.
@@ -114,6 +118,7 @@ public class CafeteriaActivity extends AppCompatActivity {
             View rootView = inflater.inflate(R.layout.fragment_main, container, false);
             TextView textView = (TextView) rootView.findViewById(R.id.section_label);
             textView.setText(getString(R.string.section_format, getArguments().getInt(ARG_SECTION_NUMBER)));
+
             return rootView;
         }
     }
