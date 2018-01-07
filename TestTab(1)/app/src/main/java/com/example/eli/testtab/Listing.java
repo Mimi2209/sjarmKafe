@@ -99,8 +99,10 @@ import java.util.ListIterator;
         protected void onPostExecute(String result) {
       //      Cafeteria[] cafeterias = misCafeterias.toArray(new Cafeteria[misCafeterias.size()]);
       //      MyAdapter adapter = new MyAdapter(getActivity(), cafeterias,"cafe");
-            Bitmap foto = Bitmap.createBitmap(1,1, Bitmap.Config.ARGB_8888);
-           misCafeterias.add(new Cafeteria("Nomad","Passatge Sert, 12, 08003 Barcelona","Una de las mejores cafeterias de Barcelona",1,1,1,true,false,true,true,false,false,"17",true,4,foto));
+            if (misCafeterias.size()==0) {
+                Bitmap foto = Bitmap.createBitmap(1, 1, Bitmap.Config.ARGB_8888);
+                misCafeterias.add(new Cafeteria("ERROR CONEXION a BBDD", "", "", 1, 1, 1, true, false, true, true, false, false, "17", true, 4, foto));
+            }
               MyAdapter adapter = new MyAdapter(getActivity(), misCafeterias,"cafe","");
                 cafes.setAdapter(adapter);
             // carga de solo array list

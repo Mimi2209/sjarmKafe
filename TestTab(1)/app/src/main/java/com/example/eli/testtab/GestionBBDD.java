@@ -313,26 +313,31 @@ public class GestionBBDD {
     public ArrayList<Valoracion> verComentarios(int id_cafeteria) throws SQLException {
         // Vis libro
 
-        String query = "SELECT * FROM u125322db1.valoracion  where id_val_cafeteria = " + id_cafeteria + ";";
+        String query = "SELECT * FROM u125322db1.valoracion left join u125322db1.usuario on id_val_usuario=id_usuario where id_val_cafeteria  = " + id_cafeteria + ";";
         Statement stmt = null;
         ArrayList<Valoracion> comentarios = new ArrayList<>();
         try {
             stmt = con.createStatement();
             ResultSet rs = stmt.executeQuery(query);
-            int com_usuario;
+            String com_usuario=null;
             int com_val;
             String com_titulo;
             String com_text;
             Date com_fecha;
+            Bitmap bitmap;
+            byte[] image=null;
 
             while (rs.next()) {
-                com_usuario = rs.getInt(2);
                 com_val = rs.getInt(4);
                 com_titulo = rs.getString(13);
                 com_text = rs.getString(14);
                 com_fecha = rs.getDate(15);
+                com_usuario = rs.getString(17);
+                image = rs.getBytes(21); // array de bytes
+                BitmapFactory.Options options = new BitmapFactory.Options();
+                bitmap = BitmapFactory.decodeByteArray(image, 0, image.length, options); //Convert bytearray to bitmap
 
-                comentarios.add(new Valoracion(com_usuario, com_val, com_titulo, com_text, com_fecha));
+                comentarios.add(new Valoracion(com_val,com_titulo, com_text, com_fecha,com_usuario,bitmap));
             }
             rs.close();
             stmt.close();
@@ -372,7 +377,7 @@ public class GestionBBDD {
     // ------- Recupero Eventos cafeteria -(ArrayList) ------------------------------------------------------------------------------------
     public ArrayList<Evento> verEventos(int id_cafeteria) throws SQLException {
 
-        String query = "SELECT * FROM u125322db1.comentario  where event_id_cafeteria = " + id_cafeteria + ";";
+        String query = "SELECT * FROM u125322db1.evento  where event_id_cafeteria = " + id_cafeteria + ";";
         Statement stmt = null;
         ArrayList<Evento> eventos = new ArrayList<>();
         try {

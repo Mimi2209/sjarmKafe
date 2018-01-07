@@ -40,7 +40,6 @@ import java.sql.SQLException;
         @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        // no peta pq lo he controlado pero de Error, no recupera la info
     }
         @Nullable
         @Override
@@ -51,9 +50,9 @@ import java.sql.SQLException;
             //-------------------------------------------------
             // Get values
 
-            gs = (GlobalState) getActivity().getApplication();
-            idCafeteria = gs.getId_cafeteria();
-             Toast.makeText(getActivity().getApplicationContext(), " Cafe "+idCafeteria, Toast.LENGTH_SHORT).show();
+
+
+       //      Toast.makeText(getActivity().getApplicationContext(), " Cafe "+idCafeteria, Toast.LENGTH_SHORT).show();
             return inflater.inflate(R.layout.info, container, false);
            }
 
@@ -61,7 +60,9 @@ import java.sql.SQLException;
     @Override
     public void onActivityCreated(Bundle state) {
         super.onActivityCreated(state);
-
+        gs = (GlobalState) getActivity().getApplication();
+        idCafeteria = gs.getId_cafeteria();
+        Toast.makeText(getActivity().getApplicationContext(), " lat/long "+gs.getLatitut()+"/"+gs.getLongitut(), Toast.LENGTH_SHORT).show();
         tNameCafe = (TextView) getView().findViewById(R.id.cafe);
         tAddress = (TextView) getView().findViewById(R.id.cafe_address);
         tHorario = (TextView) getView().findViewById(R.id.horario);
@@ -75,6 +76,9 @@ import java.sql.SQLException;
         cDogs = (CheckBox) getView().findViewById(R.id.Dogs);
         rRating2 = (RatingBar) getView().findViewById(R.id.rating2);
 
+        tNameCafe.setText(gs.getNom_cafeteria());
+        rRating2.setRating(gs.getRating_cafeteria());
+
         Info.Descarga nuevaDescarga = new Info.Descarga();
         nuevaDescarga.execute();
 
@@ -85,8 +89,7 @@ import java.sql.SQLException;
 
         @Override
         protected void onPreExecute() {
-
-        }
+                   }
 
         @Override
         protected String doInBackground(String... urls) {
@@ -106,19 +109,20 @@ import java.sql.SQLException;
         protected void onPostExecute(String result) {
             //      Cafeteria[] cafeterias = misCafeterias.toArray(new Cafeteria[misCafeterias.size()]);
             //      MyAdapter adapter = new MyAdapter(getActivity(), cafeterias,"cafe");
-            tNameCafe.setText(miCafeteria.getNombre_cafeteria());
-            tAddress.setText(miCafeteria.getAddress());
-            tHorario.setText(miCafeteria.getHorario());
-            tDescrip.setText(miCafeteria.getDescripcion());
-            cTerrace.setChecked(miCafeteria.isTerraza());
-            cTables.setChecked(miCafeteria.isMesas());
-            cWifi.setChecked(miCafeteria.isWifi());
-            cMeals.setChecked(miCafeteria.isComida());
-            cXpress.setChecked(miCafeteria.isServicio_expres());
-            cDogs.setChecked(miCafeteria.isPerros());
-            rRating2.setRating(miCafeteria.getValoracion_global());
-            gs.setNom_cafeteria(miCafeteria.getNombre_cafeteria());
-            gs.setRating_cafeteria(miCafeteria.getValoracion_global());
+            if (miCafeteria != null) {
+                tNameCafe.setText(miCafeteria.getNombre_cafeteria());
+                tAddress.setText(miCafeteria.getAddress());
+                tHorario.setText(miCafeteria.getHorario());
+                tDescrip.setText(miCafeteria.getDescripcion());
+                cTerrace.setChecked(miCafeteria.isTerraza());
+                cTables.setChecked(miCafeteria.isMesas());
+                cWifi.setChecked(miCafeteria.isWifi());
+                cMeals.setChecked(miCafeteria.isComida());
+                cXpress.setChecked(miCafeteria.isServicio_expres());
+                cDogs.setChecked(miCafeteria.isPerros());
+                rRating2.setRating(miCafeteria.getValoracion_global());
+            }
+
 
             //        misCafeterias.add(new Cafeteria("Nomad","Passatge Sert, 12, 08003 Barcelona","Una de las mejores cafeterias de Barcelona",1,true,false,true,true,false,false,"17",true,4,foto));
 

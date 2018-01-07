@@ -1,5 +1,7 @@
 package com.example.eli.testtab;
 
+import android.graphics.Bitmap;
+
 import java.util.Date;
 
 /**
@@ -22,6 +24,8 @@ public class Valoracion {
     String com_titulo;
     String com_text;
     Date data;
+    String nom_usr;
+    Bitmap img_usr;
 
     // constructor para inserts
     public Valoracion(int id_val_usuario, int id_val_cafeteria, int valoracion_global, int limpieza, int rapidez_servicio, int trato,
@@ -57,12 +61,14 @@ public class Valoracion {
     // constructor para consulta comentarios por cafeteria
 
 
-    public Valoracion(int id_val_usuario, int valoracion_global, String com_titulo, String com_text, Date data) {
-        this.id_val_usuario = id_val_usuario;
+
+    public Valoracion(int valoracion_global, String com_titulo, String com_text, Date data, String nom_usr, Bitmap img_usr) {
         this.valoracion_global = valoracion_global;
         this.com_titulo = com_titulo;
         this.com_text = com_text;
-        this.data=data;
+        this.data = data;
+        this.nom_usr = nom_usr;
+        this.img_usr = img_usr;
     }
 
     public int getId_valoracion() {
@@ -179,5 +185,26 @@ public class Valoracion {
 
     public void setCom_text(String com_text) {
         this.com_text = com_text;
+    }
+
+    public String getNom_usr() {
+        return nom_usr;
+    }
+
+    public void setNom_usr(String nom_usr) {
+        this.nom_usr = nom_usr;
+    }
+
+    public Bitmap getImg_usr() {
+        return img_usr;
+    }
+
+    public void setImg_usr(Bitmap img_usr) {
+        this.img_usr = img_usr;
+    }
+
+    public void setId_valoracion(int id_valoracion) {
+        this.id_valoracion = id_valoracion;
+
     }
 }

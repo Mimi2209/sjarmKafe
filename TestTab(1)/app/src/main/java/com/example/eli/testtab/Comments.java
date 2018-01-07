@@ -10,6 +10,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
+import android.widget.RatingBar;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import java.security.Timestamp;
 import java.sql.SQLException;
@@ -22,13 +25,14 @@ import java.util.Date;
  */
 
     public class Comments extends Fragment {
+    GlobalState gs;
     int mNum;
     ListView comments;
-    int id_cafeteria;
+    int idCafeteria;
     String resultat;
-
+    TextView nom_cafeteria;
+    RatingBar rating_cafeteria;
     ArrayList<Valoracion> comentarios = new ArrayList<Valoracion>();
-    ArrayList<Usuario> users = new ArrayList<Usuario>();
 
     static Comments newInstance(int num) {
         Comments c = new Comments();
@@ -51,7 +55,7 @@ import java.util.Date;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
+        gs = (GlobalState) getActivity().getApplication();
         return inflater.inflate(R.layout.comments, container, false);
     }
 
@@ -59,6 +63,9 @@ import java.util.Date;
     public void onActivityCreated(Bundle state) {
         super.onActivityCreated(state);
         comments = (ListView) getView().findViewById(R.id.comment_list);
+        nom_cafeteria  = (TextView) getView().findViewById(R.id.cafe);
+        rating_cafeteria = (RatingBar) getView().findViewById(R.id.rating2);
+
         Descarga nuevaDescarga = new Descarga();
         nuevaDescarga.execute();
 
@@ -69,7 +76,9 @@ import java.util.Date;
 
         @Override
         protected void onPreExecute() {
-
+            idCafeteria = gs.getId_cafeteria(); // recupero id cafeteria de la variable global
+            nom_cafeteria.setText(gs.getNom_cafeteria());
+            rating_cafeteria.setRating(idCafeteria);
         }
 
         @Override
@@ -77,7 +86,7 @@ import java.util.Date;
 
             try {
                 GestionBBDD baseDatos = new GestionBBDD(); // conecta con servidor SQL
-                comentarios= baseDatos.verComentarios(id_cafeteria); // obtiene eventos de la cafetería
+                comentarios= baseDatos.verComentarios(idCafeteria); // obtiene comentarios por cafetería
             } catch (SQLException se) {
                 System.out.println("oops! No se puede conectar. Error: " + se.toString());
 
@@ -88,12 +97,12 @@ import java.util.Date;
 
         @Override
         protected void onPostExecute(String result) {
-            //      Cafeteria[] cafeterias = misCafeterias.toArray(new Cafeteria[misCafeterias.size()]);
-            //      MyAdapter adapter = new MyAdapter(getActivity(), cafeterias,"cafe");
-            Date data = new Date();
-            comentarios.add(new Valoracion(1, id_cafeteria, 4, 4, 4, 4,
-            4, 4, 4, 4, 4, "Me gustaria volver", "Esta cafetería es espectacular", data));
-            MyAdapter adapter = new MyAdapter(getActivity(), comentarios,"comment",users);
+
+
+            if (comentarios.size()==0){
+               comentarios.add(new Valoracion(0,"No hay Comentarios todavia para esta cafeteria","",null,null,null));
+            }
+            MyAdapter adapter = new MyAdapter(getActivity(), comentarios,"comment",0);
             comments.setAdapter(adapter);
             // carga de solo array list
 
