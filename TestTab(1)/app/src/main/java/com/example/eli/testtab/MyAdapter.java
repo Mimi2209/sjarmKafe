@@ -48,12 +48,11 @@ public class MyAdapter extends BaseAdapter {
         this.type=type;
     }
 
-    public MyAdapter(Context c, ArrayList<Valoracion> comments, String type, ArrayList<Usuario> users) {
+    public MyAdapter(Context c, ArrayList<Valoracion> comments, String type, int vacio) {
         this.c = c;
         this.comments = comments;
         this.type=type;
-        this.users=users;
-    }
+        }
 
         @Override
         public int getCount() {
@@ -151,27 +150,28 @@ public class MyAdapter extends BaseAdapter {
                 case "comment":
                     elemento = inflador.inflate(R.layout.comentario, parent, false);
                     TextView ncomment = (TextView) elemento.findViewById(R.id.comment);
-                    TextView nuser = (TextView) elemento.findViewById(R.id.user);
                     TextView hcomment = (TextView) elemento.findViewById(R.id.horario);
                     TextView descomment = (TextView) elemento.findViewById(R.id.comment_descript);
-                    RatingBar crating = (RatingBar) elemento.findViewById(R.id.rating);
-                    final ImageView uimage = (ImageView) elemento.findViewById(R.id.user_image);
-                    ncomment.setText(comments.get(position).getCom_titulo());
+                    TextView nom_user = (TextView) elemento.findViewById(R.id.user);
+                    ImageView uimage = (ImageView) elemento.findViewById(R.id.user_image);
+
                     //int Userid = comments.get(position).id_val_usuario;
-                    //nuser.setText(users.get(Userid).getNombre());
+                    nom_user.setText(comments.get(position).getNom_usr());
+                    uimage.setImageBitmap(comments.get(position).getImg_usr());
+                    // comentario
+                    ncomment.setText(comments.get(position).getCom_titulo());
                     Date data=comments.get(position).data;
                     Calendar cal2=Calendar.getInstance();
                     cal2.setTime(data);
                     String showTimeC=String.format("%1$tI:%1$tM:%1$tS %1$Tp",cal2);
                     hcomment.setText(showTimeC);
                     descomment.setText(comments.get(position).getCom_text());
-                    try {
-                        crating.setRating(comments.get(position).getValoracion_global());
-                    }catch (NullPointerException e){
+                  //  try {
+                  //      crating.setRating(comments.get(position).getValoracion_global());
+                  //  }catch (NullPointerException e){
 
-                    }
-                    //uimage.setImageBitmap(users.get(Userid).getFoto());
-                    break;
+                 //   }
+
             }
 
             return elemento;
