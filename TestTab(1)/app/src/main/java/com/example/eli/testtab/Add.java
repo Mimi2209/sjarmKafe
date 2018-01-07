@@ -102,7 +102,6 @@ public class Add extends Fragment {
                 Intent intent = new Intent(getActivity(),
                         UsuarioActivity.class);
                 startActivityForResult(intent,USER_REQUEST);
-                getActivity().startActivity(intent);
 
             }
         });
@@ -116,6 +115,7 @@ public class Add extends Fragment {
             // Make sure the request was successful
             if (resultCode == RESULT_OK) {
                 String returnValue = data.getStringExtra("user");//no deberiamos pasar el usuario que la crea?
+                Toast.makeText(getActivity(), "Hello" +returnValue, Toast.LENGTH_LONG).show();
                 nuevaDescarga = new Descarga();
                 nuevaDescarga.execute();
                 }

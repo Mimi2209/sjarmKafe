@@ -1,7 +1,9 @@
 package com.example.eli.testtab;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
@@ -19,6 +21,7 @@ import java.net.PasswordAuthentication;
 import java.sql.SQLException;
 
 public class UsuarioActivity extends AppCompatActivity {
+    Context c;
     EditText email;
     EditText password;
     Button sign_in;
@@ -26,6 +29,7 @@ public class UsuarioActivity extends AppCompatActivity {
     Button new_user;
     Usuario miUser;
     String resultat;
+    static final int NEW_USER_REQUEST = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +42,15 @@ public class UsuarioActivity extends AppCompatActivity {
         new_user = (Button) findViewById(R.id.newU);
 
 
+        forgot.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Descarga3 nuevaDescarga = new Descarga3();
+                nuevaDescarga.execute();
+
+            }
+        });
 
 
         sign_in.setOnClickListener(new View.OnClickListener() {
@@ -50,6 +63,31 @@ public class UsuarioActivity extends AppCompatActivity {
             }
         });
 
+        new_user.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Descarga2 nuevaDescarga = new Descarga2();
+                nuevaDescarga.execute();
+
+            }
+        });
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == NEW_USER_REQUEST) {
+            // Make sure the request was successful
+            if (resultCode == RESULT_OK) {
+                String returnValue = data.getStringExtra("user");//no deberiamos pasar el usuario que la crea?
+                Intent resultIntent = new Intent();
+                resultIntent.putExtra("user", returnValue);
+                setResult(Activity.RESULT_OK, resultIntent);
+                finish();
+            }
+
+        }
     }
 
         //---------------------------------------------------------------------------
@@ -64,7 +102,7 @@ public class UsuarioActivity extends AppCompatActivity {
             @Override
             protected String doInBackground(String... urls) {
 
-                String emailint = String.valueOf(email.getText());
+                String emailint = email.getText().toString();
 
 
                 try {
@@ -80,10 +118,8 @@ public class UsuarioActivity extends AppCompatActivity {
 
             @Override
             protected void onPostExecute(String result) {
-                //      Cafeteria[] cafeterias = misCafeterias.toArray(new Cafeteria[misCafeterias.size()]);
-                //      MyAdapter adapter = new MyAdapter(getActivity(), cafeterias,"cafe");
                 try {
-                    String passwordint = String.valueOf(password.getText());
+                    String passwordint = password.getText().toString();
                     String email_user = miUser.getE_mail();
                     String password_user = miUser.getPwd();
                     if (passwordint == password_user) {
@@ -104,4 +140,104 @@ public class UsuarioActivity extends AppCompatActivity {
                 }
     }
 
-}
+    //---------------------------------------------------------------------------
+    @RequiresApi(api = Build.VERSION_CODES.CUPCAKE)
+    public class Descarga2 extends AsyncTask<String, Integer, String> {
+        String emailint = email.getText().toString();
+        String passwordint = password.getText().toString();
+
+        @Override
+        protected void onPreExecute() {
+
+        }
+
+        @Override
+        protected String doInBackground(String... urls) {
+
+
+            try {
+                GestionBBDD baseDatos = new GestionBBDD(); // conecta con servidor SQL
+                miUser= baseDatos.verUsuario(emailint); // obtiene cafeteria
+            } catch (SQLException |NullPointerException se) {
+                System.out.println("oops! No se puede conectar. Error: " + se.toString());
+
+            } finally {
+                return resultat;
+            }
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            //      Cafeteria[] cafeterias = misCafeterias.toArray(new Cafeteria[misCafeterias.size()]);
+            //      MyAdapter adapter = new MyAdapter(getActivity(), cafeterias,"cafe");
+
+                    Intent intent = new Intent(getApplicationContext(),
+                            NewUserActivity.class);
+                    intent.putExtra("email",emailint);
+                    intent.putExtra("password",passwordint);
+                    startActivityForResult(intent,NEW_USER_REQUEST);
+
+
+                //    Toast.makeText(getApplicationContext(), "El usuario ya existe", Toast.LENGTH_SHORT).show();
+
+                }
+
+        }
+    //---------------------------------------------------------------------------
+    @RequiresApi(api = Build.VERSION_CODES.CUPCAKE)
+    public class Descarga3 extends AsyncTask<String, Integer, String> {
+        String emailint = email.getText().toString();
+        @Override
+        protected void onPreExecute() {
+
+        }
+
+        @Override
+        protected String doInBackground(String... urls) {
+
+
+
+
+            try {
+                GestionBBDD baseDatos = new GestionBBDD(); // conecta con servidor SQL
+                miUser= baseDatos.verUsuario(emailint); // obtiene cafeteria
+            } catch (SQLException |NullPointerException se) {
+                System.out.println("oops! No se puede conectar. Error: " + se.toString());
+
+            } finally {
+                return resultat;
+            }
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            try {
+                String password_user = miUser.getPwd();
+                sendEmail(emailint,password_user);
+            } catch (NullPointerException se) {
+                System.out.println("oops! No se puede conectar. Error: " + se.toString());
+                Toast.makeText(getApplicationContext(), "Usuario invalido. Cree el usuario o intentelo de nuevo", Toast.LENGTH_LONG).show();
+            }
+
+        }
+    }
+    protected void sendEmail(String email, String password) {
+        String[] TO = {email}; //aquí pon tu correo
+        Intent emailIntent = new Intent(Intent.ACTION_SEND);
+        emailIntent.setData(Uri.parse("mailto:"));
+        emailIntent.setType("text/plain");
+        emailIntent.putExtra(Intent.EXTRA_EMAIL, TO);
+// Esto podrás modificarlo si quieres, el asunto y el cuerpo del mensaje
+        emailIntent.putExtra(Intent.EXTRA_SUBJECT, "Password sjarmKafe");
+        emailIntent.putExtra(Intent.EXTRA_TEXT, "Dear user," +
+                "Your password for this app is" +password);
+
+            startActivity(emailIntent);
+            finish();
+            Toast.makeText(getApplicationContext(),
+                    "Email enviado con contraseña", Toast.LENGTH_SHORT).show();
+    }
+
+    }
+
+
