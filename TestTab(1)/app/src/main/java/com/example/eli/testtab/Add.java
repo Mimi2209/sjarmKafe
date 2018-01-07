@@ -102,7 +102,6 @@ public class Add extends Fragment {
                 Intent intent = new Intent(getActivity(),
                         UsuarioActivity.class);
                 startActivityForResult(intent,USER_REQUEST);
-                getActivity().startActivity(intent);
 
             }
         });
