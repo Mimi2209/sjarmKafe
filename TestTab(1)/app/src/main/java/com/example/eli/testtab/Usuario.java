@@ -26,6 +26,9 @@ public class Usuario {
     }
 
 
+    public int getId() {
+        return id_usuario;
+    }
 
     public String getNombre() {
         return nombre;
