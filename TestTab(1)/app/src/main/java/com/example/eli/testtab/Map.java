@@ -282,13 +282,14 @@ public class Descarga extends AsyncTask<String, Integer, String> {
     protected void onPostExecute(String result) {
         //      Cafeteria[] cafeterias = misCafeterias.toArray(new Cafeteria[misCafeterias.size()]);
         //      MyAdapter adapter = new MyAdapter(getActivity(), cafeterias,"cafe");
+        MarkerOptions markerOptions = new MarkerOptions();
+        markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE));
+        LatLng latLng;
         if (miLongLat != null) {
             for (int i=0; i<miLongLat.size(); i++) {
-                LatLng latLng = new LatLng(miLongLat.get(i).getLatitut(), miLongLat.get(i).getLongitut());
-                MarkerOptions markerOptions = new MarkerOptions();
+                latLng = new LatLng(miLongLat.get(i).getLatitut(), miLongLat.get(i).getLongitut());
                 markerOptions.position(latLng);
                 markerOptions.title(miLongLat.get(i).getNombre_cafeteria());
-                markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE));
                 mCurrLocationMarker = mMap.addMarker(markerOptions);
             }
         }
