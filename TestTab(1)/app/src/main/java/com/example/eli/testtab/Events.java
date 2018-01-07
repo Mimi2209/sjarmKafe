@@ -106,12 +106,9 @@ import java.util.List;
             Bitmap foto = Bitmap.createBitmap(1,1, Bitmap.Config.ARGB_8888);
             if(eventos.size()==0) {
                 eventos.add(new Evento(1, "NO HAY EVENTOS CREADOS PARA ESTA CAFETERIA", "", "", timeStamp, timeStamp));
-            }else {
+            }
                 MyAdapter adapter = new MyAdapter(getActivity(), eventos, "event");
                 events.setAdapter(adapter);
-            }
-            // carga de solo array list
-
         }
     }
 }

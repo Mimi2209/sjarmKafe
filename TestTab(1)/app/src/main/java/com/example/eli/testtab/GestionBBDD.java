@@ -332,8 +332,8 @@ public class GestionBBDD {
                 com_titulo = rs.getString(13);
                 com_text = rs.getString(14);
                 com_fecha = rs.getDate(15);
-                com_usuario = rs.getString(16);
-                image = rs.getBytes(17); // array de bytes
+                com_usuario = rs.getString(17);
+                image = rs.getBytes(21); // array de bytes
                 BitmapFactory.Options options = new BitmapFactory.Options();
                 bitmap = BitmapFactory.decodeByteArray(image, 0, image.length, options); //Convert bytearray to bitmap
 

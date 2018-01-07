@@ -99,13 +99,8 @@ import java.util.Date;
         protected void onPostExecute(String result) {
 
 
-      //      Date data = new Date();
-     //       comentarios.add(new Valoracion(1, id_cafeteria, 4, 4, 4, 4,
-   //         4, 4, 4, 4, 4, "Me gustaria volver", "Esta cafetería es espectacular", data));
             if (comentarios.size()==0){
-                Toast.makeText(getContext(), " Array vacio ", Toast.LENGTH_SHORT).show();
-            }else{
-                Toast.makeText(getContext(), " Array Lleno "+comentarios.size(), Toast.LENGTH_SHORT).show();
+               comentarios.add(new Valoracion(0,"No hay Comentarios todavia para esta cafeteria","",null,null,null));
             }
             MyAdapter adapter = new MyAdapter(getActivity(), comentarios,"comment",0);
             comments.setAdapter(adapter);

@@ -116,7 +116,9 @@ public class MyAdapter extends BaseAdapter {
                     hcafe.setText(cafeterias.get(position).getHorario());
                     dire.setText(cafeterias.get(position).getAddress());
                     rating.setRating(cafeterias.get(position).getValoracion_global());
-                    image.setImageBitmap(cafeterias.get(position).getImg());
+                    if (cafeterias.get(position).getImg()!=null) {
+                        image.setImageBitmap(cafeterias.get(position).getImg());
+                    }
                     lNom.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
@@ -159,14 +161,19 @@ public class MyAdapter extends BaseAdapter {
 
                     //int Userid = comments.get(position).id_val_usuario;
                     nom_user.setText(comments.get(position).getNom_usr());
-                    uimage.setImageBitmap(comments.get(position).getImg_usr());
+                    if (comments.get(position).getImg_usr()!=null) {
+                        uimage.setImageBitmap(comments.get(position).getImg_usr());
+                    }
                     // comentario
                     ncomment.setText(comments.get(position).getCom_titulo());
-                    Date data=comments.get(position).data;
-                    Calendar cal2=Calendar.getInstance();
-                    cal2.setTime(data);
-                    String showTimeC=String.format("%1$tI:%1$tM:%1$tS %1$Tp",cal2);
-                    hcomment.setText(showTimeC);
+                    if (comments.get(position).data!=null) {
+                        Date data = comments.get(position).data;
+                        Calendar cal2 = Calendar.getInstance();
+                        cal2.setTime(data);
+                        String showTimeC = String.format("%1$tI:%1$tM:%1$tS %1$Tp", cal2);
+                        hcomment.setText(showTimeC);
+                    }
+
                     descomment.setText(comments.get(position).getCom_text());
                   //  try {
                   //      crating.setRating(comments.get(position).getValoracion_global());
