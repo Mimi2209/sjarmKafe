@@ -67,7 +67,7 @@ import java.sql.SQLException;
         tHorario = (TextView) getView().findViewById(R.id.horario);
         tDescrip = (TextView) getView().findViewById(R.id.cafe_descript);
         cTerrace = (CheckBox) getView().findViewById(R.id.Terrace);
-        cTables = (CheckBox) getView().findViewById(R.id.Tables);
+        cTables = (CheckBox) getView().findViewById(R.id.tables);
         cWifi = (CheckBox) getView().findViewById(R.id.Wifi);
         cShop = (CheckBox) getView().findViewById(R.id.shop);
         cMeals = (CheckBox) getView().findViewById(R.id.Meals);

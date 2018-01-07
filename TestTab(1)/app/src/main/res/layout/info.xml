@@ -23,15 +23,20 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:enabled="true"
+                android:clickable="false"
                 android:text="@string/terrace"
                 android:textColor="@color/colorPrimary" />
 
             <CheckBox
-                android:id="@+id/Tables"
-                android:layout_width="200dp"
+                android:id="@+id/tables"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/tables"
-                android:textColor="@color/colorPrimary" />
+                android:enabled="true"
+                android:clickable="false"
+                android:textColor="@color/colorPrimary"
+                android:visibility="visible" />
 
         </TableRow>
 
@@ -45,6 +50,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="@string/wifi"
+                android:enabled="true"
+                android:clickable="false"
                 android:textColor="@color/colorPrimary" />
 
             <CheckBox
@@ -52,6 +59,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/shop"
+                android:enabled="true"
+                android:clickable="false"
                 android:textColor="@color/colorPrimary" />
         </TableRow>
 
@@ -65,6 +74,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="@string/meals"
+                android:enabled="true"
+                android:clickable="false"
                 android:textColor="@color/colorPrimary" />
 
             <CheckBox
@@ -72,6 +83,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/express_service"
+                android:enabled="true"
+                android:clickable="false"
                 android:textColor="@color/colorPrimary" />
 
         </TableRow>
@@ -86,6 +99,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="@string/dogs"
+                android:enabled="true"
+                android:clickable="false"
                 android:textColor="@color/colorPrimary" />
         </TableRow>
     </TableLayout>
