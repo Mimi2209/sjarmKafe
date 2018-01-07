@@ -1,6 +1,7 @@
 package com.example.eli.testtab;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Build;
@@ -19,6 +20,7 @@ import java.net.PasswordAuthentication;
 import java.sql.SQLException;
 
 public class UsuarioActivity extends AppCompatActivity {
+    Context c;
     EditText email;
     EditText password;
     Button sign_in;
@@ -26,6 +28,7 @@ public class UsuarioActivity extends AppCompatActivity {
     Button new_user;
     Usuario miUser;
     String resultat;
+    static final int NEW_USER_REQUEST = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +53,31 @@ public class UsuarioActivity extends AppCompatActivity {
             }
         });
 
+        new_user.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Descarga2 nuevaDescarga = new Descarga2();
+                nuevaDescarga.execute();
+
+            }
+        });
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == NEW_USER_REQUEST) {
+            // Make sure the request was successful
+            if (resultCode == RESULT_OK) {
+                String returnValue = data.getStringExtra("user");//no deberiamos pasar el usuario que la crea?
+                Intent resultIntent = new Intent();
+                resultIntent.putExtra("user", returnValue);
+                setResult(Activity.RESULT_OK, resultIntent);
+                finish();
+            }
+
+        }
     }
 
         //---------------------------------------------------------------------------
@@ -64,7 +92,7 @@ public class UsuarioActivity extends AppCompatActivity {
             @Override
             protected String doInBackground(String... urls) {
 
-                String emailint = String.valueOf(email.getText());
+                String emailint = email.getText().toString();
 
 
                 try {
@@ -104,4 +132,52 @@ public class UsuarioActivity extends AppCompatActivity {
                 }
     }
 
-}
+    //---------------------------------------------------------------------------
+    @RequiresApi(api = Build.VERSION_CODES.CUPCAKE)
+    public class Descarga2 extends AsyncTask<String, Integer, String> {
+        String emailint = email.getText().toString();
+        String passwordint = password.getText().toString();
+
+        @Override
+        protected void onPreExecute() {
+
+        }
+
+        @Override
+        protected String doInBackground(String... urls) {
+
+
+            try {
+                GestionBBDD baseDatos = new GestionBBDD(); // conecta con servidor SQL
+                miUser= baseDatos.verUsuario(emailint); // obtiene cafeteria
+            } catch (SQLException |NullPointerException se) {
+                System.out.println("oops! No se puede conectar. Error: " + se.toString());
+
+            } finally {
+                return resultat;
+            }
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            //      Cafeteria[] cafeterias = misCafeterias.toArray(new Cafeteria[misCafeterias.size()]);
+            //      MyAdapter adapter = new MyAdapter(getActivity(), cafeterias,"cafe");
+
+                    Intent intent = new Intent(getApplicationContext(),
+                            NewUserActivity.class);
+                    intent.putExtra("email",emailint);
+                    intent.putExtra("password",passwordint);
+                    startActivityForResult(intent,NEW_USER_REQUEST);
+                    getApplicationContext().startActivity(intent);
+
+
+                //    Toast.makeText(getApplicationContext(), "El usuario ya existe", Toast.LENGTH_SHORT).show();
+
+                }
+
+        }
+
+
+    }
+
+

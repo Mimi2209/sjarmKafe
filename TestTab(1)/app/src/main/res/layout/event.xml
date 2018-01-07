@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="?attr/actionBarDivider"
+    android:background="?attr/actionBarItemBackground"
     android:orientation="vertical">
 
 
@@ -28,12 +28,12 @@
 
         <ImageView
             android:id="@+id/clock"
-            android:src="@android:drawable/ic_menu_recent_history"
             android:layout_width="wrap_content"
             android:layout_height="30dp"
             android:layout_weight="1"
             android:contentDescription="@string/todo"
-            android:scaleType="fitStart" />
+            android:scaleType="fitStart"
+            android:src="@android:drawable/ic_menu_recent_history" />
 
         <TextView
             android:id="@+id/time_event"

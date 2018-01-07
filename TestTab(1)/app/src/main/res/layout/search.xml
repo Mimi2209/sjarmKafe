@@ -117,7 +117,8 @@
                 android:id="@+id/seekBar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1" />
+                android:layout_weight="1"
+                android:clickable="true" android:focusable="true"/>
         </LinearLayout>
 
         <LinearLayout
@@ -142,9 +143,10 @@
                 style="@style/Widget.AppCompat.RatingBar.Indicator"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:isIndicator="true"
+                android:clickable="true"
+                android:isIndicator="false"
                 android:numStars="5"
-                android:stepSize="0.1" />
+                android:stepSize="0.1" android:focusable="true" />
 
         </LinearLayout>
 
