@@ -2,9 +2,11 @@ package com.example.eli.testtab;
 
 import android.Manifest;
 import android.content.pm.PackageManager;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.annotation.RequiresApi;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
@@ -31,6 +33,9 @@ import android.location.Location;
 import android.os.Build;
 import android.widget.Toast;
 
+import java.sql.SQLException;
+import java.util.ArrayList;
+
 /**
  * Created by Eli on 27/12/2017.
  */
@@ -48,6 +53,9 @@ public class Map extends Fragment implements OnMapReadyCallback,
     Location mLastLocation;
     Marker mCurrLocationMarker;
     private FusedLocationProviderClient mFusedLocationClient;
+    String resultat;
+    ArrayList<Cafeteria> miLongLat=new ArrayList<>();
+    GlobalState gs;
     @Nullable
     @Override
 //----------------------------------------------------------------------------------
@@ -71,6 +79,8 @@ public class Map extends Fragment implements OnMapReadyCallback,
             mapView.getMapAsync(this);
 
         }
+        Descarga nuevaDescarga = new Map.Descarga();
+        nuevaDescarga.execute();
         if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             checkLocationPermission();
         }
@@ -112,7 +122,7 @@ public class Map extends Fragment implements OnMapReadyCallback,
                         markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_MAGENTA));
                         mCurrLocationMarker = mMap.addMarker(markerOptions);
 // guardo en variables globales
-                        GlobalState gs = (GlobalState) getActivity().getApplication();
+                        gs = (GlobalState) getActivity().getApplication();
                         gs.setLatitut((float) location.getLatitude());
                         gs.setLongitut((float) location.getLongitude());
 
@@ -247,5 +257,49 @@ public class Map extends Fragment implements OnMapReadyCallback,
         }
     }
 //--------------------------------------------------------------
+@RequiresApi(api = Build.VERSION_CODES.CUPCAKE)
+public class Descarga extends AsyncTask<String, Integer, String> {
 
+    @Override
+    protected void onPreExecute() {
+    }
+
+    @Override
+    protected String doInBackground(String... urls) {
+
+        try {
+            GestionBBDD baseDatos = new GestionBBDD(); // conecta con servidor SQL
+            miLongLat= baseDatos.verListCafeterias(gs.getLongitut(),gs.getLatitut()); // obtiene cafeteria
+        } catch (SQLException se) {
+            System.out.println("oops! No se puede conectar. Error: " + se.toString());
+
+        } finally {
+            return resultat;
+        }
+    }
+
+    @Override
+    protected void onPostExecute(String result) {
+        //      Cafeteria[] cafeterias = misCafeterias.toArray(new Cafeteria[misCafeterias.size()]);
+        //      MyAdapter adapter = new MyAdapter(getActivity(), cafeterias,"cafe");
+        if (miLongLat != null) {
+            for (int i=0; i<miLongLat.size(); i++) {
+                LatLng latLng = new LatLng(miLongLat.get(i).getLatitut(), miLongLat.get(i).getLongitut());
+                MarkerOptions markerOptions = new MarkerOptions();
+                markerOptions.position(latLng);
+                markerOptions.title(miLongLat.get(i).getNombre_cafeteria());
+                markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE));
+                mCurrLocationMarker = mMap.addMarker(markerOptions);
+            }
+        }
+
+
+        //        misCafeterias.add(new Cafeteria("Nomad","Passatge Sert, 12, 08003 Barcelona","Una de las mejores cafeterias de Barcelona",1,true,false,true,true,false,false,"17",true,4,foto));
+
+        // carga de solo array list
+
+
+
+    }
+}
 }
