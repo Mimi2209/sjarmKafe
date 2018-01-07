@@ -25,7 +25,6 @@ public class Rating extends Fragment {
     String resultat;
     TextView tNameCafe;
     RatingBar ratGlobal, ratLimpieza, ratRapidez, ratTrato, ratAmbiente, ratPrecios, ratDiseño, ratAccesibilidad, ratAparcar;
-
     Valoracion valoraciones;
 
     static Rating newInstance(int num) {
@@ -56,7 +55,8 @@ public class Rating extends Fragment {
         ratDiseño = (RatingBar) getView().findViewById(R.id.ratingDiseño);
         ratAccesibilidad = (RatingBar) getView().findViewById(R.id.ratingAccesib);
         ratAparcar = (RatingBar) getView().findViewById(R.id.ratingAparcar);
-
+        tNameCafe.setText(gs.getNom_cafeteria());
+        ratGlobal.setRating(gs.getRating_cafeteria());
 
         Descarga nuevaDescarga = new Descarga();
         nuevaDescarga.execute();
@@ -70,8 +70,7 @@ public class Rating extends Fragment {
         @Override
         protected void onPreExecute() {
             idCafeteria = gs.getId_cafeteria(); // recupero id cafeteria de la variable global
-            tNameCafe.setText(gs.getNom_cafeteria());
-            ratGlobal.setRating(idCafeteria);
+
         }
 
         @Override
@@ -91,7 +90,7 @@ public class Rating extends Fragment {
         @Override
         protected void onPostExecute(String result) {
 
-            if (valoraciones != null) {
+            if (valoraciones !=null){
                 ratLimpieza.setRating(valoraciones.getLimpieza());
                 ratRapidez.setRating(valoraciones.getRapidez_servicio());
                 ratTrato.setRating(valoraciones.getTrato());

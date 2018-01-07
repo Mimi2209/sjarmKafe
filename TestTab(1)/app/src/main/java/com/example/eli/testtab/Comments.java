@@ -10,6 +10,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
+import android.widget.RatingBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.security.Timestamp;
@@ -28,7 +30,8 @@ import java.util.Date;
     ListView comments;
     int idCafeteria;
     String resultat;
-
+    TextView nom_cafeteria;
+    RatingBar rating_cafeteria;
     ArrayList<Valoracion> comentarios = new ArrayList<Valoracion>();
 
     static Comments newInstance(int num) {
@@ -60,6 +63,9 @@ import java.util.Date;
     public void onActivityCreated(Bundle state) {
         super.onActivityCreated(state);
         comments = (ListView) getView().findViewById(R.id.comment_list);
+        nom_cafeteria  = (TextView) getView().findViewById(R.id.cafe);
+        rating_cafeteria = (RatingBar) getView().findViewById(R.id.rating2);
+
         Descarga nuevaDescarga = new Descarga();
         nuevaDescarga.execute();
 
@@ -71,8 +77,8 @@ import java.util.Date;
         @Override
         protected void onPreExecute() {
             idCafeteria = gs.getId_cafeteria(); // recupero id cafeteria de la variable global
-   //         tNameCafe.setText(gs.getNom_cafeteria());
-   //         ratGlobal.setRating(idCafeteria);
+            nom_cafeteria.setText(gs.getNom_cafeteria());
+            rating_cafeteria.setRating(idCafeteria);
         }
 
         @Override
@@ -96,7 +102,7 @@ import java.util.Date;
       //      Date data = new Date();
      //       comentarios.add(new Valoracion(1, id_cafeteria, 4, 4, 4, 4,
    //         4, 4, 4, 4, 4, "Me gustaria volver", "Esta cafetería es espectacular", data));
-            if (comentarios==null){
+            if (comentarios.size()==0){
                 Toast.makeText(getContext(), " Array vacio ", Toast.LENGTH_SHORT).show();
             }else{
                 Toast.makeText(getContext(), " Array Lleno "+comentarios.size(), Toast.LENGTH_SHORT).show();

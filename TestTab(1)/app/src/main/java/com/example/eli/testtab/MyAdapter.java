@@ -123,6 +123,8 @@ public class MyAdapter extends BaseAdapter {
                             int id =cafeterias.get(position).getId_cafeteria();
                             gs.setPict_cafeteria(cafeterias.get(position).getImg());
                             gs.setId_cafeteria(cafeterias.get(position).getId_cafeteria());
+                            gs.setNom_cafeteria(cafeterias.get(position).getNombre_cafeteria());
+                            gs.setRating_cafeteria(cafeterias.get(position).getValoracion_global());
                             Intent intent = new Intent(c,
                             CafeteriaActivity.class);
                             c.startActivity(intent);

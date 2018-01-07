@@ -10,6 +10,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
+import android.widget.RatingBar;
+import android.widget.TextView;
 
 import java.sql.SQLException;
 import java.sql.Timestamp;
@@ -25,10 +27,12 @@ import java.util.List;
     int mNum;
     ListView events;
     Timestamp timeStamp = new Timestamp(1);
-    int id_cafeteria;
+    int idCafeteria;
     String resultat;
-
+    GlobalState gs;
     ArrayList<Evento> eventos = new ArrayList<Evento>();
+    TextView tNameCafe;
+    RatingBar ratGlobal;
 
 
     static Events newInstance(int num) {
@@ -60,7 +64,14 @@ import java.util.List;
     @Override
     public void onActivityCreated(Bundle state) {
         super.onActivityCreated(state);
+        gs = (GlobalState) getActivity().getApplication();
+        idCafeteria = gs.getId_cafeteria();
         events = (ListView) getView().findViewById(R.id.event_list);
+        tNameCafe = (TextView) getView().findViewById(R.id.cafe);
+        ratGlobal = (RatingBar) getView().findViewById(R.id.rating2);
+        tNameCafe.setText(gs.getNom_cafeteria());
+        ratGlobal.setRating(gs.getRating_cafeteria());
+
         Descarga nuevaDescarga = new Descarga();
         nuevaDescarga.execute();
 
@@ -79,7 +90,7 @@ import java.util.List;
 
             try {
                 GestionBBDD baseDatos = new GestionBBDD(); // conecta con servidor SQL
-                eventos= baseDatos.verEventos(id_cafeteria); // obtiene eventos de la cafetería
+                eventos= baseDatos.verEventos(idCafeteria); // obtiene eventos de la cafetería
             } catch (SQLException se) {
                 System.out.println("oops! No se puede conectar. Error: " + se.toString());
 
@@ -93,9 +104,12 @@ import java.util.List;
             //      Cafeteria[] cafeterias = misCafeterias.toArray(new Cafeteria[misCafeterias.size()]);
             //      MyAdapter adapter = new MyAdapter(getActivity(), cafeterias,"cafe");
             Bitmap foto = Bitmap.createBitmap(1,1, Bitmap.Config.ARGB_8888);
-            eventos.add(new Evento(1, "ejemplo", "ejemplo", "ejemplo", timeStamp, timeStamp));
-            MyAdapter adapter = new MyAdapter(getActivity(), eventos,"event");
-            events.setAdapter(adapter);
+            if(eventos.size()==0) {
+                eventos.add(new Evento(1, "NO HAY EVENTOS CREADOS PARA ESTA CAFETERIA", "", "", timeStamp, timeStamp));
+            }else {
+                MyAdapter adapter = new MyAdapter(getActivity(), eventos, "event");
+                events.setAdapter(adapter);
+            }
             // carga de solo array list
 
         }
