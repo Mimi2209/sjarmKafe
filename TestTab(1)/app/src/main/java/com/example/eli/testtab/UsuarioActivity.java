@@ -121,6 +121,7 @@ public class UsuarioActivity extends AppCompatActivity {
                 try {
                     String passwordint = password.getText().toString();
                     String email_user = miUser.getE_mail();
+                    int id_user = miUser.getId();
                     String password_user = miUser.getPwd();
                     if (passwordint == password_user) {
 

@@ -49,6 +49,10 @@
         <activity
             android:name=".NewUserActivity"
             android:label="@string/title_activity_new_user"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".NewRatingActivity"
+            android:label="@string/title_activity_new_rating"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 

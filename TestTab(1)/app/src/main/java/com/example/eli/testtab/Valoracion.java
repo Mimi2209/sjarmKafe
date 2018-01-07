@@ -10,7 +10,7 @@ import java.util.Date;
 
 public class Valoracion {
     int id_valoracion;
-    int id_val_usuario;
+    String val_usuario;
     int id_val_cafeteria;
     int valoracion_global;
     int limpieza;
@@ -28,9 +28,9 @@ public class Valoracion {
     Bitmap img_usr;
 
     // constructor para inserts
-    public Valoracion(int id_val_usuario, int id_val_cafeteria, int valoracion_global, int limpieza, int rapidez_servicio, int trato,
+    public Valoracion(String val_usuario, int id_val_cafeteria, int valoracion_global, int limpieza, int rapidez_servicio, int trato,
                       int ambiente, int precios, int disenyo, int accesibilidad, int facil_aparcar, String com_titulo, String com_text, Date data) {
-        this.id_val_usuario = id_val_usuario;
+        this.val_usuario = val_usuario;
         this.id_val_cafeteria = id_val_cafeteria;
         this.valoracion_global = valoracion_global;
         this.limpieza = limpieza;
@@ -75,12 +75,12 @@ public class Valoracion {
         return id_valoracion;
     }
 
-    public int getId_val_usuario() {
-        return id_val_usuario;
+    public String getval_usuario() {
+        return val_usuario;
     }
 
-    public void setId_val_usuario(int id_val_usuario) {
-        this.id_val_usuario = id_val_usuario;
+    public void setval_usuario(String val_usuario) {
+        this.val_usuario = val_usuario;
     }
 
     public int getId_val_cafeteria() {
