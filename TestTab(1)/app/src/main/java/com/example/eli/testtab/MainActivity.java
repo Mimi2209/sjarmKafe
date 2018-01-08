@@ -78,6 +78,11 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    public void JumpToPage(View view) {
+
+        mViewPager.setCurrentItem(1);
+    }
+
     /**
      * A placeholder fragment containing a simple view.
      */

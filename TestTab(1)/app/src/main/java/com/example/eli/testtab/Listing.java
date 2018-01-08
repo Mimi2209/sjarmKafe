@@ -30,12 +30,13 @@ import java.util.ListIterator;
  */
 
 
-    public class Listing extends Fragment {
+public class Listing extends Fragment {
     int mNum;
     ListView cafes;
-    ArrayList<Cafeteria>misCafeterias= new ArrayList<Cafeteria>();
+    ArrayList<Cafeteria> misCafeterias = new ArrayList<Cafeteria>();
     String resultat;
-
+    GlobalState gs;
+    String sql;
 
     static Listing newInstance(int num) {
         Listing l = new Listing();
@@ -58,27 +59,32 @@ import java.util.ListIterator;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
-  //      View view = inflater.inflate(R.layout.listing, container, false);
- //    return view;
         return inflater.inflate(R.layout.listing, container, false);
     }
 
     @Override
-        public void onActivityCreated(Bundle state) {
-            super.onActivityCreated(state);
+    public void onActivityCreated(Bundle state) {
+        super.onActivityCreated(state);
 
-            cafes = (ListView) getView().findViewById(R.id.cafeteria_list);
-            Descarga nuevaDescarga = new Descarga();
+        cafes = (ListView) getView().findViewById(R.id.cafeteria_list);
+        gs = (GlobalState) getActivity().getApplication();
+        sql = gs.getSql_search();
+        Toast.makeText(getActivity(), sql, Toast.LENGTH_SHORT).show();
+
+        Descarga nuevaDescarga = new Descarga();
+        if (sql.length()>0) {
+            nuevaDescarga.execute(sql);
+        }else{
             nuevaDescarga.execute();
-
         }
-//---------------------------------------------------------------------------
+
+    }
+
+    //---------------------------------------------------------------------------
     public class Descarga extends AsyncTask<String, Integer, String> {
 
         @Override
         protected void onPreExecute() {
-
         }
 
         @Override
@@ -86,7 +92,13 @@ import java.util.ListIterator;
 
             try {
                 GestionBBDD baseDatos = new GestionBBDD(); // conecta con servidor SQL
-                misCafeterias= baseDatos.verListCafeterias(1, 1); // obtiene cafeteria
+                if (urls[0].length() > 0) {
+                    misCafeterias = baseDatos.verListCafeterias(urls[0]);
+                    gs.setSql_search("");
+                } else {
+                    misCafeterias = baseDatos.verListCafeterias(1, 1); // obtiene cafeteria
+                }
+
             } catch (SQLException se) {
                 System.out.println("oops! No se puede conectar. Error: " + se.toString());
 
@@ -97,20 +109,20 @@ import java.util.ListIterator;
 
         @Override
         protected void onPostExecute(String result) {
-      //      Cafeteria[] cafeterias = misCafeterias.toArray(new Cafeteria[misCafeterias.size()]);
-      //      MyAdapter adapter = new MyAdapter(getActivity(), cafeterias,"cafe");
-            if (misCafeterias.size()==0) {
+            //      Cafeteria[] cafeterias = misCafeterias.toArray(new Cafeteria[misCafeterias.size()]);
+            //      MyAdapter adapter = new MyAdapter(getActivity(), cafeterias,"cafe");
+            if (misCafeterias.size() == 0) {
                 Bitmap foto = Bitmap.createBitmap(1, 1, Bitmap.Config.ARGB_8888);
                 misCafeterias.add(new Cafeteria("ERROR CONEXION a BBDD", "", "", 1, 1, 1, true, false, true, true, false, false, "17", true, 4, foto));
             }
-              MyAdapter adapter = new MyAdapter(getActivity(), misCafeterias,"cafe","");
-                cafes.setAdapter(adapter);
+            MyAdapter adapter = new MyAdapter(getActivity(), misCafeterias, "cafe", "");
+            cafes.setAdapter(adapter);
             // carga de solo array list
-
 
 
         }
     }
+
 }
 
 

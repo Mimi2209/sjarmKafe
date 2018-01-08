@@ -44,14 +44,6 @@ import java.sql.SQLException;
         @Nullable
         @Override
         public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-            // peta por nullPointer exception-----------------------------
-            // Bundle b1= getArguments();
-            // idCafeteria =  b1.getString("id_Cafeteria");
-            //-------------------------------------------------
-            // Get values
-
-
-
        //      Toast.makeText(getActivity().getApplicationContext(), " Cafe "+idCafeteria, Toast.LENGTH_SHORT).show();
             return inflater.inflate(R.layout.info, container, false);
            }

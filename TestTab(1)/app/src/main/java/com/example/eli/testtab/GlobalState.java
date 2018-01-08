@@ -18,6 +18,7 @@ public class GlobalState extends Application
     private Bitmap pict_usr;
     private float latitut;
     private float longitut;
+    private String sql_search="";
 
     public int getId_cafeteria() {
         return id_cafeteria;
@@ -89,5 +90,13 @@ public class GlobalState extends Application
 
     public void setLongitut(float longitut) {
         this.longitut = longitut;
+    }
+
+    public String getSql_search() {
+        return sql_search;
+    }
+
+    public void setSql_search(String sql_search) {
+        this.sql_search = sql_search;
     }
 }

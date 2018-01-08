@@ -174,7 +174,7 @@ public class GestionBBDD {
             float caf_long;
             float caf_ltg;
             Integer valoracion;
-            double distancia;
+            double distancia=0;
             Bitmap bitmap = null;
             Bitmap bitmap_sortida = null;
             byte[] image = null;
@@ -208,7 +208,55 @@ public class GestionBBDD {
         }
 
     }
+    // ------- Recupero lista  cafeterias por distancia (para Listing y para Map)
+    public ArrayList<Cafeteria> verListCafeterias(String query) throws SQLException {
+        Statement stmt = null;
+        ArrayList<Cafeteria> listCafeterias = new ArrayList<>();
+        try {
+            stmt = con.createStatement();
+            ResultSet rs = stmt.executeQuery(query);
+            int id_cafeteria;
+            String nom;
+            String address;
+            String descripcion;
+            String horario;
+            float caf_long;
+            float caf_ltg;
+            Integer valoracion;
+            double distancia=0;
+            Bitmap bitmap = null;
+            Bitmap bitmap_sortida = null;
+            byte[] image = null;
+            while (rs.next()) {
+                id_cafeteria = rs.getInt(1);
+                nom = rs.getString(2);
+                address = rs.getString(3);
+                descripcion = rs.getString(4);
+                caf_long = rs.getFloat(6);
+                caf_ltg = rs.getFloat(7);
+                horario = rs.getString(14);
+                valoracion = rs.getInt(16);
+                image = rs.getBytes(17); // array de bytes
+                BitmapFactory.Options options = new BitmapFactory.Options();
+                bitmap = BitmapFactory.decodeByteArray(image, 0, image.length, options); //Convert bytearray to bitmap
+                // Calculo distancia y la guardo para ordenar por distancia
 
+       //         distancia = distance(longi, ltg, caf_long, caf_ltg);
+                // if(distancia<2.5) {
+                listCafeterias.add(new Cafeteria(id_cafeteria, nom, address, descripcion, caf_long, caf_ltg, horario, valoracion, distancia, bitmap));
+                // }
+            }
+
+            rs.close();
+            stmt.close();
+        } catch (SQLException se) {
+            System.out.println("oops! No se puede conectar. Error: " + se.toString());
+
+        } finally {
+            return listCafeterias;
+        }
+
+    }
     //   ----------------------- INSERTAR VALORACION -------------------------------------------------------------
     public boolean insertValoracion(Valoracion miValoracion) throws SQLException {
 

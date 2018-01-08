@@ -50,9 +50,9 @@ public class Search extends Fragment {
     CheckBox terraza, mesas, wifi, shop, comida, xPress, perros;
     RatingBar ratGlobal;
     SeekBar distancia;
-    Cafeteria searchCafe;
     Button jumpTo;
     FloatingActionButton fab;
+    GlobalState gs;
 
 
     @Nullable
@@ -67,7 +67,7 @@ public class Search extends Fragment {
 
         //   View V = getView();
         super.onActivityCreated(state);
-
+        gs = (GlobalState) getActivity().getApplication();
         terraza = (CheckBox) getView().findViewById(R.id.Terrace);
         mesas = (CheckBox) getView().findViewById(R.id.Tables);
         wifi = (CheckBox) getView().findViewById(R.id.Wifi);
@@ -77,7 +77,7 @@ public class Search extends Fragment {
         perros = (CheckBox) getView().findViewById(R.id.Dogs);
         ratGlobal = (RatingBar) getView().findViewById(R.id.rating);
         distancia = (SeekBar) getView().findViewById(R.id.seekDistancia);
-        jumpTo = (Button) getView().findViewById(R.id.prueba);
+        jumpTo = (Button) getView().findViewById(R.id.lanza);
 
 
         fab = (FloatingActionButton) getActivity().findViewById(R.id.search_button);
@@ -85,21 +85,103 @@ public class Search extends Fragment {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                searchCafe = new Cafeteria(mesas.isChecked(), terraza.isChecked(), wifi.isChecked(), comida.isChecked(), shop.isChecked(), perros.isChecked(), xPress.isChecked(), ratGlobal.getNumStars(), distancia.getProgress());
+                //searchCafe = new Cafeteria(mesas.isChecked(), terraza.isChecked(), wifi.isChecked(), comida.isChecked(), shop.isChecked(), perros.isChecked(), xPress.isChecked(), ratGlobal.getRating(), distancia.getProgress());
 // crear string select i passar-lo com a variable global.
-                jumpTo.performClick();  //activo listing
+
+              //  Toast.makeText(getActivity(), sql_select, Toast.LENGTH_SHORT).show();
+                gs.setSql_search(compone_sql());
+         //       jumpTo.performClick();  //activo listing
 
             }
         });
-           }
+    }
 
     //---------------------------------------------------------------------------
+    public String compone_sql(){
+    String sql_string ="SELECT * FROM u125322db1.cafeteria ";
+    int chk_criterios=0;
+    if (mesas.isChecked()){
+        if (chk_criterios==0){
+            sql_string+=" WHERE ";
+                    }
+        sql_string+="mesas = true ";
+        chk_criterios++;
+    }
+        if (terraza.isChecked()){
+            if (chk_criterios==0){
+                sql_string+=" WHERE ";
+            }else{
+                sql_string+=" and ";
+            }
+            sql_string+="terraza = true ";
+            chk_criterios++;
+        }
+        if (wifi.isChecked()){
+            if (chk_criterios==0){
+                sql_string+=" WHERE ";
+            }else{
+                sql_string+=" and ";
+            }
+            sql_string+="wifi = true ";
+            chk_criterios++;
+        }
+        if (comida.isChecked()){
+            if (chk_criterios==0){
+                sql_string+=" WHERE ";
+            }else{
+                sql_string+=" and ";
+            }
+            sql_string+="comida = true ";
+            chk_criterios++;
+        } if (shop.isChecked()){
+            if (chk_criterios==0){
+                sql_string+=" WHERE ";
+            }else{
+                sql_string+=" and ";
+            }
+            sql_string+="tienda = true ";
+            chk_criterios++;
+        }
+        if (perros.isChecked()){
+            if (chk_criterios==0){
+                sql_string+=" WHERE ";
+            }else{
+                sql_string+=" and ";
+            }
+            sql_string+="perros = true ";
+            chk_criterios++;
+        }
+        if (xPress.isChecked()){
+            if (chk_criterios==0){
+                sql_string+=" WHERE ";
+            }else{
+                sql_string+=" and ";
+            }
+            sql_string+="servicio_express = true ";
+            chk_criterios++;
+        }
+        if (ratGlobal.getRating()>0){
+            if (chk_criterios==0){
+                sql_string+=" WHERE ";
+            }else{
+                sql_string+=" and ";
+            }
+            sql_string+="valoracion >= "+ratGlobal.getRating();
+            chk_criterios++;
+        }
+// falta aplicar distancia
+        //if (distancia.getProgress()>0){
+        //    if (chk_criterios==0){
+        //        sql_string+=" Where ";
+        //    }else{
+        //        sql_string+=" and ";
+        //    }
+        //    sql_string+="valoracion >= "+ratGlobal.getNumStars();
+        //    chk_criterios++;
+        //}
+        sql_string+=" ;";
+        return sql_string;
 
+    }
 }
-
-
-
-
-
-
 
