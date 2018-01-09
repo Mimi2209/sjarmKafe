@@ -1,10 +1,12 @@
 package com.example.eli.testtab;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,11 +22,15 @@ import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Date;
 
+import static android.app.Activity.RESULT_OK;
+
 /**
  * Created by Eli on 27/12/2017.
  */
 
     public class Comments extends Fragment {
+
+    final int USER_REQUEST=1, NEW_RAT =2;
     GlobalState gs;
     int mNum;
     ListView comments;
@@ -32,6 +38,7 @@ import java.util.Date;
     String resultat;
     TextView nom_cafeteria;
     RatingBar rating_cafeteria;
+    FloatingActionButton add;
     ArrayList<Valoracion> comentarios = new ArrayList<Valoracion>();
 
     static Comments newInstance(int num) {
@@ -65,11 +72,45 @@ import java.util.Date;
         comments = (ListView) getView().findViewById(R.id.comment_list);
         nom_cafeteria  = (TextView) getView().findViewById(R.id.cafe);
         rating_cafeteria = (RatingBar) getView().findViewById(R.id.rating2);
+        add = (FloatingActionButton) getView().findViewById(R.id.addValoracion);
 
         Descarga nuevaDescarga = new Descarga();
         nuevaDescarga.execute();
 
+        add.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+
+                Intent intent = new Intent(getActivity(),
+                        UsuarioActivity.class);
+                startActivityForResult(intent,USER_REQUEST);
+
+            }
+        });
+
     }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == USER_REQUEST) {
+            // Make sure the request was successful
+            if (resultCode == RESULT_OK) {
+                String returnValue = data.getStringExtra("user");//no deberiamos pasar el usuario que la crea?
+                Toast.makeText(getActivity(), "Hello" +returnValue, Toast.LENGTH_LONG).show();
+
+                Intent intent = new Intent(getActivity(),
+                        NewRatingActivity.class);
+                intent.putExtra("user",returnValue);
+                intent.putExtra("cafe",idCafeteria);
+                startActivityForResult(intent,NEW_RAT);
+
+            }
+
+        }
+    }
+
 
     //---------------------------------------------------------------------------
     public class Descarga extends AsyncTask<String, Integer, String> {
