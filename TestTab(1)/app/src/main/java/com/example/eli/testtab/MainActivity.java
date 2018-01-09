@@ -3,6 +3,7 @@ package com.example.eli.testtab;
 import android.support.design.widget.TabLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
@@ -78,9 +79,24 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void JumpToPage(View view) {
+    public boolean JumpToPage(View view) {
+   //     Fragment mFragment = new Listing();
+   //     getSupportFragmentManager().beginTransaction().replace(R.id.container, mFragment, "fragment").setTransitionStyle(FragmentTransaction.TRANSIT_FRAGMENT_FADE).commit();
+   //     getSupportFragmentManager().beginTransaction().replace(R.id.container, mFragment).commit();
+   //----------------------------------------------------------------------------------
+   //     FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+  //      ft.replace(R.id.container, new Listing(),"Listing")
+  //              .addToBackStack("Listing").commit();
+   //   Fragment frg = null;
+   //          frg = getSupportFragmentManager().findFragmentByTag("Listing");
 
+     //   FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+    //    ft.detach(frg);
+    //    ft.attach(frg);
+    //    ft.addToBackStack("Listing");
+    //    ft.commit();
         mViewPager.setCurrentItem(1);
+        return true;
     }
 
     /**

@@ -37,25 +37,44 @@ public class Listing extends Fragment {
     String resultat;
     GlobalState gs;
     String sql;
+    boolean sql_search;
 
-    static Listing newInstance(int num) {
-        Listing l = new Listing();
+  //  static Listing newInstance(int num) {
+  //      Listing l = new Listing();
 
         // Supply num input as an argument.
-        Bundle args = new Bundle();
-        args.putInt("num", num);
-        l.setArguments(args);
+    //    Bundle args = new Bundle();
+    //    args.putInt("num", num);
+    //    l.setArguments(args);
 
-        return l;
-    }
+      //  return l;
+   // }
+
+//    @Override
+ //   public void onCreate(Bundle savedInstanceState) {
+  //      super.onCreate(savedInstanceState);
+  //      mNum = getArguments() != null ? getArguments().getInt("num") : 1;
+  //  }
+
+//----------------------------------------------------------------------------
+
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        mNum = getArguments() != null ? getArguments().getInt("num") : 1;
+    public void onStart() {
+        super.onStart();
+        if (this.isVisible()) {
+            gs = (GlobalState) getActivity().getApplication();
+            sql = gs.getSql_search();
+            Toast.makeText(getActivity(), sql, Toast.LENGTH_SHORT).show();
+
+            Descarga nuevaDescarga = new Descarga();
+            if (sql.length() > 10) {
+                sql_search = true;
+            }
+            nuevaDescarga.execute(sql);
+        }
     }
-
-
+//-------------------------------------------------------------------------
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -67,16 +86,6 @@ public class Listing extends Fragment {
         super.onActivityCreated(state);
 
         cafes = (ListView) getView().findViewById(R.id.cafeteria_list);
-        gs = (GlobalState) getActivity().getApplication();
-        sql = gs.getSql_search();
-        Toast.makeText(getActivity(), sql, Toast.LENGTH_SHORT).show();
-
-        Descarga nuevaDescarga = new Descarga();
-        if (sql.length()>0) {
-            nuevaDescarga.execute(sql);
-        }else{
-            nuevaDescarga.execute();
-        }
 
     }
 
@@ -85,6 +94,7 @@ public class Listing extends Fragment {
 
         @Override
         protected void onPreExecute() {
+
         }
 
         @Override
@@ -92,7 +102,7 @@ public class Listing extends Fragment {
 
             try {
                 GestionBBDD baseDatos = new GestionBBDD(); // conecta con servidor SQL
-                if (urls[0].length() > 0) {
+                if (sql_search) {
                     misCafeterias = baseDatos.verListCafeterias(urls[0]);
                     gs.setSql_search("");
                 } else {
@@ -119,7 +129,7 @@ public class Listing extends Fragment {
             cafes.setAdapter(adapter);
             // carga de solo array list
 
-
+            Toast.makeText(getActivity(), sql, Toast.LENGTH_SHORT).show();
         }
     }
 

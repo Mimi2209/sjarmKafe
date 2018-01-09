@@ -1,46 +1,15 @@
 package com.example.eli.testtab;
-
-import android.content.Intent;
-import android.graphics.Bitmap;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
-import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.LinearLayout;
 import android.widget.RatingBar;
-import android.widget.RelativeLayout;
 import android.widget.SeekBar;
-import android.widget.TableRow;
-import android.widget.TextView;
-import android.widget.Toast;
-
-import java.sql.Blob;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.Observable;
-import java.util.Observer;
-
-import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 
 /**
  * Created by Eli on 27/12/2017.
@@ -88,85 +57,88 @@ public class Search extends Fragment {
                 //searchCafe = new Cafeteria(mesas.isChecked(), terraza.isChecked(), wifi.isChecked(), comida.isChecked(), shop.isChecked(), perros.isChecked(), xPress.isChecked(), ratGlobal.getRating(), distancia.getProgress());
 // crear string select i passar-lo com a variable global.
 
-              //  Toast.makeText(getActivity(), sql_select, Toast.LENGTH_SHORT).show();
+                //  Toast.makeText(getActivity(), sql_select, Toast.LENGTH_SHORT).show();
                 gs.setSql_search(compone_sql());
-         //       jumpTo.performClick();  //activo listing
+                ratGlobal.setRating(0);
+                jumpTo.performClick();  //activo listin
+
 
             }
         });
     }
 
     //---------------------------------------------------------------------------
-    public String compone_sql(){
-    String sql_string ="SELECT * FROM u125322db1.cafeteria ";
-    int chk_criterios=0;
-    if (mesas.isChecked()){
-        if (chk_criterios==0){
-            sql_string+=" WHERE ";
-                    }
-        sql_string+="mesas = true ";
-        chk_criterios++;
-    }
-        if (terraza.isChecked()){
-            if (chk_criterios==0){
-                sql_string+=" WHERE ";
-            }else{
-                sql_string+=" and ";
+    public String compone_sql() {
+        String sql_string = "SELECT * FROM u125322db1.cafeteria ";
+        int chk_criterios = 0;
+        if (mesas.isChecked()) {
+            if (chk_criterios == 0) {
+                sql_string += " WHERE ";
             }
-            sql_string+="terraza = true ";
+            sql_string += "mesas = true ";
             chk_criterios++;
         }
-        if (wifi.isChecked()){
-            if (chk_criterios==0){
-                sql_string+=" WHERE ";
-            }else{
-                sql_string+=" and ";
+        if (terraza.isChecked()) {
+            if (chk_criterios == 0) {
+                sql_string += " WHERE ";
+            } else {
+                sql_string += " and ";
             }
-            sql_string+="wifi = true ";
+            sql_string += "terraza = true ";
             chk_criterios++;
         }
-        if (comida.isChecked()){
-            if (chk_criterios==0){
-                sql_string+=" WHERE ";
-            }else{
-                sql_string+=" and ";
+        if (wifi.isChecked()) {
+            if (chk_criterios == 0) {
+                sql_string += " WHERE ";
+            } else {
+                sql_string += " and ";
             }
-            sql_string+="comida = true ";
-            chk_criterios++;
-        } if (shop.isChecked()){
-            if (chk_criterios==0){
-                sql_string+=" WHERE ";
-            }else{
-                sql_string+=" and ";
-            }
-            sql_string+="tienda = true ";
+            sql_string += "wifi = true ";
             chk_criterios++;
         }
-        if (perros.isChecked()){
-            if (chk_criterios==0){
-                sql_string+=" WHERE ";
-            }else{
-                sql_string+=" and ";
+        if (comida.isChecked()) {
+            if (chk_criterios == 0) {
+                sql_string += " WHERE ";
+            } else {
+                sql_string += " and ";
             }
-            sql_string+="perros = true ";
+            sql_string += "comida = true ";
             chk_criterios++;
         }
-        if (xPress.isChecked()){
-            if (chk_criterios==0){
-                sql_string+=" WHERE ";
-            }else{
-                sql_string+=" and ";
+        if (shop.isChecked()) {
+            if (chk_criterios == 0) {
+                sql_string += " WHERE ";
+            } else {
+                sql_string += " and ";
             }
-            sql_string+="servicio_express = true ";
+            sql_string += "tienda = true ";
             chk_criterios++;
         }
-        if (ratGlobal.getRating()>0){
-            if (chk_criterios==0){
-                sql_string+=" WHERE ";
-            }else{
-                sql_string+=" and ";
+        if (perros.isChecked()) {
+            if (chk_criterios == 0) {
+                sql_string += " WHERE ";
+            } else {
+                sql_string += " and ";
             }
-            sql_string+="valoracion >= "+ratGlobal.getRating();
+            sql_string += "perros = true ";
+            chk_criterios++;
+        }
+        if (xPress.isChecked()) {
+            if (chk_criterios == 0) {
+                sql_string += " WHERE ";
+            } else {
+                sql_string += " and ";
+            }
+            sql_string += "servicio_express = true ";
+            chk_criterios++;
+        }
+        if (ratGlobal.getRating() > 0) {
+            if (chk_criterios == 0) {
+                sql_string += " WHERE ";
+            } else {
+                sql_string += " and ";
+            }
+            sql_string += "valoracion >= " + ratGlobal.getRating();
             chk_criterios++;
         }
 // falta aplicar distancia
@@ -179,9 +151,10 @@ public class Search extends Fragment {
         //    sql_string+="valoracion >= "+ratGlobal.getNumStars();
         //    chk_criterios++;
         //}
-        sql_string+=" ;";
+        sql_string += " ;";
         return sql_string;
 
     }
+
 }
 
