@@ -27,12 +27,15 @@ public class NewUserActivity extends AppCompatActivity {
     TextView nombre, password, email;
     EditText newname,newpass, newemail;
     ImageButton newfoto;
+    int id_usr;
     String resultat;
+    GlobalState gs;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_user);
+        gs = (GlobalState) getApplication();
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -82,7 +85,7 @@ public class NewUserActivity extends AppCompatActivity {
                 GestionBBDD baseDatos = new GestionBBDD(); // conecta con servidor SQL
                 // Falta captura foto
                 miUser = new Usuario(Uname,Upass,timeStamp,Uemail,bitmap);
-                baseDatos.insertUsuario(miUser); // obtiene usuario
+                id_usr=baseDatos.insertUsuario(miUser); // obtiene usuario
 
             } catch (SQLException se) {
                 System.out.println("oops! No se puede conectar. Error: " + se.toString());
@@ -99,11 +102,12 @@ public class NewUserActivity extends AppCompatActivity {
             newname.setText(null);
             newpass.setText(null);
             newemail.setText(null);
-            Toast.makeText(getApplicationContext(), " USUARIO INSERTADO CORRECTAMENTE !! ", Toast.LENGTH_SHORT).show();
-
-            Intent resultIntent = new Intent();
-            resultIntent.putExtra("user", Uemail);
-            setResult(Activity.RESULT_OK, resultIntent);
+            Toast.makeText(getApplicationContext(), " USUARIO CON ID "+ id_usr+ " INSERTADO CORRECTAMENTE !! ", Toast.LENGTH_SHORT).show();
+            gs.setId_usr(id_usr);
+            gs.setNom_usr(Uname);
+       //     Intent resultIntent = new Intent();
+       //     resultIntent.putExtra("user", Uemail);
+       //     setResult(Activity.RESULT_OK, resultIntent);
             finish();
         }
     }

@@ -67,11 +67,11 @@ public class Listing extends Fragment {
             sql = gs.getSql_search();
             Toast.makeText(getActivity(), sql, Toast.LENGTH_SHORT).show();
 
-            Descarga nuevaDescarga = new Descarga();
+            Descarga_listing nuevaDescarga_listing = new Descarga_listing();
             if (sql.length() > 10) {
                 sql_search = true;
             }
-            nuevaDescarga.execute(sql);
+            nuevaDescarga_listing.execute(sql);
         }
     }
 //-------------------------------------------------------------------------
@@ -90,10 +90,11 @@ public class Listing extends Fragment {
     }
 
     //---------------------------------------------------------------------------
-    public class Descarga extends AsyncTask<String, Integer, String> {
+    public class Descarga_listing extends AsyncTask<String, Integer, String> {
 
         @Override
         protected void onPreExecute() {
+            Toast.makeText(getActivity(), "Loading, please wait", Toast.LENGTH_SHORT).show();
 
         }
 

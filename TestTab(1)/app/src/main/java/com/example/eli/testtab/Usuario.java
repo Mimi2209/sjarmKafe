@@ -25,6 +25,14 @@ public class Usuario {
         this.foto = foto;
     }
 
+    public Usuario(int id_usuario, String nombre, String pwd, Timestamp ultima_conexion, String e_mail, Bitmap foto) {
+        this.id_usuario = id_usuario;
+        this.nombre = nombre;
+        this.pwd = pwd;
+        this.ultima_conexion = ultima_conexion;
+        this.e_mail = e_mail;
+        this.foto = foto;
+    }
 
     public int getId() {
         return id_usuario;

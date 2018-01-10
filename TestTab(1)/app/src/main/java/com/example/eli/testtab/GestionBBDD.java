@@ -41,9 +41,12 @@ public class GestionBBDD {
     }
 
     //   ----------------------- INSERTAR USUARIO -------------------------------------------------------------
-    public boolean insertUsuario(Usuario miUsuario) throws SQLException {
-
+    public int insertUsuario(Usuario miUsuario) throws SQLException {
+        int id_usr=0;
+        String query = "select LAST_INSERT_ID();";
+        Statement stmt = null;
         PreparedStatement st = con.prepareStatement("INSERT INTO `u125322db1`.`usuario` (`nombre_usuario`, `pwd`, `ultima_conexion`, `email`, `foto`) VALUES  (?,?,?,?,?)");
+        stmt = con.createStatement();
         st.setString(1, miUsuario.getNombre());
         st.setString(2, miUsuario.getPwd());
         st.setTimestamp(3, (Timestamp) miUsuario.getUltima_conexion());
@@ -54,14 +57,17 @@ public class GestionBBDD {
         byte[] image = bos.toByteArray();
         st.setBytes(5, image);
         try {
-            st.executeUpdate();
+            st.executeUpdate();  // insert
+            ResultSet rs = stmt.executeQuery(query); // get last ID
+            rs.next();
+            id_usr = rs.getInt(1);
         } catch (SQLException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
-            return false;
+            return 0;
         } finally {
             st.close();
-            return true;
+            return id_usr;
         }
     }
 
@@ -490,9 +496,46 @@ public class GestionBBDD {
 
     }
 
-    // ------- Recupero info usuario ----- Class Usuario --------------------------------------------------------------------------------
+    // ------- Recupero info usuario ----- Class Usuario - comprueba usr + pwd para sign-in ---------------------------------------------
+    public Usuario verUsuario(String email, String pwd) throws SQLException {
+        String query = "SELECT * FROM u125322db1.usuario  where email = '" + email + "' and pwd ='" + pwd + "';";
+        Statement stmt = null;
+        Usuario miUsuario = null;
+        try {
+            stmt = con.createStatement();
+            ResultSet rs = stmt.executeQuery(query);
+            int id_usr;
+            String nom;
+            String password;
+            Timestamp uconexion;
+            String uemail;
+            byte[] image = null;
+            Bitmap bitmap = null;
+
+            while (rs.next()) {
+                id_usr = rs.getInt(1);
+                nom = rs.getString(2);
+                password = rs.getString(3);
+                uconexion = rs.getTimestamp(4);
+                uemail = rs.getString(5);
+                image = rs.getBytes(6); // array de bytes
+                BitmapFactory.Options options = new BitmapFactory.Options();
+                bitmap = BitmapFactory.decodeByteArray(image, 0, image.length, options); //Convert bytearray to bitmap
+                miUsuario=new Usuario(id_usr,nom,password,uconexion,uemail,bitmap);}
+
+            rs.close();
+            stmt.close();
+        } catch (SQLException se) {
+            System.out.println("oops! No se puede conectar. Error: " + se.toString());
+
+        } finally {
+            return miUsuario;
+        }
+
+    }
+    // ------- Recupero info usuario ----- Class Usuario - comprueba email  para enviar email --------------------------------------------
     public Usuario verUsuario(String email) throws SQLException {
-        String query = "SELECT * FROM u125322db1.usuario  where email = " + email + ";";
+        String query = "SELECT * FROM u125322db1.usuario  where email = '" + email + "';";
         Statement stmt = null;
         Usuario miUsuario = null;
         try {

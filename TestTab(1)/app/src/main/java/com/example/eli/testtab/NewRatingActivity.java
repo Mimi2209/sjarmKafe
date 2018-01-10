@@ -26,6 +26,9 @@ public class NewRatingActivity extends AppCompatActivity {
     FloatingActionButton add;
     String resultat;
     EditText coment, comment_des;
+    GlobalState gs;
+    static Bitmap pict_cafeteria;
+    static int idCafeteria;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +36,9 @@ public class NewRatingActivity extends AppCompatActivity {
         setContentView(R.layout.activity_new_rating);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        gs = (GlobalState) getApplication();
+        idCafeteria=gs.getId_cafeteria();
+        pict_cafeteria=gs.getPict_cafeteria();
 
 
 
@@ -64,7 +70,7 @@ public class NewRatingActivity extends AppCompatActivity {
     public class Descarga extends AsyncTask<String, Integer, String> {
 
         String user = getIntent().getStringExtra("user");
-        int idCafeteria = getIntent().getIntExtra("cafe",0);
+
 
         @Override
         protected void onPreExecute() {
@@ -107,7 +113,7 @@ public class NewRatingActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(String result) {
 
-            Toast.makeText(getApplicationContext(), " CAFETERIA INSERTADA CORRECTAMENTE !! ", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), " Valoracion Insertada correctamente !! ", Toast.LENGTH_SHORT).show();
 
             ratGlobal.setRating(Float.parseFloat(null));
             ratLimpieza.setRating(Float.parseFloat(null));
