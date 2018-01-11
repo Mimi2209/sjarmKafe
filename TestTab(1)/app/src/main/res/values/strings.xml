@@ -45,5 +45,10 @@
     <string name="sign_in2">Sign In</string>
     <string name="title_activity_new_user">NewUserActivity</string>
     <string name="title_activity_new_rating">NewRatingActivity</string>
+    <string name="add_your_comment_title">Add your comment title</string>
+    <string name="add_your_comment_description">Add your comment description</string>
+    <string name="commentTitle">Add your comment title</string>
+    <string name="commentDescription">Add your comment description</string>
+
 
 </resources>
