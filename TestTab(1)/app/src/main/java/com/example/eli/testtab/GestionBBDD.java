@@ -267,7 +267,7 @@ public class GestionBBDD {
     public boolean insertValoracion(Valoracion miValoracion) throws SQLException {
 
         PreparedStatement st = con.prepareStatement("INSERT INTO `u125322db1`.`valoracion` (`id_val_usuario`, `id_val_cafeteria`, `valoracion_gobal`, `limpieza`, `rapidez_servicio`, `trato`, `ambiente`, `precios`, `disenyo`, `accesibilidad`, `facil_aparcar`, `titulo_comentario`, `texto_comentario`, `date_val`) VALUES  (?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
-        st.setString(1, miValoracion.getval_usuario());
+        st.setInt(1, miValoracion.getval_usuario());
         st.setInt(2, miValoracion.getId_val_cafeteria());
         st.setInt(3, miValoracion.getValoracion_global());
         st.setInt(4, miValoracion.getLimpieza());

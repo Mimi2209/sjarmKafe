@@ -25,7 +25,7 @@
                 android:id="@+id/fecha"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:firstDayOfWeek="monday" />
+                android:firstDayOfWeek="2" />
 
             <TimePicker
                 android:id="@+id/hora"
