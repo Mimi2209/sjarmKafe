@@ -377,6 +377,7 @@ public class GestionBBDD {
             int com_val;
             String com_titulo;
             String com_text;
+            Date rec_fecha;
             String com_fecha;
             Bitmap bitmap;
             byte[] image=null;
@@ -385,7 +386,8 @@ public class GestionBBDD {
                 com_val = rs.getInt(4);
                 com_titulo = rs.getString(13);
                 com_text = rs.getString(14);
-                com_fecha = rs.getString(15);
+                rec_fecha = rs.getDate(15);
+                com_fecha=rec_fecha.toString();
                 com_usuario = rs.getString(17);
                 image = rs.getBytes(21); // array de bytes
                 BitmapFactory.Options options = new BitmapFactory.Options();

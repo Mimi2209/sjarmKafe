@@ -90,7 +90,7 @@ public class UsuarioActivity extends AppCompatActivity {
             if (resultCode == RESULT_OK) {
                 String returnValue = data.getStringExtra("user");//no deberiamos pasar el usuario que la crea?
                 Intent resultIntent = new Intent();
-                resultIntent.putExtra("user", returnValue);
+         //       resultIntent.putExtra("user", returnValue);
                 setResult(Activity.RESULT_OK, resultIntent);
                 finish();
             }

@@ -105,9 +105,9 @@ public class NewUserActivity extends AppCompatActivity {
             Toast.makeText(getApplicationContext(), " USUARIO CON ID "+ id_usr+ " INSERTADO CORRECTAMENTE !! ", Toast.LENGTH_SHORT).show();
             gs.setId_usr(id_usr);
             gs.setNom_usr(Uname);
-       //     Intent resultIntent = new Intent();
+            Intent resultIntent = new Intent();
        //     resultIntent.putExtra("user", Uemail);
-       //     setResult(Activity.RESULT_OK, resultIntent);
+            setResult(Activity.RESULT_OK, resultIntent);
             finish();
         }
     }
