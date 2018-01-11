@@ -15,6 +15,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -29,6 +30,7 @@ public class NewRatingActivity extends AppCompatActivity {
     GlobalState gs;
     static Bitmap pict_cafeteria;
     static int idCafeteria;
+    static int idUsuario;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,8 +39,6 @@ public class NewRatingActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         gs = (GlobalState) getApplication();
-        idCafeteria=gs.getId_cafeteria();
-        pict_cafeteria=gs.getPict_cafeteria();
 
 
 
@@ -55,11 +55,14 @@ public class NewRatingActivity extends AppCompatActivity {
         add = (FloatingActionButton) findViewById(R.id.addValoracion);
         coment =(EditText) findViewById(R.id.coment);
         comment_des = (EditText) findViewById(R.id.comment_descript);
-
+        tNameCafe.setText(gs.getNom_cafeteria());
+        idCafeteria=gs.getId_cafeteria();
+        pict_cafeteria=gs.getPict_cafeteria();
+        idUsuario=gs.getId_usr();
 
         add.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
+            public void onClick(View view) { // grabar
                 Descarga nuevaDescarga = new Descarga();
                 nuevaDescarga.execute();
             }
@@ -69,7 +72,8 @@ public class NewRatingActivity extends AppCompatActivity {
     //---------------------------------------------------------------------------
     public class Descarga extends AsyncTask<String, Integer, String> {
 
-        String user = getIntent().getStringExtra("user");
+      //  String user = getIntent().getStringExtra("user");
+
 
 
         @Override
@@ -85,7 +89,7 @@ public class NewRatingActivity extends AppCompatActivity {
                 GestionBBDD baseDatos = new GestionBBDD(); // conecta con servidor SQL
 // DATOS QUE FALTAN !!!! // usuario y cafeteria
 
-                String nCafe = tNameCafe.getText().toString();
+
                 int valGlobal = (int) ratGlobal.getRating();
                 int valLimpieza = (int) ratLimpieza.getRating();
                 int valRapidez = (int) ratRapidez.getRating();
@@ -98,7 +102,10 @@ public class NewRatingActivity extends AppCompatActivity {
                 String comment = coment.getText().toString();
                 String descript = comment_des.getText().toString();
                 Date data = Calendar.getInstance().getTime();
-                miVal = new Valoracion(user,idCafeteria,valGlobal,valLimpieza,valRapidez,valTrato,valAmbiente,valPrecios,valDiseño,valAcces,valAparcar,comment,descript,data);
+                SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+                String formattedDate = df.format(Calendar.getInstance().getTime());
+                miVal = new Valoracion(idUsuario,idCafeteria,valGlobal,valLimpieza,valRapidez,valTrato,valAmbiente,valPrecios,valDiseño,valAcces,valAparcar,comment,descript,formattedDate);
+
                 baseDatos.insertValoracion(miVal); // obtiene valoracion
 
             } catch (SQLException se) {

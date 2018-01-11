@@ -167,11 +167,11 @@ public class MyAdapter extends BaseAdapter {
                     // comentario
                     ncomment.setText(comments.get(position).getCom_titulo());
                     if (comments.get(position).data!=null) {
-                        Date data = comments.get(position).data;
+                        String data = comments.get(position).data;
                         Calendar cal2 = Calendar.getInstance();
-                        cal2.setTime(data);
-                        String showTimeC = String.format("%1$tI:%1$tM:%1$tS %1$Tp", cal2);
-                        hcomment.setText(showTimeC);
+                      //  cal2.setTime(data);
+                     //   String showTimeC = String.format("%1$tI:%1$tM:%1$tS %1$Tp", cal2);
+                        hcomment.setText(data);
                     }
 
                     descomment.setText(comments.get(position).getCom_text());

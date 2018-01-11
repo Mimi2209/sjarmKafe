@@ -347,7 +347,7 @@
                     android:layout_height="wrap_content"
                     android:ems="10"
                     android:inputType="textPersonName"
-                    android:text="@string/commentTitle" />
+                    android:hint="@string/commentTitle" />
 
                 <EditText
                     android:id="@+id/comment_descript"

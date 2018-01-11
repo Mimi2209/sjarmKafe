@@ -280,7 +280,7 @@ public class GestionBBDD {
         st.setInt(11, miValoracion.getFacil_aparcar());
         st.setString(12, miValoracion.getCom_titulo());
         st.setString(13, miValoracion.getCom_text());
-        st.setDate(14, (java.sql.Date) miValoracion.getData());
+        st.setString(14, miValoracion.getData());
 
 
         try {
@@ -377,7 +377,7 @@ public class GestionBBDD {
             int com_val;
             String com_titulo;
             String com_text;
-            Date com_fecha;
+            String com_fecha;
             Bitmap bitmap;
             byte[] image=null;
 
@@ -385,7 +385,7 @@ public class GestionBBDD {
                 com_val = rs.getInt(4);
                 com_titulo = rs.getString(13);
                 com_text = rs.getString(14);
-                com_fecha = rs.getDate(15);
+                com_fecha = rs.getString(15);
                 com_usuario = rs.getString(17);
                 image = rs.getBytes(21); // array de bytes
                 BitmapFactory.Options options = new BitmapFactory.Options();

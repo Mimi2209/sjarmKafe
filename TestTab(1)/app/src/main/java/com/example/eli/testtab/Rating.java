@@ -91,14 +91,14 @@ public class Rating extends Fragment {
         if (requestCode == USER_REQUEST) {
             // Make sure the request was successful
             if (resultCode == RESULT_OK) {
-                String returnValue = data.getStringExtra("user");//no deberiamos pasar el usuario que la crea?
+      //          String returnValue = data.getStringExtra("user");//no deberiamos pasar el usuario que la crea?
                 Toast.makeText(getActivity(), "Hello " +gs.getNom_usr()+ "your id is :" +gs.getId_usr()
                         , Toast.LENGTH_LONG).show();
 
                 Intent intent = new Intent(getActivity(),
                         NewRatingActivity.class);
-                intent.putExtra("user",returnValue);
-                intent.putExtra("cafe",idCafeteria);
+          //      intent.putExtra("user",returnValue);
+          //      intent.putExtra("cafe",idCafeteria);
                 startActivityForResult(intent,NEW_RAT);
 
             }

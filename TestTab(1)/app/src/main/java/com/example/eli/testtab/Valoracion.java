@@ -10,7 +10,7 @@ import java.util.Date;
 
 public class Valoracion {
     int id_valoracion;
-    String val_usuario;
+    int val_usuario;
     int id_val_cafeteria;
     int valoracion_global;
     int limpieza;
@@ -23,13 +23,13 @@ public class Valoracion {
     int facil_aparcar;
     String com_titulo;
     String com_text;
-    Date data;
+    String data;
     String nom_usr;
     Bitmap img_usr;
 
     // constructor para inserts
-    public Valoracion(String val_usuario, int id_val_cafeteria, int valoracion_global, int limpieza, int rapidez_servicio, int trato,
-                      int ambiente, int precios, int disenyo, int accesibilidad, int facil_aparcar, String com_titulo, String com_text, Date data) {
+    public Valoracion(int val_usuario, int id_val_cafeteria, int valoracion_global, int limpieza, int rapidez_servicio, int trato,
+                      int ambiente, int precios, int disenyo, int accesibilidad, int facil_aparcar, String com_titulo, String com_text, String data) {
         this.val_usuario = val_usuario;
         this.id_val_cafeteria = id_val_cafeteria;
         this.valoracion_global = valoracion_global;
@@ -62,7 +62,7 @@ public class Valoracion {
 
 
 
-    public Valoracion(int valoracion_global, String com_titulo, String com_text, Date data, String nom_usr, Bitmap img_usr) {
+    public Valoracion(int valoracion_global, String com_titulo, String com_text, String data, String nom_usr, Bitmap img_usr) {
         this.valoracion_global = valoracion_global;
         this.com_titulo = com_titulo;
         this.com_text = com_text;
@@ -75,11 +75,11 @@ public class Valoracion {
         return id_valoracion;
     }
 
-    public String getval_usuario() {
+    public int getval_usuario() {
         return val_usuario;
     }
 
-    public void setval_usuario(String val_usuario) {
+    public void setval_usuario(int val_usuario) {
         this.val_usuario = val_usuario;
     }
 
@@ -163,11 +163,11 @@ public class Valoracion {
         this.facil_aparcar = facil_aparcar;
     }
 
-    public Date getData() {
+    public String getData() {
         return data;
     }
 
-    public void setData(Date data) {
+    public void setData(String data) {
         this.data = data;
     }
 
