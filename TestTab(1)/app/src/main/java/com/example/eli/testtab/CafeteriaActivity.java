@@ -31,7 +31,7 @@ public class CafeteriaActivity extends AppCompatActivity {
     private SectionsPagerAdapter mSectionsPagerAdapter;
     static int idCafeteria;
     static Bitmap pict_cafeteria;
-    GlobalState gs;
+    static GlobalState gs;
 
     /**
      * The {@link ViewPager} that will host the section contents.
@@ -42,11 +42,7 @@ public class CafeteriaActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.cafeteria_main);
-       gs = (GlobalState) getApplication();
-        idCafeteria=gs.getId_cafeteria();
-        pict_cafeteria=gs.getPict_cafeteria();
-        ImageView image = (ImageView) findViewById(R.id.pic_cafeteria);
-        image.setImageBitmap(pict_cafeteria);
+
 
         //---------------------------------------------------------------------------
        // Toast.makeText(getApplicationContext(), " Cafe "+idCafeteria, Toast.LENGTH_SHORT).show();
@@ -61,7 +57,11 @@ public class CafeteriaActivity extends AppCompatActivity {
 
         mViewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
         tabLayout.addOnTabSelectedListener(new TabLayout.ViewPagerOnTabSelectedListener(mViewPager));
-
+        ImageView image = (ImageView) findViewById(R.id.pic_cafeteria);
+        gs = (GlobalState) getApplication();
+        idCafeteria=gs.getId_cafeteria();
+        pict_cafeteria=gs.getPict_cafeteria();
+        image.setImageBitmap(pict_cafeteria);
     }
 
 
@@ -71,6 +71,7 @@ public class CafeteriaActivity extends AppCompatActivity {
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -86,6 +87,9 @@ public class CafeteriaActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
+
+
 
     /**
      * A placeholder fragment containing a simple view.
@@ -118,7 +122,10 @@ public class CafeteriaActivity extends AppCompatActivity {
             View rootView = inflater.inflate(R.layout.fragment_main, container, false);
             TextView textView = (TextView) rootView.findViewById(R.id.section_label);
             textView.setText(getString(R.string.section_format, getArguments().getInt(ARG_SECTION_NUMBER)));
-
+            idCafeteria=gs.getId_cafeteria();
+            pict_cafeteria=gs.getPict_cafeteria();
+            ImageView image = (ImageView) rootView.findViewById(R.id.pic_cafeteria);
+            image.setImageBitmap(pict_cafeteria);
             return rootView;
         }
     }
@@ -156,7 +163,7 @@ public class CafeteriaActivity extends AppCompatActivity {
 
         @Override
         public int getCount() {
-            // Show 3 total pages.
+            // Show 4 total pages.
             return 4;
         }
     }
