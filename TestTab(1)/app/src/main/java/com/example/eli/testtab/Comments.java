@@ -28,9 +28,9 @@ import static android.app.Activity.RESULT_OK;
  * Created by Eli on 27/12/2017.
  */
 
-    public class Comments extends Fragment {
+public class Comments extends Fragment {
 
-    final int USER_REQUEST=1, NEW_RAT =2;
+    final int USER_REQUEST = 1, NEW_RAT = 2;
     GlobalState gs;
     int mNum;
     ListView comments;
@@ -70,7 +70,7 @@ import static android.app.Activity.RESULT_OK;
     public void onActivityCreated(Bundle state) {
         super.onActivityCreated(state);
         comments = (ListView) getView().findViewById(R.id.comment_list);
-        nom_cafeteria  = (TextView) getView().findViewById(R.id.cafe);
+        nom_cafeteria = (TextView) getView().findViewById(R.id.cafe);
         rating_cafeteria = (RatingBar) getView().findViewById(R.id.rating2);
         add = (FloatingActionButton) getView().findViewById(R.id.addValoracion);
 
@@ -84,7 +84,7 @@ import static android.app.Activity.RESULT_OK;
 
                 Intent intent = new Intent(getActivity(),
                         UsuarioActivity.class);
-                startActivityForResult(intent,USER_REQUEST);
+                startActivityForResult(intent, USER_REQUEST);
 
             }
         });
@@ -97,17 +97,22 @@ import static android.app.Activity.RESULT_OK;
         if (requestCode == USER_REQUEST) {
             // Make sure the request was successful
             if (resultCode == RESULT_OK) {
-           //     String returnValue = data.getStringExtra("user");//no deberiamos pasar el usuario que la crea?
-                Toast.makeText(getActivity(), "Hello " +gs.getNom_usr()+ "your id is :" +gs.getId_usr(), Toast.LENGTH_LONG).show();
+                //     String returnValue = data.getStringExtra("user");//no deberiamos pasar el usuario que la crea?
+                Toast.makeText(getActivity(), "Hello " + gs.getNom_usr() + "your id is :" + gs.getId_usr(), Toast.LENGTH_LONG).show();
 
                 Intent intent = new Intent(getActivity(),
                         NewRatingActivity.class);
-          //      intent.putExtra("user",returnValue);
-          //      intent.putExtra("cafe",idCafeteria);
-                startActivityForResult(intent,NEW_RAT);
+
+                startActivityForResult(intent, NEW_RAT);
 
             }
 
+        }
+        else {
+            if (requestCode == NEW_RAT) {
+                Toast.makeText(getActivity().getApplicationContext(), " Comment inserted fine !!! ", Toast.LENGTH_SHORT).show();
+                getActivity().finish();
+            }
         }
     }
 
@@ -127,7 +132,7 @@ import static android.app.Activity.RESULT_OK;
 
             try {
                 GestionBBDD baseDatos = new GestionBBDD(); // conecta con servidor SQL
-                comentarios= baseDatos.verComentarios(idCafeteria); // obtiene comentarios por cafetería
+                comentarios = baseDatos.verComentarios(idCafeteria); // obtiene comentarios por cafetería
             } catch (SQLException se) {
                 System.out.println("oops! No se puede conectar. Error: " + se.toString());
 
@@ -140,10 +145,10 @@ import static android.app.Activity.RESULT_OK;
         protected void onPostExecute(String result) {
 
 
-            if (comentarios.size()==0){
-               comentarios.add(new Valoracion(0,"No hay Comentarios todavia para esta cafeteria","",null,null,null));
+            if (comentarios.size() == 0) {
+                comentarios.add(new Valoracion(0, "No hay Comentarios todavia para esta cafeteria", "", null, null, null));
             }
-            MyAdapter adapter = new MyAdapter(getActivity(), comentarios,"comment",0);
+            MyAdapter adapter = new MyAdapter(getActivity(), comentarios, "comment", 0);
             comments.setAdapter(adapter);
             // carga de solo array list
 

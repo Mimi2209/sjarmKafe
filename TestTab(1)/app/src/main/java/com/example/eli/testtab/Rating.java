@@ -27,7 +27,7 @@ import static android.app.Activity.RESULT_OK;
 
 public class Rating extends Fragment {
 
-    final int USER_REQUEST=1, NEW_RAT =2;
+    final int USER_REQUEST = 1, NEW_RAT = 2;
     GlobalState gs;
     int idCafeteria;
     String resultat;
@@ -78,7 +78,7 @@ public class Rating extends Fragment {
 
                 Intent intent = new Intent(getActivity(),
                         UsuarioActivity.class);
-                startActivityForResult(intent,USER_REQUEST);
+                startActivityForResult(intent, USER_REQUEST);
 
             }
         });
@@ -91,18 +91,21 @@ public class Rating extends Fragment {
         if (requestCode == USER_REQUEST) {
             // Make sure the request was successful
             if (resultCode == RESULT_OK) {
-      //          String returnValue = data.getStringExtra("user");//no deberiamos pasar el usuario que la crea?
-                Toast.makeText(getActivity(), "Hello " +gs.getNom_usr()+ "your id is :" +gs.getId_usr()
+                //          String returnValue = data.getStringExtra("user");//no deberiamos pasar el usuario que la crea?
+                Toast.makeText(getActivity(), "Hello " + gs.getNom_usr() + "your id is :" + gs.getId_usr()
                         , Toast.LENGTH_LONG).show();
 
                 Intent intent = new Intent(getActivity(),
                         NewRatingActivity.class);
-          //      intent.putExtra("user",returnValue);
-          //      intent.putExtra("cafe",idCafeteria);
-                startActivityForResult(intent,NEW_RAT);
+                startActivityForResult(intent, NEW_RAT);
 
             }
 
+        } else {
+            if (requestCode == NEW_RAT) {
+
+                getActivity().finish();
+            }
         }
     }
 
@@ -133,7 +136,7 @@ public class Rating extends Fragment {
         @Override
         protected void onPostExecute(String result) {
 
-            if (valoraciones !=null){
+            if (valoraciones != null) {
                 ratLimpieza.setRating(valoraciones.getLimpieza());
                 ratRapidez.setRating(valoraciones.getRapidez_servicio());
                 ratTrato.setRating(valoraciones.getTrato());

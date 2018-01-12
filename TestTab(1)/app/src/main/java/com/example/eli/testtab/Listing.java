@@ -34,47 +34,13 @@ public class Listing extends Fragment {
     int mNum;
     ListView cafes;
     ArrayList<Cafeteria> misCafeterias = new ArrayList<Cafeteria>();
+    ArrayList<Cafeteria> misCafeteriasBak = new ArrayList<Cafeteria>();
     String resultat;
     GlobalState gs;
     String sql;
     boolean sql_search;
-
-  //  static Listing newInstance(int num) {
-  //      Listing l = new Listing();
-
-        // Supply num input as an argument.
-    //    Bundle args = new Bundle();
-    //    args.putInt("num", num);
-    //    l.setArguments(args);
-
-      //  return l;
-   // }
-
-//    @Override
- //   public void onCreate(Bundle savedInstanceState) {
-  //      super.onCreate(savedInstanceState);
-  //      mNum = getArguments() != null ? getArguments().getInt("num") : 1;
-  //  }
-
-//----------------------------------------------------------------------------
-
-
-    @Override
-    public void onStart() {
-        super.onStart();
-        if (this.isVisible()) {
-            gs = (GlobalState) getActivity().getApplication();
-            sql = gs.getSql_search();
-            Toast.makeText(getActivity(), sql, Toast.LENGTH_SHORT).show();
-
-            Descarga_listing nuevaDescarga_listing = new Descarga_listing();
-            if (sql.length() > 10) {
-                sql_search = true;
-            }
-            nuevaDescarga_listing.execute(sql);
-        }
-    }
-//-------------------------------------------------------------------------
+    MyAdapter adapter;
+ //-------------------------------------------------------------------------
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -84,8 +50,10 @@ public class Listing extends Fragment {
     @Override
     public void onActivityCreated(Bundle state) {
         super.onActivityCreated(state);
-
+        gs = (GlobalState) getActivity().getApplication();
         cafes = (ListView) getView().findViewById(R.id.cafeteria_list);
+        Descarga_listing nuevaDescarga_listing = new Descarga_listing();
+        nuevaDescarga_listing.execute();
 
     }
 
@@ -122,9 +90,15 @@ public class Listing extends Fragment {
         protected void onPostExecute(String result) {
             //      Cafeteria[] cafeterias = misCafeterias.toArray(new Cafeteria[misCafeterias.size()]);
             //      MyAdapter adapter = new MyAdapter(getActivity(), cafeterias,"cafe");
-            if (misCafeterias.size() == 0) {
-                Bitmap foto = Bitmap.createBitmap(1, 1, Bitmap.Config.ARGB_8888);
-                misCafeterias.add(new Cafeteria("ERROR CONEXION a BBDD", "", "", 1, 1, 1, true, false, true, true, false, false, "17", true, 4, foto));
+            if (misCafeterias.size() == 0 || misCafeterias==null) {
+                if(misCafeteriasBak.size()> 1){
+                    misCafeterias=misCafeteriasBak;
+                }else {
+                    Bitmap foto = Bitmap.createBitmap(1, 1, Bitmap.Config.ARGB_8888);
+                    misCafeterias.add(new Cafeteria("ERROR CONEXION a BBDD, vuelva a intentarlo mas tarde", "", "", 1, 1, 1, true, false, true, true, false, false, "17", true, 4, foto));
+                }
+                }else {
+                misCafeteriasBak = misCafeterias;
             }
             MyAdapter adapter = new MyAdapter(getActivity(), misCafeterias, "cafe", "");
             cafes.setAdapter(adapter);

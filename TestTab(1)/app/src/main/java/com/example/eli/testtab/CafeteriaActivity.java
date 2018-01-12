@@ -58,10 +58,9 @@ public class CafeteriaActivity extends AppCompatActivity {
         mViewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
         tabLayout.addOnTabSelectedListener(new TabLayout.ViewPagerOnTabSelectedListener(mViewPager));
         ImageView image = (ImageView) findViewById(R.id.pic_cafeteria);
-        gs = (GlobalState) getApplication();
-        idCafeteria=gs.getId_cafeteria();
-        pict_cafeteria=gs.getPict_cafeteria();
-        image.setImageBitmap(pict_cafeteria);
+          //     idCafeteria=gs.getId_cafeteria();
+   //     pict_cafeteria=gs.getPict_cafeteria();
+    //    image.setImageBitmap(pict_cafeteria);
     }
 
 
@@ -122,6 +121,7 @@ public class CafeteriaActivity extends AppCompatActivity {
             View rootView = inflater.inflate(R.layout.fragment_main, container, false);
             TextView textView = (TextView) rootView.findViewById(R.id.section_label);
             textView.setText(getString(R.string.section_format, getArguments().getInt(ARG_SECTION_NUMBER)));
+            gs = (GlobalState) getActivity().getApplication();
             idCafeteria=gs.getId_cafeteria();
             pict_cafeteria=gs.getPict_cafeteria();
             ImageView image = (ImageView) rootView.findViewById(R.id.pic_cafeteria);
