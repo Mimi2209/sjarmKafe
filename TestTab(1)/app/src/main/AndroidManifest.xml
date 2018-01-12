@@ -54,7 +54,12 @@
             android:name=".NewRatingActivity"
             android:label="@string/title_activity_new_rating"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".NewEventActivity"></activity>
+        <activity android:name=".NewEventActivity"
+            android:label="@string/title_activity_new_rating"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".ListingActivity"
+            android:label="@string/title_activity_new_rating"
+            android:theme="@style/AppTheme.NoActionBar" />
     </application>
 
 </manifest>

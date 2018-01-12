@@ -1,4 +1,5 @@
 package com.example.eli.testtab;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
@@ -16,6 +17,7 @@ import android.widget.SeekBar;
  */
 
 public class Search extends Fragment {
+    final int LISTING = 1;
     CheckBox terraza, mesas, wifi, shop, comida, xPress, perros;
     RatingBar ratGlobal;
     SeekBar distancia;
@@ -60,7 +62,10 @@ public class Search extends Fragment {
                 //  Toast.makeText(getActivity(), sql_select, Toast.LENGTH_SHORT).show();
                 gs.setSql_search(compone_sql());
                 ratGlobal.setRating(0);
-                jumpTo.performClick();  //activo listin
+                Intent i = new Intent(getActivity(), ListingActivity.class);
+                startActivity(i);
+
+     //          jumpTo.performClick();  //activo listin
 
 
             }

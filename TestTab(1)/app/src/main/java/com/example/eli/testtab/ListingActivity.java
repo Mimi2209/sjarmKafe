@@ -1,36 +1,22 @@
 package com.example.eli.testtab;
 
-import android.app.Activity;
+import android.content.Context;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
+import android.support.v7.app.AppCompatActivity;
 import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import java.sql.Array;
-import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Iterator;
-import java.util.List;
-import java.util.ListIterator;
 
 /**
- * Created by Eli on 27/12/2017.
+ * Created by Eli on 12/01/2018.
  */
 
-
-public class Listing extends Fragment {
+public class ListingActivity extends AppCompatActivity {
     ListView cafes;
     ArrayList<Cafeteria> misCafeterias = new ArrayList<Cafeteria>();
     ArrayList<Cafeteria> misCafeteriasBak = new ArrayList<Cafeteria>();
@@ -39,29 +25,25 @@ public class Listing extends Fragment {
     String sql;
     boolean sql_search;
     MyAdapter adapter;
- //-------------------------------------------------------------------------
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.listing, container, false);
-    }
+    Context c;
 
     @Override
-    public void onActivityCreated(Bundle state) {
-        super.onActivityCreated(state);
-        gs = (GlobalState) getActivity().getApplication();
-        cafes = (ListView) getView().findViewById(R.id.cafeteria_list);
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_listing);
+        gs = (GlobalState) getApplication();
+        cafes = (ListView) findViewById(R.id.cafeteria_list);
         Descarga_listing nuevaDescarga_listing = new Descarga_listing();
-        nuevaDescarga_listing.execute();
+        nuevaDescarga_listing.execute(gs.getSql_search());
+        c= getBaseContext();
 
     }
-
     //---------------------------------------------------------------------------
     public class Descarga_listing extends AsyncTask<String, Integer, String> {
 
         @Override
         protected void onPreExecute() {
-            Toast.makeText(getActivity(), "Loading, please wait", Toast.LENGTH_SHORT).show();
+     //       Toast.makeText(c, "Loading, please wait", Toast.LENGTH_SHORT).show();
 
         }
 
@@ -70,8 +52,8 @@ public class Listing extends Fragment {
 
             try {
                 GestionBBDD baseDatos = new GestionBBDD(); // conecta con servidor SQL
-
-                    misCafeterias = baseDatos.verListCafeterias(gs.getLatitut(), gs.getLongitut()); // obtiene cafeteria
+                    misCafeterias = baseDatos.verListCafeterias(urls[0]);
+                    gs.setSql_search("");
 
 
             } catch (SQLException se) {
@@ -84,24 +66,23 @@ public class Listing extends Fragment {
 
         @Override
         protected void onPostExecute(String result) {
-             if (misCafeterias.size() == 0 || misCafeterias==null) {
+            //      Cafeteria[] cafeterias = misCafeterias.toArray(new Cafeteria[misCafeterias.size()]);
+            //      MyAdapter adapter = new MyAdapter(getActivity(), cafeterias,"cafe");
+            if (misCafeterias.size() == 0 || misCafeterias==null) {
                 if(misCafeteriasBak.size()> 1){
                     misCafeterias=misCafeteriasBak;
                 }else {
                     Bitmap foto = Bitmap.createBitmap(1, 1, Bitmap.Config.ARGB_8888);
                     misCafeterias.add(new Cafeteria("ERROR CONEXION a BBDD, vuelva a intentarlo mas tarde", "", "", 1, 1, 1, true, false, true, true, false, false, "17", true, 4, foto));
                 }
-                }else {
+            }else {
                 misCafeteriasBak = misCafeterias;
             }
-            adapter = new MyAdapter(getActivity(), misCafeterias, "cafe", "");
-            cafes.setAdapter(adapter);
+             adapter = new MyAdapter(c, misCafeterias, "cafe", "");
+             cafes.setAdapter(adapter);
             // carga de solo array list
 
-            Toast.makeText(getActivity(), sql, Toast.LENGTH_SHORT).show();
+            Toast.makeText(c, sql, Toast.LENGTH_SHORT).show();
         }
     }
-
 }
-
-
