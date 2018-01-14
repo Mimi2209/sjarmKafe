@@ -18,13 +18,16 @@
             <ImageView
                 android:src="@drawable/tacita"
                 android:layout_width="match_parent"
-                android:layout_height="195dp" />
+                android:layout_height="195dp" android:contentDescription="@string/todo" />
 
 
         <android.support.design.widget.TabLayout
             android:id="@+id/tabs"
+            style="@style/Widget.Design.TabLayout"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:persistentDrawingCache="animation|scrolling"
+            app:tabIndicatorHeight="10dp">
 
             <android.support.design.widget.TabItem
                 android:id="@+id/tabItem"
