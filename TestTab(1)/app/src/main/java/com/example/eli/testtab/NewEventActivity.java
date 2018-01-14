@@ -51,11 +51,13 @@ public class NewEventActivity extends AppCompatActivity {
         eName = (EditText) findViewById(R.id.event_name);
         eDesc = (EditText) findViewById(R.id.event_description);
         eLocation = (EditText) findViewById(R.id.event_location);
+
         eDateF = (DatePicker) findViewById(R.id.fecha_in);
         eTimeF = (TimePicker) findViewById(R.id.hora_in);
         eDateT = (DatePicker) findViewById(R.id.fecha_fin);
         eTimeT = (TimePicker) findViewById(R.id.hora_fin);
         add = (FloatingActionButton) findViewById(R.id.insertEvent);
+
         add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) { // grabar
