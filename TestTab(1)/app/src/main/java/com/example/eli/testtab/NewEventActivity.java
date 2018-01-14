@@ -28,8 +28,8 @@ public class NewEventActivity extends AppCompatActivity {
     RatingBar ratGlobal;
     TextView tNameCafe;
     EditText eName, eDesc, eLocation;
-    DatePicker eDate;
-    TimePicker eTime;
+    DatePicker eDateF,eDateT ;
+    TimePicker eTimeF,eTimeT;
     FloatingActionButton add;
     Evento miEvento;
     @Override
@@ -51,9 +51,13 @@ public class NewEventActivity extends AppCompatActivity {
         eName = (EditText) findViewById(R.id.event_name);
         eDesc = (EditText) findViewById(R.id.event_description);
         eLocation = (EditText) findViewById(R.id.event_location);
-        eDate = (DatePicker) findViewById(R.id.fecha_in);
-        eTime = (TimePicker) findViewById(R.id.hora_in);
-        add = (FloatingActionButton) findViewById(R.id.addValoracion);
+
+        eDateF = (DatePicker) findViewById(R.id.fecha_in);
+        eTimeF = (TimePicker) findViewById(R.id.hora_in);
+        eDateT = (DatePicker) findViewById(R.id.fecha_fin);
+        eTimeT = (TimePicker) findViewById(R.id.hora_fin);
+        add = (FloatingActionButton) findViewById(R.id.insertEvent);
+
         add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) { // grabar
@@ -84,12 +88,12 @@ public class NewEventActivity extends AppCompatActivity {
 
 
 
-                String when = "From : "+String.valueOf(eDate.getDayOfMonth())+ "-"+String.valueOf(eDate.getMonth())+ "-"+String.valueOf(eDate.getYear())
-                +" at "+ String.valueOf(eTime.getCurrentHour())+":"+ String.valueOf(eTime.getCurrentMinute());
+                String when = "From : "+String.valueOf(eDateF.getDayOfMonth())+ "-"+String.valueOf(eDateF.getMonth())+ "-"+String.valueOf(eDateF.getYear())
+                +" at "+ String.valueOf(eTimeF.getCurrentHour())+":"+ String.valueOf(eTimeF.getCurrentMinute());
 
-                String to =  " to : " +String.valueOf(eDate.getDayOfMonth())+ "-"+String.valueOf(eDate.getMonth())+ "-"+String.valueOf(eDate.getYear())
-                        +" at "+ String.valueOf(eTime.getCurrentHour())+":"+ String.valueOf(eTime.getCurrentMinute()) ;
-                miEvento = new Evento(idUsuario,idCafeteria,eName.getText().toString(),eDesc.getText().toString(),eLocation.getText().toString(),when,to);
+                String to =  " to : " +String.valueOf(eDateT.getDayOfMonth())+ "-"+String.valueOf(eDateT.getMonth())+ "-"+String.valueOf(eDateT.getYear())
+                        +" at "+ String.valueOf(eTimeT.getCurrentHour())+":"+ String.valueOf(eTimeT.getCurrentMinute()) ;
+                miEvento = new Evento(idCafeteria,idUsuario,eName.getText().toString(),eDesc.getText().toString(),eLocation.getText().toString(),when,to);
 
                 baseDatos.insertEvento(miEvento); // obtiene valoracion
 
@@ -107,7 +111,7 @@ public class NewEventActivity extends AppCompatActivity {
 
             Toast.makeText(getApplicationContext(), " Evento Added fine !! ", Toast.LENGTH_SHORT).show();
 
-
+            finish();
         }
     }
 }
