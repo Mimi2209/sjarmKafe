@@ -98,10 +98,10 @@
 
             </LinearLayout>
 
+
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
                 android:orientation="vertical">
 
                 <TextView
@@ -115,25 +115,35 @@
 
                 <DatePicker
                     android:id="@+id/fecha_in"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="250dp"
+                    android:layout_height="150dp"
+                    android:layout_gravity="center_horizontal"
+                    android:animateLayoutChanges="true"
+                    android:calendarViewShown="?android:attr/windowSwipeToDismiss"
                     android:datePickerMode="spinner"
                     android:firstDayOfWeek="2"
+                    android:fitsSystemWindows="false"
+                    android:focusedByDefault="false"
+                    android:forceHasOverlappingRendering="false"
+                    android:isScrollContainer="false"
                     android:layoutMode="opticalBounds"
                     tools:targetApi="lollipop" />
 
                 <TimePicker
                     android:id="@+id/hora_in"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-
+                    android:layout_height="150dp"
+                    android:layout_gravity="center_vertical|center_horizontal"
+                    android:layoutMode="clipBounds"
+                    android:timePickerMode="spinner"
+                    tools:targetApi="lollipop" />
 
             </LinearLayout>
+
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
                 android:orientation="vertical">
 
                 <TextView
@@ -146,19 +156,31 @@
 
                 <DatePicker
                     android:id="@+id/fecha_fin"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="250dp"
+                    android:layout_height="150dp"
+                    android:layout_gravity="center_horizontal"
+                    android:animateLayoutChanges="true"
+                    android:calendarViewShown="?android:attr/windowSwipeToDismiss"
                     android:datePickerMode="spinner"
                     android:firstDayOfWeek="2"
+                    android:fitsSystemWindows="false"
+                    android:focusedByDefault="false"
+                    android:forceHasOverlappingRendering="false"
+                    android:isScrollContainer="false"
                     android:layoutMode="opticalBounds"
                     tools:targetApi="lollipop" />
 
                 <TimePicker
                     android:id="@+id/hora_fin"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="150dp"
+                    android:layout_gravity="center_vertical|center_horizontal"
+                    android:layoutMode="clipBounds"
+                    android:timePickerMode="spinner"
+                    tools:targetApi="lollipop" />
 
             </LinearLayout>
+
         </LinearLayout>
     </ScrollView>
 
