@@ -12,7 +12,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 
 /**
@@ -505,10 +507,16 @@ public class GestionBBDD {
         String query = "SELECT * FROM u125322db1.usuario  where email = '" + email + "' and pwd ='" + pwd + "';";
         Statement stmt = null;
         Usuario miUsuario = null;
+        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy' 'HH:mm:ss");
+        String formattedDate = sdf.format(Calendar.getInstance().getTime());
         try {
             stmt = con.createStatement();
+            PreparedStatement st = con.prepareStatement("UPDATE `u125322db1`.`usuario` SET ultima_conexion=? WHERE id_usuario=?;") ;
+                    stmt = con.createStatement();
+
+
             ResultSet rs = stmt.executeQuery(query);
-            int id_usr;
+            int id_usr=0;
             String nom;
             String password;
             String uconexion;
@@ -526,9 +534,12 @@ public class GestionBBDD {
                 BitmapFactory.Options options = new BitmapFactory.Options();
                 bitmap = BitmapFactory.decodeByteArray(image, 0, image.length, options); //Convert bytearray to bitmap
                 miUsuario=new Usuario(id_usr,nom,password,uconexion,uemail,bitmap);}
-
+            st.setString(1, formattedDate);
+            st.setInt(2, id_usr);
+            st.executeUpdate();  // update
             rs.close();
             stmt.close();
+            st.close();
         } catch (SQLException se) {
             System.out.println("oops! No se puede conectar. Error: " + se.toString());
 
@@ -565,6 +576,7 @@ public class GestionBBDD {
             rs.close();
             stmt.close();
         } catch (SQLException se) {
+            
             System.out.println("oops! No se puede conectar. Error: " + se.toString());
 
         } finally {
