@@ -36,23 +36,21 @@ public class ListingActivity extends AppCompatActivity {
         Descarga_listing nuevaDescarga_listing = new Descarga_listing();
         nuevaDescarga_listing.execute(gs.getSql_search());
         c= getBaseContext();
-
+        Toast.makeText(c, "Searching,  please wait, filtering by criteria and distance "+gs.getDistancia_search()+" km", Toast.LENGTH_SHORT).show();
     }
     //---------------------------------------------------------------------------
     public class Descarga_listing extends AsyncTask<String, Integer, String> {
 
         @Override
         protected void onPreExecute() {
-     //       Toast.makeText(c, "Loading, please wait", Toast.LENGTH_SHORT).show();
-
-        }
+            }
 
         @Override
         protected String doInBackground(String... urls) {
 
             try {
                 GestionBBDD baseDatos = new GestionBBDD(); // conecta con servidor SQL
-                    misCafeterias = baseDatos.verListCafeterias(urls[0]);
+                    misCafeterias = baseDatos.verListCafeterias(urls[0],gs.getDistancia_search(),gs.getLongitut(),gs.getLatitut());
                     gs.setSql_search("");
 
 
@@ -73,7 +71,7 @@ public class ListingActivity extends AppCompatActivity {
                     misCafeterias=misCafeteriasBak;
                 }else {
                     Bitmap foto = Bitmap.createBitmap(1, 1, Bitmap.Config.ARGB_8888);
-                    misCafeterias.add(new Cafeteria("ERROR CONEXION a BBDD, vuelva a intentarlo mas tarde", "", "", 1, 1, 1, true, false, true, true, false, false, "17", true, 4, foto));
+                    misCafeterias.add(new Cafeteria("Not found according search criteria", "", "", 1, 1, 1, true, false, true, true, false, false, "17", true, 4, foto));
                 }
             }else {
                 misCafeteriasBak = misCafeterias;
@@ -81,8 +79,6 @@ public class ListingActivity extends AppCompatActivity {
              adapter = new MyAdapter(c, misCafeterias, "cafe", "");
              cafes.setAdapter(adapter);
             // carga de solo array list
-
-            Toast.makeText(c, sql, Toast.LENGTH_SHORT).show();
         }
     }
 }

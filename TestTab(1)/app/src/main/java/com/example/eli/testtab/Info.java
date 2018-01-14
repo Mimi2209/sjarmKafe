@@ -54,7 +54,6 @@ import java.sql.SQLException;
         super.onActivityCreated(state);
         gs = (GlobalState) getActivity().getApplication();
         idCafeteria = gs.getId_cafeteria();
-        Toast.makeText(getActivity().getApplicationContext(), " lat/long "+gs.getLatitut()+"/"+gs.getLongitut(), Toast.LENGTH_SHORT).show();
         tNameCafe = (TextView) getView().findViewById(R.id.cafe);
         tAddress = (TextView) getView().findViewById(R.id.cafe_address);
         tHorario = (TextView) getView().findViewById(R.id.horario);

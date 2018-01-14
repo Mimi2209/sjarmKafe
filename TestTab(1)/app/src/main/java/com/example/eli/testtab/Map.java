@@ -269,7 +269,7 @@ public class Descarga extends AsyncTask<String, Integer, String> {
 
         try {
             GestionBBDD baseDatos = new GestionBBDD(); // conecta con servidor SQL
-            miLongLat= baseDatos.verListCafeterias(gs.getLongitut(),gs.getLatitut()); // obtiene cafeteria
+            miLongLat= baseDatos.verListCafeterias(); // obtiene cafeteria
         } catch (SQLException se) {
             System.out.println("oops! No se puede conectar. Error: " + se.toString());
 

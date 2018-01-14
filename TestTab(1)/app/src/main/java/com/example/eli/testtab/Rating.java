@@ -74,12 +74,15 @@ public class Rating extends Fragment {
         add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                Intent intent;
                 if (gs.getId_usr()>0) {  // Si el usuario ya se ha identificado, no lo vuelve a pedir
-                    Intent intent = new Intent(getActivity(),
+                    intent = new Intent(getActivity(),
+                            NewRatingActivity.class);
+                }else{
+                    intent = new Intent(getActivity(),
                             UsuarioActivity.class);
-                    startActivityForResult(intent, USER_REQUEST);
                 }
+                startActivityForResult(intent, USER_REQUEST);
             }
         });
 

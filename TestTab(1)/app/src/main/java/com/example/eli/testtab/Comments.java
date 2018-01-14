@@ -81,13 +81,18 @@ public class Comments extends Fragment {
             @Override
             public void onClick(View view) {
 
-                if (gs.getId_usr()>0) {  // Si el usuario ya se ha identificado, no lo vuelve a pedir
-                    Intent intent = new Intent(getActivity(),
+                Intent intent;
+                if (gs.getId_usr()>0 ) {  // Si el usuario ya se ha identificado, no lo vuelve a pedir
+                    intent = new Intent(getActivity(),
+                            NewRatingActivity.class);
+                }else{
+                    intent = new Intent(getActivity(),
                             UsuarioActivity.class);
-                    startActivityForResult(intent, USER_REQUEST);
                 }
+                startActivityForResult(intent, USER_REQUEST);
             }
         });
+
 
     }
 

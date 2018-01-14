@@ -26,6 +26,7 @@ public class GestionBBDD {
     private static String usuario = "u125322db1";
     private static String pass = "Proyecto2018";
     private Connection con;
+    GlobalState gs;
 
     public GestionBBDD() {
         try {
@@ -164,7 +165,7 @@ public class GestionBBDD {
     }
 
     // ------- Recupero lista  cafeterias por distancia (para Listing y para Map)
-    public ArrayList<Cafeteria> verListCafeterias(float longi, float ltg) throws SQLException {
+    public ArrayList<Cafeteria> verListCafeterias() throws SQLException {
 
         String query = "SELECT * FROM u125322db1.cafeteria ;";
         Statement stmt = null;
@@ -196,12 +197,12 @@ public class GestionBBDD {
                 image = rs.getBytes(17); // array de bytes
                 BitmapFactory.Options options = new BitmapFactory.Options();
                 bitmap = BitmapFactory.decodeByteArray(image, 0, image.length, options); //Convert bytearray to bitmap
-                // Calculo distancia y la guardo para ordenar por distancia
 
-                distancia = distance(longi, ltg, caf_long, caf_ltg);
-                 if(distancia<2.5) {
-                      listCafeterias.add(new Cafeteria(id_cafeteria, nom, address, descripcion, caf_long, caf_ltg, horario, valoracion, distancia, bitmap));
-                 }
+
+         //       distancia = distance(longi, ltg, caf_long, caf_ltg);
+         //        if(distancia<2.5) {
+               listCafeterias.add(new Cafeteria(id_cafeteria, nom, address, descripcion, caf_long, caf_ltg, horario, valoracion, distancia, bitmap));
+         //        }
             }
 
             rs.close();
@@ -215,9 +216,10 @@ public class GestionBBDD {
 
     }
     // ------- Recupero lista  cafeterias por distancia (para Listing y para Map)
-    public ArrayList<Cafeteria> verListCafeterias(String query) throws SQLException {
+    public ArrayList<Cafeteria> verListCafeterias(String query, int dist,float longi, float ltg) throws SQLException {
         Statement stmt = null;
         ArrayList<Cafeteria> listCafeterias = new ArrayList<>();
+
         try {
             stmt = con.createStatement();
             ResultSet rs = stmt.executeQuery(query);
@@ -247,10 +249,10 @@ public class GestionBBDD {
                 bitmap = BitmapFactory.decodeByteArray(image, 0, image.length, options); //Convert bytearray to bitmap
                 // Calculo distancia y la guardo para ordenar por distancia
 
-       //         distancia = distance(longi, ltg, caf_long, caf_ltg);
-                // if(distancia<2.5) {
+                distancia = distance(longi, ltg, caf_long, caf_ltg);
+       if( distancia<dist) { // solo si han indicado distancia
                 listCafeterias.add(new Cafeteria(id_cafeteria, nom, address, descripcion, caf_long, caf_ltg, horario, valoracion, distancia, bitmap));
-                // }
+        }
             }
 
             rs.close();

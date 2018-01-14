@@ -1,4 +1,5 @@
 package com.example.eli.testtab;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -11,6 +12,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.RatingBar;
 import android.widget.SeekBar;
+import android.widget.TextView;
 
 /**
  * Created by Eli on 27/12/2017.
@@ -21,6 +23,7 @@ public class Search extends Fragment {
     CheckBox terraza, mesas, wifi, shop, comida, xPress, perros;
     RatingBar ratGlobal;
     SeekBar distancia;
+    TextView valDist;
     Button jumpTo;
     FloatingActionButton fab;
     GlobalState gs;
@@ -48,29 +51,43 @@ public class Search extends Fragment {
         perros = (CheckBox) getView().findViewById(R.id.Dogs);
         ratGlobal = (RatingBar) getView().findViewById(R.id.rating);
         distancia = (SeekBar) getView().findViewById(R.id.seekDistancia);
-        jumpTo = (Button) getView().findViewById(R.id.lanza);
-
+        distancia.setProgress(20);
+        valDist = (TextView) getView().findViewById(R.id.valDistancia);
 
         fab = (FloatingActionButton) getActivity().findViewById(R.id.search_button);
 
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //searchCafe = new Cafeteria(mesas.isChecked(), terraza.isChecked(), wifi.isChecked(), comida.isChecked(), shop.isChecked(), perros.isChecked(), xPress.isChecked(), ratGlobal.getRating(), distancia.getProgress());
-// crear string select i passar-lo com a variable global.
 
-                //  Toast.makeText(getActivity(), sql_select, Toast.LENGTH_SHORT).show();
                 gs.setSql_search(compone_sql());
                 ratGlobal.setRating(0);
                 Intent i = new Intent(getActivity(), ListingActivity.class);
                 startActivity(i);
 
-     //          jumpTo.performClick();  //activo listin
+            }
+        });
+        distancia.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+                // TODO Auto-generated method stub
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+                // TODO Auto-generated method stub
+            }
 
 
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress,
+                                          boolean fromUser) {
+                // TODO Auto-generated method stub
+                valDist.setText(String.valueOf(progress)+" km");
             }
         });
     }
+
 
     //---------------------------------------------------------------------------
     public String compone_sql() {
@@ -146,12 +163,9 @@ public class Search extends Fragment {
             sql_string += "valoracion >= " + ratGlobal.getRating();
             chk_criterios++;
         }
- //  aplicar distancia 5 km max.
-        if (distancia.getProgress()>0){
-        int dist= 5* (distancia.getProgress())/100;
-            gs.setDistancia_search(dist);
-        }else{
-            gs.setDistancia_search(0);
+        //  aplicar distancia 5 km max.
+        if (distancia.getProgress() > 0) {
+            gs.setDistancia_search(distancia.getProgress());
         }
 
         sql_string += " ;";
