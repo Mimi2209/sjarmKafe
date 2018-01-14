@@ -23,6 +23,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_gravity="center"
+        android:layout_marginBottom="15dp"
         android:orientation="horizontal">
 
         <ImageView
@@ -36,15 +37,16 @@
 
         <LinearLayout
             android:id="@+id/periode"
-            android:layout_width="match_parent"
+            android:layout_width="191dp"
             android:layout_height="match_parent"
             android:layout_gravity="center"
+            android:layout_weight="2"
             android:orientation="vertical">
 
             <TextView
                 android:id="@+id/time_eventF"
                 style="@android:style/Widget.DeviceDefault.TextView"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_weight="2"
@@ -54,7 +56,7 @@
             <TextView
                 android:id="@+id/time_eventT"
                 style="@android:style/Widget.DeviceDefault.TextView"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_weight="2"
@@ -69,6 +71,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_gravity="center"
+        android:layout_marginBottom="15dp"
         android:orientation="horizontal"
         android:paddingEnd="15dp">
 
@@ -93,11 +96,33 @@
 
     </LinearLayout>
 
-    <TextView
-        android:id="@+id/event_descript"
+    <LinearLayout
+        android:id="@+id/des"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="textMultiLine" />
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:layout_marginBottom="15dp"
+        android:orientation="horizontal"
+        android:paddingEnd="15dp">
+
+        <ImageView
+            android:id="@+id/descipt"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_weight="1"
+            android:contentDescription="@string/todo"
+            android:scaleType="fitStart"
+            android:src="@android:drawable/ic_menu_edit" />
+
+        <TextView
+            android:id="@+id/event_descript"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:ems="10"
+            android:inputType="textMultiLine" />
+
+
+    </LinearLayout>
 
 </LinearLayout>

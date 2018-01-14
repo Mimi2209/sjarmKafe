@@ -51,8 +51,8 @@ public class NewEventActivity extends AppCompatActivity {
         eName = (EditText) findViewById(R.id.event_name);
         eDesc = (EditText) findViewById(R.id.event_description);
         eLocation = (EditText) findViewById(R.id.event_location);
-        eDate = (DatePicker) findViewById(R.id.fecha);
-        eTime = (TimePicker) findViewById(R.id.hora);
+        eDate = (DatePicker) findViewById(R.id.fecha_in);
+        eTime = (TimePicker) findViewById(R.id.hora_in);
         add = (FloatingActionButton) findViewById(R.id.addValoracion);
         add.setOnClickListener(new View.OnClickListener() {
             @Override

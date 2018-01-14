@@ -141,8 +141,8 @@ public class MyAdapter extends BaseAdapter {
                     TextView location = (TextView) elemento.findViewById(R.id.location);
                     TextView desevent = (TextView) elemento.findViewById(R.id.event_descript);
                     nevent.setText(eventos.get(position).getEvent_name());
-                    heventF.setText(eventos.get(position).getEvent_inicio());
-                    heventT.setText(eventos.get(position).getEvent_fin());
+                    heventF.setText("From: "+eventos.get(position).getEvent_inicio());
+                    heventT.setText("To: "+eventos.get(position).getEvent_fin());
                     location.setText(eventos.get(position).getEvent_location());
                     desevent.setText(eventos.get(position).getEvent_descrip());
                     break;
