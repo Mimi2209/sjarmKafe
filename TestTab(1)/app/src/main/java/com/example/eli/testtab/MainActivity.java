@@ -31,7 +31,9 @@ public class MainActivity extends AppCompatActivity {
      * loaded fragment in memory. If this becomes too memory intensive, it
      * may be best to switch to a
      * {@link android.support.v4.app.FragmentStatePagerAdapter}.
+     *
      */
+    GlobalState gs;
     private SectionsPagerAdapter mSectionsPagerAdapter;
 
     /**
@@ -43,6 +45,9 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        gs = (GlobalState) getApplication();
+        gs.setId_usr(0);
+        gs.setNom_usr("");
         // Create the adapter that will return a fragment for each of the three
         // primary sections of the activity.
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());

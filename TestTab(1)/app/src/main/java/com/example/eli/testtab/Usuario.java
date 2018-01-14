@@ -13,11 +13,11 @@ public class Usuario {
     int id_usuario;
     String nombre;
     String pwd;
-    Timestamp ultima_conexion;
+    String ultima_conexion;
     String e_mail;
     Bitmap foto;
 
-    public Usuario(String nombre, String pwd, Timestamp ultima_conexion, String e_mail, Bitmap foto) {
+    public Usuario(String nombre, String pwd, String ultima_conexion, String e_mail, Bitmap foto) {
         this.nombre = nombre;
         this.pwd = pwd;
         this.ultima_conexion = ultima_conexion;
@@ -25,7 +25,7 @@ public class Usuario {
         this.foto = foto;
     }
 
-    public Usuario(int id_usuario, String nombre, String pwd, Timestamp ultima_conexion, String e_mail, Bitmap foto) {
+    public Usuario(int id_usuario, String nombre, String pwd, String ultima_conexion, String e_mail, Bitmap foto) {
         this.id_usuario = id_usuario;
         this.nombre = nombre;
         this.pwd = pwd;
@@ -54,11 +54,11 @@ public class Usuario {
         this.pwd = pwd;
     }
 
-    public Timestamp getUltima_conexion() {
+    public String getUltima_conexion() {
         return ultima_conexion;
     }
 
-    public void setUltima_conexion(Timestamp ultima_conexion) {
+    public void setUltima_conexion(String ultima_conexion) {
         this.ultima_conexion = ultima_conexion;
     }
 

@@ -151,11 +151,12 @@ public class MyAdapter extends BaseAdapter {
                     TextView ncomment = (TextView) elemento.findViewById(R.id.comment);
                     TextView hcomment = (TextView) elemento.findViewById(R.id.horario);
                     TextView descomment = (TextView) elemento.findViewById(R.id.comment_descript);
-                    TextView nom_user = (TextView) elemento.findViewById(R.id.user);
+                    TextView nom_user = (TextView) elemento.findViewById(R.id.user_comment);
                     ImageView uimage = (ImageView) elemento.findViewById(R.id.user_image);
 
-                    //int Userid = comments.get(position).id_val_usuario;
-                    nom_user.setText(comments.get(position).getNom_usr());
+
+                  //  nom_user.setText(comments.get(position).getNom_usr());
+                    nom_user.setText("Nombre usr");
                     if (comments.get(position).getImg_usr()!=null) {
                         uimage.setImageBitmap(comments.get(position).getImg_usr());
                     }

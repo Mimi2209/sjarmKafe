@@ -19,6 +19,10 @@ import android.widget.Toast;
 
 import java.sql.SQLException;
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Locale;
+import java.util.TimeZone;
 
 public class NewUserActivity extends AppCompatActivity {
 
@@ -68,7 +72,8 @@ public class NewUserActivity extends AppCompatActivity {
         String Uname = newname.getText().toString();
         String Upass = newpass.getText().toString();
         String Uemail = newemail.getText().toString();
-        Timestamp timeStamp = new Timestamp(1);
+        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy' 'HH:mm:ss");
+        String formattedDate = sdf.format(Calendar.getInstance().getTime());
         Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.usericon); // eliminar cuando activemos camara
 
 
@@ -84,7 +89,7 @@ public class NewUserActivity extends AppCompatActivity {
             try {
                 GestionBBDD baseDatos = new GestionBBDD(); // conecta con servidor SQL
                 // Falta captura foto
-                miUser = new Usuario(Uname,Upass,timeStamp,Uemail,bitmap);
+                miUser = new Usuario(Uname,Upass,formattedDate,Uemail,bitmap);
                 id_usr=baseDatos.insertUsuario(miUser); // obtiene usuario
 
             } catch (SQLException se) {

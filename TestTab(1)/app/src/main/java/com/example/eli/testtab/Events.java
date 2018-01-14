@@ -29,7 +29,7 @@ import static android.app.Activity.RESULT_OK;
  */
 
     public class Events extends Fragment {
-    final int USER_REQUEST = 1, NEW_RAT = 2;
+    final int USER_REQUEST = 1, NEW_EVE = 2;
     int mNum;
     ListView events;
     Timestamp timeStamp = new Timestamp(1);
@@ -88,11 +88,13 @@ import static android.app.Activity.RESULT_OK;
                 if (gs.getId_usr()>0) {  // Si el usuario ya se ha identificado, no lo vuelve a pedir
                     intent = new Intent(getActivity(),
                             NewEventActivity.class);
+                    startActivityForResult(intent, NEW_EVE);
                 }else{
                     intent = new Intent(getActivity(),
                             UsuarioActivity.class);
+                    startActivityForResult(intent, USER_REQUEST);
                 }
-                startActivityForResult(intent, USER_REQUEST);
+
             }
         });
     }
@@ -108,12 +110,12 @@ import static android.app.Activity.RESULT_OK;
 
                 Intent intent = new Intent(getActivity(),
                         NewEventActivity.class);
-                startActivityForResult(intent, NEW_RAT);
+                startActivityForResult(intent, NEW_EVE);
 
             }
 
         } else {
-            if (requestCode == NEW_RAT) {
+            if (requestCode == NEW_EVE) {
 
                 getActivity().finish();
             }

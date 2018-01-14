@@ -13,7 +13,7 @@ public class GlobalState extends Application
     private String nom_cafeteria;
     private int rating_cafeteria;
     private Bitmap pict_cafeteria;
-    private int id_usr;
+    private int id_usr=0;
     private String nom_usr;
     private Bitmap pict_usr;
     private float latitut;

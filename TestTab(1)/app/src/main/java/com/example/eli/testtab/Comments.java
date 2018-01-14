@@ -85,11 +85,13 @@ public class Comments extends Fragment {
                 if (gs.getId_usr()>0 ) {  // Si el usuario ya se ha identificado, no lo vuelve a pedir
                     intent = new Intent(getActivity(),
                             NewRatingActivity.class);
+                    startActivityForResult(intent, NEW_RAT);
                 }else{
                     intent = new Intent(getActivity(),
                             UsuarioActivity.class);
+                    startActivityForResult(intent, USER_REQUEST);
                 }
-                startActivityForResult(intent, USER_REQUEST);
+
             }
         });
 
