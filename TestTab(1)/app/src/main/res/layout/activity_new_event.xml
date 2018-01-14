@@ -9,6 +9,22 @@
     tools:context="com.example.eli.testtab.NewEventActivity">
 
 
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/addValoracion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_gravity="bottom|end"
+        android:clickable="true"
+        android:elevation="4dp"
+        android:focusable="true"
+        android:src="@android:drawable/ic_menu_add"
+        app:layout_constraintBottom_toBottomOf="@+id/linea_nom"
+        app:layout_constraintEnd_toEndOf="@+id/scrollView3"
+        tools:targetApi="lollipop" />
+
     <ScrollView
         android:id="@+id/scrollView3"
         android:layout_width="match_parent"
@@ -20,9 +36,10 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
+
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_marginBottom="25dp"
                 android:background="?attr/actionBarItemBackground"
                 android:orientation="vertical">
@@ -88,31 +105,63 @@
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/fechadia"
+                    android:id="@+id/_in"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="20dp"
-                    android:text="@string/when"
+                    android:text="@string/starting"
                     android:textSize="18sp"
                     android:textStyle="bold" />
 
                 <DatePicker
-                    android:id="@+id/fecha"
+                    android:id="@+id/fecha_in"
                     android:layout_width="wrap_content"
-                    android:layout_height="250dp"
+                    android:layout_height="wrap_content"
                     android:datePickerMode="spinner"
                     android:firstDayOfWeek="2"
                     android:layoutMode="opticalBounds"
                     tools:targetApi="lollipop" />
 
                 <TimePicker
-                    android:id="@+id/hora"
+                    android:id="@+id/hora_in"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/fechadia"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/finishing"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <DatePicker
+                    android:id="@+id/fecha_fin"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:datePickerMode="spinner"
+                    android:firstDayOfWeek="2"
+                    android:layoutMode="opticalBounds"
+                    tools:targetApi="lollipop" />
+
+                <TimePicker
+                    android:id="@+id/hora_fin"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
 
             </LinearLayout>
         </LinearLayout>
     </ScrollView>
+
 
     <android.support.design.widget.AppBarLayout
         android:id="@+id/linea_foto"
@@ -173,5 +222,6 @@
 
 
     </LinearLayout>
+
 
 </android.support.constraint.ConstraintLayout>
