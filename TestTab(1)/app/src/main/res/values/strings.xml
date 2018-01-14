@@ -49,6 +49,12 @@
     <string name="add_your_comment_description">Add your comment description</string>
     <string name="commentTitle">Add your comment title</string>
     <string name="commentDescription">Add your comment description</string>
+    <string name="when">When?</string>
+    <string name="what">What?</string>
+    <string name="add_event_name">Add event name</string>
+    <string name="add_event_description">Add event description</string>
+    <string name="where">Where?</string>
+    <string name="add_event_location">Add event location</string>
 
 
 </resources>

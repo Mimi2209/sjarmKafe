@@ -4,9 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/TestTab(1).iml" filepath="$PROJECT_DIR$/TestTab(1).iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://C:\Users\miruc\Documents\GitHub\sjarmKafe\TestTab(1)\app\app.iml" filepath="C:\Users\miruc\Documents\GitHub\sjarmKafe\TestTab(1)\app\app.iml" />
       <module fileurl="file://$PROJECT_DIR$/mysql-connector-java-5.1.34-bin/mysql-connector-java-5.1.34-bin.iml" filepath="$PROJECT_DIR$/mysql-connector-java-5.1.34-bin/mysql-connector-java-5.1.34-bin.iml" />
-      <module fileurl="file://C:\Users\miruc\Documents\GitHub\sjarmKafe\TestTab(1)\mysql-connector-java-5.1.34-bin\mysql-connector-java-5.1.34-bin.iml" filepath="C:\Users\miruc\Documents\GitHub\sjarmKafe\TestTab(1)\mysql-connector-java-5.1.34-bin\mysql-connector-java-5.1.34-bin.iml" />
     </modules>
   </component>
 </project>
