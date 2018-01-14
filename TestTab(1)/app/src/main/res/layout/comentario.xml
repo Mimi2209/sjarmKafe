@@ -24,14 +24,14 @@
             android:src="@android:drawable/ic_menu_my_calendar" />
 
         <TextView
-            android:id="@+id/user"
+            android:id="@+id/user_comment"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|center"
             android:text="@string/user"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
             android:textColor="@color/colorPrimaryDark"
-            android:textSize="14sp"
+            android:textSize="8sp"
             android:textStyle="normal" />
     </LinearLayout>
 

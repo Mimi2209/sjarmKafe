@@ -88,11 +88,11 @@ public class NewEventActivity extends AppCompatActivity {
 
 
 
-                String when = "From : "+String.valueOf(eDateF.getDayOfMonth())+ "-"+String.valueOf(eDateF.getMonth())+ "-"+String.valueOf(eDateF.getYear())
-                +" at "+ String.valueOf(eTimeF.getCurrentHour())+":"+ String.valueOf(eTimeF.getCurrentMinute());
+                String when = String.valueOf(eDateF.getDayOfMonth())+ "-"+String.valueOf(eDateF.getMonth()+1)+ "-"+String.valueOf(eDateF.getYear())
+                + " "+String.valueOf(eTimeF.getCurrentHour())+":"+ String.valueOf(eTimeF.getCurrentMinute());
 
-                String to =  " to : " +String.valueOf(eDateT.getDayOfMonth())+ "-"+String.valueOf(eDateT.getMonth())+ "-"+String.valueOf(eDateT.getYear())
-                        +" at "+ String.valueOf(eTimeT.getCurrentHour())+":"+ String.valueOf(eTimeT.getCurrentMinute()) ;
+                String to =  String.valueOf(eDateT.getDayOfMonth())+ "-"+String.valueOf(eDateT.getMonth()+1)+ "-"+String.valueOf(eDateT.getYear())
+                       +" "+ String.valueOf(eTimeT.getCurrentHour())+":"+ String.valueOf(eTimeT.getCurrentMinute()) ;
                 miEvento = new Evento(idCafeteria,idUsuario,eName.getText().toString(),eDesc.getText().toString(),eLocation.getText().toString(),when,to);
 
                 baseDatos.insertEvento(miEvento); // obtiene valoracion

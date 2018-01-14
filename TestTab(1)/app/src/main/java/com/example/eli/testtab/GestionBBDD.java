@@ -50,7 +50,7 @@ public class GestionBBDD {
         stmt = con.createStatement();
         st.setString(1, miUsuario.getNombre());
         st.setString(2, miUsuario.getPwd());
-        st.setTimestamp(3, (Timestamp) miUsuario.getUltima_conexion());
+        st.setString(3, miUsuario.getUltima_conexion());
         st.setString(4, miUsuario.getE_mail());
         Bitmap bitmap = miUsuario.getFoto();
         ByteArrayOutputStream bos = new ByteArrayOutputStream();
@@ -511,7 +511,7 @@ public class GestionBBDD {
             int id_usr;
             String nom;
             String password;
-            Timestamp uconexion;
+            String uconexion;
             String uemail;
             byte[] image = null;
             Bitmap bitmap = null;
@@ -520,7 +520,7 @@ public class GestionBBDD {
                 id_usr = rs.getInt(1);
                 nom = rs.getString(2);
                 password = rs.getString(3);
-                uconexion = rs.getTimestamp(4);
+                uconexion = rs.getString(4);
                 uemail = rs.getString(5);
                 image = rs.getBytes(6); // array de bytes
                 BitmapFactory.Options options = new BitmapFactory.Options();
@@ -547,7 +547,7 @@ public class GestionBBDD {
             ResultSet rs = stmt.executeQuery(query);
             String nom;
             String password;
-            Timestamp uconexion;
+            String uconexion;
             String uemail;
             byte[] image = null;
             Bitmap bitmap = null;
@@ -555,7 +555,7 @@ public class GestionBBDD {
             while (rs.next()) {
                 nom = rs.getString(2);
                 password = rs.getString(3);
-                uconexion = rs.getTimestamp(4);
+                uconexion = rs.getString(4);
                 uemail = rs.getString(5);
                 image = rs.getBytes(6); // array de bytes
                 BitmapFactory.Options options = new BitmapFactory.Options();
@@ -583,7 +583,7 @@ public class GestionBBDD {
             ResultSet rs = stmt.executeQuery(query);
             String nom;
             String password;
-            Timestamp uconexion;
+            String uconexion;
             String uemail;
             byte[] image = null;
             Bitmap bitmap = null;
@@ -591,7 +591,7 @@ public class GestionBBDD {
             while (rs.next()) {
                 nom = rs.getString(2);
                 password = rs.getString(3);
-                uconexion = rs.getTimestamp(4);
+                uconexion = rs.getString(4);
                 uemail = rs.getString(5);
                 image = rs.getBytes(6); // array de bytes
                 BitmapFactory.Options options = new BitmapFactory.Options();
