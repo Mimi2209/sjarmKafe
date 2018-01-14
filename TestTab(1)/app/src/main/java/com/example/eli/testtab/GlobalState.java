@@ -9,7 +9,7 @@ import android.graphics.Bitmap;
 
 public class GlobalState extends Application
 {
-    private int id_cafeteria;
+    private int id_cafeteria=0;
     private String nom_cafeteria;
     private int rating_cafeteria;
     private Bitmap pict_cafeteria;
@@ -19,6 +19,7 @@ public class GlobalState extends Application
     private float latitut;
     private float longitut;
     private String sql_search="";
+    private int distancia_search=0;
 
     public int getId_cafeteria() {
         return id_cafeteria;
@@ -98,5 +99,13 @@ public class GlobalState extends Application
 
     public void setSql_search(String sql_search) {
         this.sql_search = sql_search;
+    }
+
+    public int getDistancia_search() {
+        return distancia_search;
+    }
+
+    public void setDistancia_search(int distancia_search) {
+        this.distancia_search = distancia_search;
     }
 }

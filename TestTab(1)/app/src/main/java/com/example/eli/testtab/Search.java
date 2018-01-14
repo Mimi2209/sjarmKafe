@@ -146,16 +146,14 @@ public class Search extends Fragment {
             sql_string += "valoracion >= " + ratGlobal.getRating();
             chk_criterios++;
         }
-// falta aplicar distancia
-        //if (distancia.getProgress()>0){
-        //    if (chk_criterios==0){
-        //        sql_string+=" Where ";
-        //    }else{
-        //        sql_string+=" and ";
-        //    }
-        //    sql_string+="valoracion >= "+ratGlobal.getNumStars();
-        //    chk_criterios++;
-        //}
+ //  aplicar distancia 5 km max.
+        if (distancia.getProgress()>0){
+        int dist= 5* (distancia.getProgress())/100;
+            gs.setDistancia_search(dist);
+        }else{
+            gs.setDistancia_search(0);
+        }
+
         sql_string += " ;";
         return sql_string;
 
