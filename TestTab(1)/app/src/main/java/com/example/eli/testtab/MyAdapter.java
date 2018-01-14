@@ -155,8 +155,8 @@ public class MyAdapter extends BaseAdapter {
                     ImageView uimage = (ImageView) elemento.findViewById(R.id.user_image);
 
 
-                  //  nom_user.setText(comments.get(position).getNom_usr());
-                    nom_user.setText("Nombre usr");
+                    nom_user.setText(comments.get(position).getNom_usr());
+                  
                     if (comments.get(position).getImg_usr()!=null) {
                         uimage.setImageBitmap(comments.get(position).getImg_usr());
                     }
