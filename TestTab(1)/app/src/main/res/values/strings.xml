@@ -55,6 +55,8 @@
     <string name="add_event_description">Add event description</string>
     <string name="where">Where?</string>
     <string name="add_event_location">Add event location</string>
+    <string name="starting">Starting?</string>
+    <string name="finishing">Finishing?</string>
 
 
 </resources>
