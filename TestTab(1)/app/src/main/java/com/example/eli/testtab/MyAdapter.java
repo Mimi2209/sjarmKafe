@@ -136,18 +136,13 @@ public class MyAdapter extends BaseAdapter {
                 case "event":
                     elemento = inflador.inflate(R.layout.event, parent, false);
                     TextView nevent = (TextView) elemento.findViewById(R.id.event);
-                    TextView hevent = (TextView) elemento.findViewById(R.id.time_event);
+                    TextView heventF = (TextView) elemento.findViewById(R.id.time_eventF);
+                    TextView heventT = (TextView) elemento.findViewById(R.id.time_eventT);
                     TextView location = (TextView) elemento.findViewById(R.id.location);
                     TextView desevent = (TextView) elemento.findViewById(R.id.event_descript);
                     nevent.setText(eventos.get(position).getEvent_name());
-                    Date inicio=eventos.get(position).getEvent_inicio();
-                    Date fin=eventos.get(position).getEvent_fin();
-                    Calendar cal=Calendar.getInstance();
-                    cal.setTime(inicio);
-                    Calendar cal1=Calendar.getInstance();
-                    cal1.setTime(fin);
-                    String showTime=String.format("%1$tI:%1$tM:%1$tS %1$Tp",cal)+"-"+String.format("%1$tI:%1$tM:%1$tS %1$Tp",cal1);
-                    hevent.setText(showTime);
+                    heventF.setText(eventos.get(position).getEvent_inicio());
+                    heventT.setText(eventos.get(position).getEvent_fin());
                     location.setText(eventos.get(position).getEvent_location());
                     desevent.setText(eventos.get(position).getEvent_descrip());
                     break;

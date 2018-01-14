@@ -16,10 +16,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 public class CafeteriaActivity extends AppCompatActivity {
-
     /**
      * The {@link android.support.v4.view.PagerAdapter} that will provide
      * fragments for each of the sections. We use a
@@ -42,25 +40,18 @@ public class CafeteriaActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.cafeteria_main);
-
-
-        //---------------------------------------------------------------------------
-       // Toast.makeText(getApplicationContext(), " Cafe "+idCafeteria, Toast.LENGTH_SHORT).show();
-             // primary sections of the activity.
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
-
         // Set up the ViewPager with the sections adapter.
         mViewPager = (ViewPager) findViewById(R.id.container);
         mViewPager.setAdapter(mSectionsPagerAdapter);
-
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
-
         mViewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
         tabLayout.addOnTabSelectedListener(new TabLayout.ViewPagerOnTabSelectedListener(mViewPager));
+        gs = (GlobalState) getApplication();
+        idCafeteria=gs.getId_cafeteria();
+        pict_cafeteria=gs.getPict_cafeteria();
         ImageView image = (ImageView) findViewById(R.id.pic_cafeteria);
-          //     idCafeteria=gs.getId_cafeteria();
-   //     pict_cafeteria=gs.getPict_cafeteria();
-    //    image.setImageBitmap(pict_cafeteria);
+        image.setImageBitmap(pict_cafeteria);
     }
 
 
@@ -86,9 +77,6 @@ public class CafeteriaActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
-
-
-
 
     /**
      * A placeholder fragment containing a simple view.

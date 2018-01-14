@@ -14,20 +14,20 @@ public class Evento {
     String event_name;
     String event_descrip;
     String event_location;
-    Timestamp event_inicio;
-    Timestamp event_fin;
-
-    public Evento(int id_evento_cafeteria, int id_evento_usuario, String event_name,
-                  String event_location, Timestamp event_inicio, Timestamp event_fin) {
+    String event_inicio;
+    String event_fin;
+// Para Insert
+    public Evento(int id_evento_cafeteria, int id_evento_usuario, String event_name, String event_descrip, String event_location, String event_inicio, String event_fin) {
         this.id_evento_cafeteria = id_evento_cafeteria;
         this.id_evento_usuario = id_evento_usuario;
         this.event_name = event_name;
+        this.event_descrip = event_descrip;
         this.event_location = event_location;
         this.event_inicio = event_inicio;
         this.event_fin = event_fin;
     }
-
-    public Evento(int id_evento_usuario, String event_name, String event_descrip, String event_location, Timestamp event_inicio, Timestamp event_fin) {
+// para Ver Evenros
+    public Evento(int id_evento_usuario, String event_name, String event_descrip, String event_location, String event_inicio, String event_fin) {
         this.id_evento_usuario = id_evento_usuario;
         this.event_name = event_name;
         this.event_descrip = event_descrip;
@@ -76,21 +76,6 @@ public class Evento {
         this.event_location = event_location;
     }
 
-    public Timestamp getEvent_inicio() {
-        return event_inicio;
-    }
-
-    public void setEvent_inicio(Timestamp event_inicio) {
-        this.event_inicio = event_inicio;
-    }
-
-    public Timestamp getEvent_fin() {
-        return event_fin;
-    }
-
-    public void setEvent_fin(Timestamp event_fin) {
-        this.event_fin = event_fin;
-    }
 
     public String getEvent_descrip() {
         return event_descrip;
@@ -98,6 +83,22 @@ public class Evento {
 
     public void setEvent_descrip(String event_descrip) {
         this.event_descrip = event_descrip;
+    }
+
+    public String getEvent_inicio() {
+        return event_inicio;
+    }
+
+    public void setEvent_inicio(String event_inicio) {
+        this.event_inicio = event_inicio;
+    }
+
+    public String getEvent_fin() {
+        return event_fin;
+    }
+
+    public void setEvent_fin(String event_fin) {
+        this.event_fin = event_fin;
     }
 }
 

@@ -69,7 +69,7 @@ public class NewUserActivity extends AppCompatActivity {
         String Upass = newpass.getText().toString();
         String Uemail = newemail.getText().toString();
         Timestamp timeStamp = new Timestamp(1);
-        Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.tacita); // eliminar cuando activemos camara
+        Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.usericon); // eliminar cuando activemos camara
 
 
         @Override
@@ -102,7 +102,7 @@ public class NewUserActivity extends AppCompatActivity {
             newname.setText(null);
             newpass.setText(null);
             newemail.setText(null);
-            Toast.makeText(getApplicationContext(), " USUARIO CON ID "+ id_usr+ " INSERTADO CORRECTAMENTE !! ", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), " USER WITH ID "+ id_usr+ " ADDED FINE !! ", Toast.LENGTH_SHORT).show();
             gs.setId_usr(id_usr);
             gs.setNom_usr(Uname);
             Intent resultIntent = new Intent();

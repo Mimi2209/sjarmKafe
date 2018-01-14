@@ -84,12 +84,15 @@ import static android.app.Activity.RESULT_OK;
         add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-
-                Intent intent = new Intent(getActivity(),
-                        UsuarioActivity.class);
+                Intent intent;
+                if (gs.getId_usr()>0) {  // Si el usuario ya se ha identificado, no lo vuelve a pedir
+                    intent = new Intent(getActivity(),
+                            NewEventActivity.class);
+                }else{
+                    intent = new Intent(getActivity(),
+                            UsuarioActivity.class);
+                }
                 startActivityForResult(intent, USER_REQUEST);
-
             }
         });
     }
@@ -100,7 +103,7 @@ import static android.app.Activity.RESULT_OK;
             // Make sure the request was successful
             if (resultCode == RESULT_OK) {
                 //          String returnValue = data.getStringExtra("user");//no deberiamos pasar el usuario que la crea?
-                Toast.makeText(getActivity(), "Hello " + gs.getNom_usr() + "your id is :" + gs.getId_usr()
+                Toast.makeText(getActivity(), "Hello " + gs.getNom_usr() + " your id is :" + gs.getId_usr()
                         , Toast.LENGTH_LONG).show();
 
                 Intent intent = new Intent(getActivity(),
@@ -144,7 +147,7 @@ import static android.app.Activity.RESULT_OK;
             //      MyAdapter adapter = new MyAdapter(getActivity(), cafeterias,"cafe");
             Bitmap foto = Bitmap.createBitmap(1,1, Bitmap.Config.ARGB_8888);
             if(eventos.size()==0) {
-                eventos.add(new Evento(1, "NO HAY EVENTOS CREADOS PARA ESTA CAFETERIA", "", "", timeStamp, timeStamp));
+                eventos.add(new Evento( 0,0, "NO HAY EVENTOS CREADOS PARA ESTA CAFETERIA", "", "", "",""));
             }
                 MyAdapter adapter = new MyAdapter(getActivity(), eventos, "event");
                 events.setAdapter(adapter);

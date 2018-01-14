@@ -1,9 +1,11 @@
 package com.example.eli.testtab;
 
+import android.content.Context;
 import android.support.design.widget.TabLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
@@ -19,9 +21,9 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
-
     /**
      * The {@link android.support.v4.view.PagerAdapter} that will provide
      * fragments for each of the sections. We use a
@@ -41,7 +43,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         // Create the adapter that will return a fragment for each of the three
         // primary sections of the activity.
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
@@ -77,26 +78,6 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
-    }
-
-    public boolean JumpToPage(View view) {
-   //     Fragment mFragment = new Listing();
-   //     getSupportFragmentManager().beginTransaction().replace(R.id.container, mFragment, "fragment").setTransitionStyle(FragmentTransaction.TRANSIT_FRAGMENT_FADE).commit();
-   //     getSupportFragmentManager().beginTransaction().replace(R.id.container, mFragment).commit();
-   //----------------------------------------------------------------------------------
-   //     FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-  //      ft.replace(R.id.container, new Listing(),"Listing")
-  //              .addToBackStack("Listing").commit();
-   //   Fragment frg = null;
-   //          frg = getSupportFragmentManager().findFragmentByTag("Listing");
-
-     //   FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-    //    ft.detach(frg);
-    //    ft.attach(frg);
-    //    ft.addToBackStack("Listing");
-    //    ft.commit();
-        mViewPager.setCurrentItem(1);
-        return true;
     }
 
     /**
@@ -146,18 +127,18 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         public Fragment getItem(int position) {
-            switch (position){
+            switch (position) {
                 case 0:
-                    Map map= new Map();
+                    Map map = new Map();
                     return map;
                 case 1:
-                    Listing listing= new Listing();
+                    Listing listing = new Listing();
                     return listing;
                 case 2:
-                    Search search= new Search();
+                    Search search = new Search();
                     return search;
                 case 3:
-                    Add add= new Add();
+                    Add add = new Add();
                     return add;
 
             }

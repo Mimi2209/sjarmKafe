@@ -48,7 +48,6 @@ public class Listing extends Fragment {
 
         @Override
         protected void onPreExecute() {
-            Toast.makeText(getActivity(), "Loading, please wait", Toast.LENGTH_SHORT).show();
 
         }
 

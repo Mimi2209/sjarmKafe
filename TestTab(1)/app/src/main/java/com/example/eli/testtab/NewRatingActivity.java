@@ -10,6 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -57,8 +58,10 @@ public class NewRatingActivity extends AppCompatActivity {
         comment_des = (EditText) findViewById(R.id.comment_descript);
         tNameCafe.setText(gs.getNom_cafeteria());
         idCafeteria=gs.getId_cafeteria();
-        pict_cafeteria=gs.getPict_cafeteria();
         idUsuario=gs.getId_usr();
+        pict_cafeteria=gs.getPict_cafeteria();
+        ImageView image = (ImageView) findViewById(R.id.pic_cafeteria);
+        image.setImageBitmap(pict_cafeteria);
 
         add.setOnClickListener(new View.OnClickListener() {
             @Override

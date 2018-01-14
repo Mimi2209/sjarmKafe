@@ -417,8 +417,8 @@ public class GestionBBDD {
         st.setString(3, miEvento.getEvent_name());
         st.setString(4, miEvento.getEvent_descrip());
         st.setString(5, miEvento.getEvent_location());
-        st.setTimestamp(6, miEvento.getEvent_inicio());
-        st.setTimestamp(7, miEvento.getEvent_fin());
+        st.setString(6, miEvento.getEvent_inicio());
+        st.setString(7, miEvento.getEvent_fin());
 
         try {
             st.executeUpdate();
@@ -445,16 +445,16 @@ public class GestionBBDD {
             String evento_titulo;
             String evento_descripcion;
             String evento_locaclizacion;
-            Timestamp com_fecha_ini;
-            Timestamp com_fecha_fin;
+            String com_fecha_ini;
+            String com_fecha_fin;
 
             while (rs.next()) {
                 evento_usuario = rs.getInt(3);
                 evento_titulo = rs.getString(4);
                 evento_descripcion = rs.getString(5);
                 evento_locaclizacion = rs.getString(6);
-                com_fecha_ini = rs.getTimestamp(7);
-                com_fecha_fin = rs.getTimestamp(8);
+                com_fecha_ini = rs.getString(7);
+                com_fecha_fin = rs.getString(8);
 
                 eventos.add(new Evento(evento_usuario, evento_titulo, evento_descripcion, evento_locaclizacion, com_fecha_ini, com_fecha_fin));
             }
