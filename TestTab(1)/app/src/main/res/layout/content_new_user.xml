@@ -84,8 +84,11 @@
 
     <ImageButton
         android:id="@+id/foto"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="160dp"
+        android:layout_height="140dp"
+        android:layout_gravity="center_vertical|center_horizontal"
+        android:adjustViewBounds="true"
+        android:scaleType="fitXY"
         android:layout_below="@+id/psswordNU"
         android:contentDescription="@string/todo"
         android:paddingBottom="25dp"

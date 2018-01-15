@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -20,12 +21,15 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.IOException;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
 import java.util.TimeZone;
+
+import static com.example.eli.testtab.Add.GALLERY_REQUEST;
 
 public class NewUserActivity extends AppCompatActivity {
 
@@ -36,13 +40,14 @@ public class NewUserActivity extends AppCompatActivity {
     int id_usr;
     String resultat;
     GlobalState gs;
-    ImageView foto;
+    Bitmap bitmap;
     static final int REQUEST_IMAGE_CAPTURE = 1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_user);
         gs = (GlobalState) getApplication();
+        bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.usericon); // si no capturan foto
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -55,16 +60,16 @@ public class NewUserActivity extends AppCompatActivity {
         newemail= (EditText) findViewById(R.id.emailnu);
 
         newFoto = (ImageButton) findViewById(R.id.foto);
+        newFoto.setImageResource(R.drawable.camera);
 
         newpass.setText(getIntent().getStringExtra("password"));
         newemail.setText(getIntent().getStringExtra("email"));
         newFoto.setOnClickListener(new View.OnClickListener()   {
             public void onClick(View v)  {
                 try {
-                    Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                    if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
-                        startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
-                    }
+                    Intent photoPickerIntent = new Intent(Intent.ACTION_PICK);
+                    photoPickerIntent.setType("image/*");
+                    startActivityForResult(photoPickerIntent, GALLERY_REQUEST);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -75,19 +80,29 @@ public class NewUserActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                Descarga nuevaDescarga = new Descarga();
-                nuevaDescarga.execute();
+                if (newname.getText().toString().length() < 1 || newpass.getText().toString().length() < 1
+                        || newemail.getText().toString().length() < 1) {
+                    Toast.makeText(getBaseContext(),"Name, Password and E-mail are compulsory ", Toast.LENGTH_SHORT).show();
+                } else {
+                    Descarga nuevaDescarga = new Descarga();
+                    nuevaDescarga.execute();
+                }
             }
         });
     }
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
-            Bundle extras = data.getExtras();
-            Bitmap imageBitmap = (Bitmap) extras.get("data");
-            foto.setImageBitmap(imageBitmap);
-            newFoto.setImageBitmap(imageBitmap);
+        if (requestCode == GALLERY_REQUEST && resultCode == Activity.RESULT_OK) {
+
+            Uri selectedImage = data.getData();
+            try {
+                bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), selectedImage);
+                newFoto.setImageBitmap(bitmap);
+
+            } catch (IOException e) {
+                // Log.i("TAG", "Some exception " + e);
+            }
+
         }
     }
 
@@ -97,13 +112,9 @@ public class NewUserActivity extends AppCompatActivity {
         String Uemail = newemail.getText().toString();
         SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy' 'HH:mm:ss");
         String formattedDate = sdf.format(Calendar.getInstance().getTime());
-        Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.usericon); // eliminar cuando activemos camara
-
 
         @Override
         protected void onPreExecute() {
-
-
         }
 
         @Override
