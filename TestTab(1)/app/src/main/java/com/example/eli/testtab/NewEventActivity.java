@@ -73,7 +73,7 @@ public class NewEventActivity extends AppCompatActivity {
 
                 if (fechaF>fechaT || fechaF < avui || eName.getText().length()<1)
                 {
-                    Toast.makeText(getApplicationContext(), " check What and dates, FROM have to be > TODAY and < than TO", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), " check the following issues: field What is empty / date FROM have to be greather than  TODAY and less than TO", Toast.LENGTH_SHORT).show();
                           }else {
                     Descarga nuevaDescarga = new Descarga();
                     nuevaDescarga.execute();
