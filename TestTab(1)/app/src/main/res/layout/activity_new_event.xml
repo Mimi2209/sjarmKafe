@@ -25,165 +25,6 @@
         app:layout_constraintEnd_toEndOf="@+id/scrollView3"
         tools:targetApi="lollipop" />
 
-    <ScrollView
-        android:id="@+id/scrollView3"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@+id/linea_nom">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="25dp"
-                android:background="?attr/actionBarItemBackground"
-                android:orientation="vertical">
-
-                <TextView
-                    android:id="@+id/event"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="20dp"
-                    android:text="@string/what"
-                    android:textSize="18sp"
-                    android:textStyle="bold" />
-
-                <EditText
-                    android:id="@+id/event_name"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:ems="10"
-                    android:hint="@string/add_event_name"
-                    android:inputType="textMultiLine" />
-
-                <EditText
-                    android:id="@+id/event_description"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:ems="10"
-                    android:hint="@string/add_event_description"
-                    android:inputType="textMultiLine" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="25dp"
-                android:background="?attr/actionModeBackground"
-                android:orientation="vertical">
-
-                <TextView
-                    android:id="@+id/event_loc"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="20dp"
-                    android:text="@string/where"
-                    android:textSize="18sp"
-                    android:textStyle="bold" />
-
-                <EditText
-                    android:id="@+id/event_location"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="25dp"
-                    android:ems="10"
-                    android:hint="@string/add_event_location"
-                    android:inputType="textPostalAddress" />
-
-            </LinearLayout>
-
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-
-                <TextView
-                    android:id="@+id/_in"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="20dp"
-                    android:text="@string/starting"
-                    android:textSize="18sp"
-                    android:textStyle="bold" />
-
-                <DatePicker
-                    android:id="@+id/fecha_in"
-                    android:layout_width="250dp"
-                    android:layout_height="150dp"
-                    android:layout_gravity="center_horizontal"
-                    android:animateLayoutChanges="true"
-                    android:calendarViewShown="?android:attr/windowSwipeToDismiss"
-                    android:datePickerMode="spinner"
-                    android:firstDayOfWeek="2"
-                    android:fitsSystemWindows="false"
-                    android:focusedByDefault="false"
-                    android:forceHasOverlappingRendering="false"
-                    android:isScrollContainer="false"
-                    android:layoutMode="opticalBounds"
-                    tools:targetApi="lollipop" />
-
-                <TimePicker
-                    android:id="@+id/hora_in"
-                    android:layout_width="wrap_content"
-                    android:layout_height="150dp"
-                    android:layout_gravity="center_vertical|center_horizontal"
-                    android:layoutMode="clipBounds"
-                    android:timePickerMode="spinner"
-                    tools:targetApi="lollipop" />
-
-            </LinearLayout>
-
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-
-                <TextView
-                    android:id="@+id/fechadia"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/finishing"
-                    android:textSize="18sp"
-                    android:textStyle="bold" />
-
-                <DatePicker
-                    android:id="@+id/fecha_fin"
-                    android:layout_width="250dp"
-                    android:layout_height="150dp"
-                    android:layout_gravity="center_horizontal"
-                    android:animateLayoutChanges="true"
-                    android:calendarViewShown="?android:attr/windowSwipeToDismiss"
-                    android:datePickerMode="spinner"
-                    android:firstDayOfWeek="2"
-                    android:fitsSystemWindows="false"
-                    android:focusedByDefault="false"
-                    android:forceHasOverlappingRendering="false"
-                    android:isScrollContainer="false"
-                    android:layoutMode="opticalBounds"
-                    tools:targetApi="lollipop" />
-
-                <TimePicker
-                    android:id="@+id/hora_fin"
-                    android:layout_width="wrap_content"
-                    android:layout_height="150dp"
-                    android:layout_gravity="center_vertical|center_horizontal"
-                    android:layoutMode="clipBounds"
-                    android:timePickerMode="spinner"
-                    tools:targetApi="lollipop" />
-
-            </LinearLayout>
-
-        </LinearLayout>
-    </ScrollView>
-
 
     <android.support.design.widget.AppBarLayout
         android:id="@+id/linea_foto"
@@ -244,6 +85,171 @@
 
 
     </LinearLayout>
+
+    <ScrollView
+        android:id="@+id/scrollView3"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:fillViewport="true"
+        android:layoutMode="clipBounds"
+        app:layout_constraintHeight_default="spread"
+        app:layout_constraintTop_toBottomOf="@+id/linea_nom">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+
+            <LinearLayout
+                android:id="@+id/que"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="?attr/actionBarItemBackground"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/event"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:text="@string/what"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <EditText
+                    android:id="@+id/event_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:hint="@string/add_event_name"
+                    android:inputType="textMultiLine" />
+
+                <EditText
+                    android:id="@+id/event_description"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:hint="@string/add_event_description"
+                    android:inputType="textMultiLine" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/donde"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/que"
+                android:background="?attr/actionModeBackground"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/event_loc"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:text="@string/where"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <EditText
+                    android:id="@+id/event_location"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:hint="@string/add_event_location"
+                    android:inputType="textPostalAddress" />
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/inicio"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/donde"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/_in"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/starting"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <DatePicker
+                    android:id="@+id/fecha_in"
+                    android:layout_width="match_parent"
+                    android:layout_height="150dp"
+                    android:layout_gravity="center_horizontal"
+                    android:animateLayoutChanges="true"
+                    android:calendarViewShown="?android:attr/windowSwipeToDismiss"
+                    android:datePickerMode="spinner"
+                    android:firstDayOfWeek="2"
+                    android:fitsSystemWindows="false"
+                    android:focusable="auto"
+                    android:focusedByDefault="false"
+                    android:forceHasOverlappingRendering="false"
+                    android:isScrollContainer="false"
+                    android:layoutMode="opticalBounds"
+                    tools:targetApi="lollipop" />
+
+                <TimePicker
+                    android:id="@+id/hora_in"
+                    android:layout_width="match_parent"
+                    android:layout_height="150dp"
+                    android:layout_gravity="center_vertical|center_horizontal"
+                    android:layoutMode="clipBounds"
+                    android:timePickerMode="spinner"
+                    tools:targetApi="lollipop" />
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/fin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/inicio"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/fechadia"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/finishing"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <DatePicker
+                    android:id="@+id/fecha_fin"
+                    android:layout_width="match_parent"
+                    android:layout_height="150dp"
+                    android:layout_gravity="center_horizontal"
+                    android:animateLayoutChanges="false"
+                    android:calendarViewShown="?android:attr/windowSwipeToDismiss"
+                    android:datePickerMode="spinner"
+                    android:firstDayOfWeek="2"
+                    android:fitsSystemWindows="false"
+                    android:focusedByDefault="false"
+                    android:forceHasOverlappingRendering="false"
+                    android:isScrollContainer="false"
+                    android:layoutMode="clipBounds"
+                    tools:targetApi="lollipop" />
+
+                <TimePicker
+                    android:id="@+id/hora_fin"
+                    android:layout_width="match_parent"
+                    android:layout_height="150dp"
+                    android:layout_gravity="center_vertical|center_horizontal"
+                    android:layoutMode="clipBounds"
+                    android:timePickerMode="spinner"
+                    tools:targetApi="lollipop" />
+
+            </LinearLayout>
+
+        </RelativeLayout>
+    </ScrollView>
 
 
 </android.support.constraint.ConstraintLayout>
