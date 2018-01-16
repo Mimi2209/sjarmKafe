@@ -16,9 +16,11 @@ import android.widget.TimePicker;
 import android.widget.Toast;
 
 import java.sql.SQLException;
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 
 public class NewEventActivity extends AppCompatActivity {
     GlobalState gs;
@@ -29,6 +31,7 @@ public class NewEventActivity extends AppCompatActivity {
     TextView tNameCafe;
     EditText eName, eDesc, eLocation;
     DatePicker eDateF,eDateT ;
+    Date desde, hasta;
     TimePicker eTimeF,eTimeT;
     FloatingActionButton add;
     Evento miEvento;
@@ -61,8 +64,20 @@ public class NewEventActivity extends AppCompatActivity {
         add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) { // grabar
-                Descarga nuevaDescarga = new Descarga();
-                nuevaDescarga.execute();
+// valido datos
+                int fechaF=eDateF.getYear()*10000+(eDateF.getMonth()+1)*100+eDateF.getDayOfMonth();
+                int fechaT=eDateT.getYear()*10000+(eDateT.getMonth()+1)*100+eDateT.getDayOfMonth();
+                DateFormat df = new SimpleDateFormat("yyyyMMdd");
+                String now = df.format(Calendar.getInstance().getTime());
+                int avui= Integer.parseInt(now);
+
+                if (fechaF>fechaT || fechaF < avui || eName.getText().length()<1)
+                {
+                    Toast.makeText(getApplicationContext(), " check What and dates, FROM have to be > TODAY and < than TO", Toast.LENGTH_SHORT).show();
+                          }else {
+                    Descarga nuevaDescarga = new Descarga();
+                    nuevaDescarga.execute();
+                }
             }
         });
     }
