@@ -57,6 +57,7 @@
     <string name="add_event_location">Add event location</string>
     <string name="starting">Starting?</string>
     <string name="finishing">Finishing?</string>
+    <string name="coffee_type">Coffee Type:</string>
 
 
 </resources>

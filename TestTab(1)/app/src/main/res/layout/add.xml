@@ -133,15 +133,33 @@
 
             </LinearLayout>
 
-            <Spinner
-                android:id="@+id/tcafe"
-                style="@style/Widget.AppCompat.Spinner.DropDown"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+            <LinearLayout
+                android:id="@+id/ctype"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:layout_below="@+id/des"
-                android:layout_marginStart="50dp"
-                android:entries="@string/cafet"
-                android:paddingBottom="25dp" />
+                android:orientation="horizontal"
+                android:paddingBottom="25dp">
+
+                <TextView
+                    android:id="@+id/ctyp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/coffee_type" />
+
+                <Spinner
+                    android:id="@+id/tcafe"
+                    style="@style/Widget.AppCompat.Spinner.DropDown"
+                    android:layout_width="250dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="50dp"
+                    android:layout_weight="1"
+                    android:entries="@string/cafet"
+                    android:paddingBottom="25dp" />
+
+
+            </LinearLayout>
 
             <ImageButton
                 android:id="@+id/add_cafe_pict"
