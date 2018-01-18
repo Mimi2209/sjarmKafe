@@ -45,7 +45,7 @@ public class Add extends Fragment {
     Cafeteria miCafeteria;
     ArrayList<Tipo_cafe> arTipCafe = new ArrayList<>();
     ArrayList<String> spinnerArray = null;
-    String resultat, tipus;
+    String resultat;
     Boolean bTerrace, bTables, bWifi, bShop, bMeals, bXpress, bDogs;
     CheckBox cTerrace, cTables, cWifi, cShop, cMeals, cXpress, cDogs;
     String sNameCafe, sAddress, sHorario, sDescrip;
@@ -54,7 +54,6 @@ public class Add extends Fragment {
     ImageButton newFoto;
     ArrayAdapter<String> adapter;
     int tip_cafe;
-    RatingBar rRating2;
     static final int USER_REQUEST = 1;
     static final int GALLERY_REQUEST = 2;
     Bitmap bitmap;
@@ -232,20 +231,11 @@ public class Add extends Fragment {
         protected String doInBackground(String... tipo) {
 
             try {
-                GestionBBDD baseDatos = new GestionBBDD(); // conecta con servidor SQL
-// DATOS QUE FALTAN !!!! //
-                // falta tipo de cafe
-                // falta long/ltg
-                // Falta captura foto
-
-
+                GestionBBDD baseDatos = new GestionBBDD();
                 arTipCafe = baseDatos.verTipCafe();
-
             } catch (SQLException se) {
                 System.out.println("oops! No se puede conectar. Error: " + se.toString());
             } finally {
-
-                //         estatus=tNameCafe.getText().toString()+"/"+tAddress.getText().toString()+"/"+ tDescrip.getText().toString()+2+"/"+ cTables.isChecked()+"/"+ cTerrace.isChecked()+"/"+rRating2.getNumStars() ;
                 return resultat;
             }
         }

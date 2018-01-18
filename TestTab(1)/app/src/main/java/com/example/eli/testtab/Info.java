@@ -28,7 +28,7 @@ import java.sql.SQLException;
         Cafeteria miCafeteria;
         String resultat;
         CheckBox cTerrace, cTables, cWifi, cShop, cMeals, cXpress, cDogs;
-        TextView tNameCafe, tAddress, tHorario, tDescrip ;
+        TextView tNameCafe, tAddress, tHorario, tDescrip, tNameCoffee ;
         RatingBar rRating2;
         GlobalState gs;
 
@@ -66,7 +66,7 @@ import java.sql.SQLException;
         cXpress = (CheckBox) getView().findViewById(R.id.Xpress);
         cDogs = (CheckBox) getView().findViewById(R.id.Dogs);
         rRating2 = (RatingBar) getView().findViewById(R.id.rating2);
-
+      //  tNameCoffee = (TextView) getView().findViewById(R.id.cafe);    TREURE QUAN ESTIGUI EL LAYOUT
         tNameCafe.setText(gs.getNom_cafeteria());
         rRating2.setRating(gs.getRating_cafeteria());
 
@@ -112,6 +112,7 @@ import java.sql.SQLException;
                 cXpress.setChecked(miCafeteria.isServicio_expres());
                 cDogs.setChecked(miCafeteria.isPerros());
                 rRating2.setRating(miCafeteria.getValoracion_global());
+                tNameCoffee.setText(miCafeteria.getNom_coffee());
             }
 
 
