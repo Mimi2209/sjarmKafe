@@ -15,6 +15,8 @@ import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 
 /**
@@ -167,9 +169,9 @@ public class GestionBBDD {
     }
 
     // ------- Recupero lista  cafeterias por distancia (para Listing y para Map)
-    public ArrayList<Cafeteria> verListCafeterias() throws SQLException {
+    public ArrayList<Cafeteria> verListCafeterias(float longi, float ltg) throws SQLException {
 
-        String query = "SELECT * FROM u125322db1.cafeteria ;";
+        String query = "SELECT * FROM u125322db1.cafeteria order by valoracion desc;";
         Statement stmt = null;
         ArrayList<Cafeteria> listCafeterias = new ArrayList<>();
         try {
@@ -201,7 +203,7 @@ public class GestionBBDD {
                 bitmap = BitmapFactory.decodeByteArray(image, 0, image.length, options); //Convert bytearray to bitmap
 
 
-         //       distancia = distance(longi, ltg, caf_long, caf_ltg);
+                distancia = distance(longi, ltg, caf_long, caf_ltg);
          //        if(distancia<2.5) {
                listCafeterias.add(new Cafeteria(id_cafeteria, nom, address, descripcion, caf_long, caf_ltg, horario, valoracion, distancia, bitmap));
          //        }
@@ -213,6 +215,15 @@ public class GestionBBDD {
             System.out.println("oops! No se puede conectar. Error: " + se.toString());
 
         } finally {
+            // ordeno por distancia antes de devolver el array
+            Collections.sort(listCafeterias, new Comparator<Cafeteria>(){
+                @Override
+                public int compare(Cafeteria obj1, Cafeteria obj2){
+                    return Double.compare(obj1.getDistancia(),obj2.getDistancia());
+
+                }
+            });
+
             return listCafeterias;
         }
 
@@ -263,6 +274,7 @@ public class GestionBBDD {
             System.out.println("oops! No se puede conectar. Error: " + se.toString());
 
         } finally {
+            // ordenar por distancia
             return listCafeterias;
         }
 

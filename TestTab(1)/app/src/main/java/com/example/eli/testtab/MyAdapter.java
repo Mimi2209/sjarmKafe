@@ -104,7 +104,6 @@ public class MyAdapter extends BaseAdapter {
             switch (type){
                 case "cafe":
                     elemento = inflador.inflate(R.layout.cafeteria, parent, false);
-
                     final TextView ncafe = (TextView) elemento.findViewById(R.id.cafe);
                     TextView hcafe = (TextView) elemento.findViewById(R.id.horario);
                     TextView dire = (TextView) elemento.findViewById(R.id.cafe_address);
@@ -114,7 +113,8 @@ public class MyAdapter extends BaseAdapter {
                     lNom.setBackgroundColor(Color.LTGRAY);
                     ncafe.setText(cafeterias.get(position).getNombre_cafeteria());
                     hcafe.setText(cafeterias.get(position).getHorario());
-                    dire.setText(cafeterias.get(position).getAddress());
+                    dire.setText(String.format ("%.2f", cafeterias.get(position).getDistancia())+" Km - "+cafeterias.get(position).getAddress());
+
                     rating.setRating(cafeterias.get(position).getValoracion_global());
                     if (cafeterias.get(position).getImg()!=null) {
                         image.setImageBitmap(cafeterias.get(position).getImg());

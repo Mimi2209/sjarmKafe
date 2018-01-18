@@ -25,7 +25,8 @@ public class Listing extends Fragment {
     ArrayList<Cafeteria> misCafeteriasBak = new ArrayList<Cafeteria>();
     String resultat;
     String sql;
-    boolean sql_search;
+    GlobalState gs;
+
     MyAdapter adapter;
  //-------------------------------------------------------------------------
     @Override
@@ -38,6 +39,7 @@ public class Listing extends Fragment {
     public void onActivityCreated(Bundle state) {
         super.onActivityCreated(state);
         cafes = (ListView) getView().findViewById(R.id.cafeteria_list);
+        gs = (GlobalState) getActivity().getApplication();
         Descarga_listing nuevaDescarga_listing = new Descarga_listing();
         nuevaDescarga_listing.execute();
 
@@ -57,7 +59,7 @@ public class Listing extends Fragment {
             try {
                 GestionBBDD baseDatos = new GestionBBDD(); // conecta con servidor SQL
 
-                    misCafeterias = baseDatos.verListCafeterias(); // obtiene cafeteria
+                    misCafeterias = baseDatos.verListCafeterias(gs.getLongitut(),gs.getLatitut()); // obtiene cafeteria
 
 
             } catch (SQLException se) {
