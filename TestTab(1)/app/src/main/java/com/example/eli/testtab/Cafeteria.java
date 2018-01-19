@@ -3,12 +3,17 @@ package com.example.eli.testtab;
 import android.graphics.Bitmap;
 
 import java.sql.Time;
+import java.util.Comparator;
+import java.util.function.Function;
+import java.util.function.ToDoubleFunction;
+import java.util.function.ToIntFunction;
+import java.util.function.ToLongFunction;
 
 /**
  * Created by Eli on 26/12/2017.
  */
 
-public class Cafeteria {
+public class Cafeteria{
     int id_cafeteria;
     String nombre_cafeteria;
     String address;
@@ -27,6 +32,8 @@ public class Cafeteria {
     int valoracion_global;
     Bitmap img;
     double distancia;
+    String nom_coffee;
+
 
     // constructor para insert
     public Cafeteria(String nombre_cafeteria, String address, String descripcion, int tip_cafe, float longitut, float latitut, boolean mesas, boolean terraza, boolean wifi, boolean comida,
@@ -79,6 +86,24 @@ public class Cafeteria {
         this.valoracion_global = valoracion_global;
         this.distancia = distancia;
         this.img = img;
+    }
+
+    public Cafeteria(int id_cafeteria, String nombre_cafeteria, String address, String descripcion,  boolean mesas, boolean terraza, boolean wifi, boolean comida, boolean tienda, boolean perros, String horario, boolean servicio_expres, int valoracion_global, Bitmap img, String nom_coffee) {
+        this.id_cafeteria = id_cafeteria;
+        this.nombre_cafeteria = nombre_cafeteria;
+        this.address = address;
+        this.descripcion = descripcion;
+        this.mesas = mesas;
+        this.terraza = terraza;
+        this.wifi = wifi;
+        this.comida = comida;
+        this.tienda = tienda;
+        this.perros = perros;
+        this.horario = horario;
+        this.servicio_expres = servicio_expres;
+        this.valoracion_global = valoracion_global;
+        this.img = img;
+        this.nom_coffee = nom_coffee;
     }
 
     public int getId_cafeteria() {
@@ -225,6 +250,14 @@ public class Cafeteria {
 
     public void setDistancia(double distancia) {
         this.distancia = distancia;
+    }
+
+    public String getNom_coffee() {
+        return nom_coffee;
+    }
+
+    public void setNom_coffee(String nom_coffee) {
+        this.nom_coffee = nom_coffee;
     }
 }
 

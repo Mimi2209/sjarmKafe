@@ -141,12 +141,7 @@
                 android:orientation="horizontal"
                 android:paddingBottom="25dp">
 
-                <TextView
-                    android:id="@+id/ctyp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/coffee_type" />
+
 
                 <Spinner
                     android:id="@+id/tcafe"
@@ -155,6 +150,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="50dp"
                     android:layout_weight="1"
+                    android:textSize="15sp"
+                    android:textColor="#7c5106"
                     android:entries="@string/cafet"
                     android:paddingBottom="25dp" />
 

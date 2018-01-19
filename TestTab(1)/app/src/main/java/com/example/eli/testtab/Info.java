@@ -112,7 +112,7 @@ import java.sql.SQLException;
                 cXpress.setChecked(miCafeteria.isServicio_expres());
                 cDogs.setChecked(miCafeteria.isPerros());
                 rRating2.setRating(miCafeteria.getValoracion_global());
-                tNameCoffee.setText(miCafeteria.getTip_cafe());
+                tNameCoffee.setText(miCafeteria.getNom_coffee());
             }
 
 

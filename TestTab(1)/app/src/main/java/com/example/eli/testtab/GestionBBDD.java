@@ -156,7 +156,7 @@ public class GestionBBDD {
                 BitmapFactory.Options options = new BitmapFactory.Options();
                 nom_cafe = rs.getString(19);
                 bitmap = BitmapFactory.decodeByteArray(image, 0, image.length, options); //Convert bytearray to bitmap
-                miCafeteria = new Cafeteria(id_cafeteria, nom, address, descripcion,tip_cafe, mesas, terraza, wifi, comida, tienda, perros, horario, servicio_expres, valoracion, bitmap);
+                miCafeteria = new Cafeteria(id_cafeteria, nom, address, descripcion, mesas, terraza, wifi, comida, tienda, perros, horario, servicio_expres, valoracion, bitmap,nom_cafe);
             }
 
             rs.close();

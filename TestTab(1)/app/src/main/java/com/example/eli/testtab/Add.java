@@ -95,12 +95,13 @@ public class Add extends Fragment {
                                        View selectedItemView, int position, long id) {
                 // Object item = parentView.getItemAtPosition(position);
 
-                tip_cafe = sItems.getSelectedItemPosition() + 1;
+                tip_cafe = sItems.getSelectedItemPosition() ;
+                if (tip_cafe==0) tip_cafe=0; // por defecto asignamos tipo 1
 
             }
 
             public void onNothingSelected(AdapterView<?> arg0) {
-                tip_cafe = 1;
+                tip_cafe = 0;
             }
 
         });
@@ -243,7 +244,8 @@ public class Add extends Fragment {
         @Override
         protected void onPostExecute(String result) {
             spinnerArray = new ArrayList<String>();
-            for (int i = 0; i < arTipCafe.size(); i++) {
+            spinnerArray.add("Choose type of coffee to add"); // 1er elemento explicativo
+            for (int i = 1; i < arTipCafe.size(); i++) {
                 spinnerArray.add(arTipCafe.get(i).getNombre_cafe());
             }
             if (spinnerArray != null) { // cargo spinner array en spinner si array lleno

@@ -12,19 +12,16 @@
         android:orientation="horizontal"
         android:paddingBottom="25dp">
 
-        <TextView
-            android:id="@+id/ctyp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/coffee_type" />
+
 
         <Spinner
             android:id="@+id/tcafe"
-            style="@style/Widget.AppCompat.Spinner.DropDown"
             android:layout_width="250dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="50dp"
+            android:textSize="15sp"
+            style="@style/Widget.AppCompat.Spinner.DropDown"
+            android:backgroundTint="@color/colorPrimary"
             android:layout_weight="1"
             android:entries="@string/cafet"
             android:paddingBottom="25dp" />

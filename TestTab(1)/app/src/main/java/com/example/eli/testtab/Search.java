@@ -72,7 +72,7 @@ public class Search extends Fragment {
                                        View selectedItemView, int position, long id) {
                 // Object item = parentView.getItemAtPosition(position);
 
-                tip_cafe = sItems.getSelectedItemPosition() + 1;
+                tip_cafe = sItems.getSelectedItemPosition();
 
             }
 
@@ -192,6 +192,15 @@ public class Search extends Fragment {
             sql_string += "tip_cafe= " + tip_cafe;
             chk_criterios++;
         }
+        if (ratGlobal.getRating() > 0) {
+            if (chk_criterios == 0) {
+                sql_string += " WHERE ";
+            } else {
+                sql_string += " and ";
+            }
+            sql_string += "valoracion >= " + ratGlobal.getRating();
+            chk_criterios++;
+        }
         //  aplicar distancia 5 km max.
         if (distancia.getProgress() > 0) {
             gs.setDistancia_search(distancia.getProgress());
@@ -236,7 +245,8 @@ public class Search extends Fragment {
         @Override
         protected void onPostExecute(String result) {
             spinnerArray = new ArrayList<String>();
-            for (int i = 0; i < arTipCafe.size(); i++) {
+            spinnerArray.add("Choose type of coffee to search"); // 1er elemento explicativo
+            for (int i = 1; i < arTipCafe.size(); i++) {
                 spinnerArray.add(arTipCafe.get(i).getNombre_cafe());
             }
             if (spinnerArray != null) { // cargo spinner array en spinner si array lleno

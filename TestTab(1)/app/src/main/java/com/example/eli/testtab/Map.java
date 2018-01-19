@@ -128,7 +128,7 @@ public class Map extends Fragment implements OnMapReadyCallback,
                             gs.setLongitut((float) location.getLongitude());
 
                             //move map camera
-                            mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(location.getLatitude(), location.getLongitude()), 18.0f));
+                            mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(location.getLatitude(), location.getLongitude()), 14.0f));
 
 
                             // Logic to handle location object
@@ -259,7 +259,7 @@ public class Map extends Fragment implements OnMapReadyCallback,
 
         //move map camera
         //move map camera
-        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(location.getLatitude(), location.getLongitude()), 18.0f));
+        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(location.getLatitude(), location.getLongitude()), 16.0f));
         //stop location updates
         if (mGoogleApiClient != null) {
             LocationServices.FusedLocationApi.removeLocationUpdates(mGoogleApiClient, (com.google.android.gms.location.LocationListener) this);
