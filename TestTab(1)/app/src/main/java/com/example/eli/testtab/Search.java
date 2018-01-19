@@ -65,7 +65,7 @@ public class Search extends Fragment {
         distancia = (SeekBar) getView().findViewById(R.id.seekDistancia);
         distancia.setProgress(20);
         valDist = (TextView) getView().findViewById(R.id.valDistancia);
-//        sItems = (Spinner) getView().findViewById(R.id.tcafe);  posar el nom del spinner en el search
+        sItems = (Spinner) getView().findViewById(R.id.tcafe);
         sItems.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 
             public void onItemSelected(AdapterView<?> parentView,

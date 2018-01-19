@@ -4,11 +4,39 @@
     android:layout_width="match_parent" android:layout_height="match_parent"
     android:id="@+id/searchScreen">
 
+    <LinearLayout
+        android:id="@+id/ctype"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/cap"
+        android:orientation="horizontal"
+        android:paddingBottom="25dp">
+
+        <TextView
+            android:id="@+id/ctyp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/coffee_type" />
+
+        <Spinner
+            android:id="@+id/tcafe"
+            style="@style/Widget.AppCompat.Spinner.DropDown"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="50dp"
+            android:layout_weight="1"
+            android:entries="@string/cafet"
+            android:paddingBottom="25dp" />
+
+
+    </LinearLayout>
+
     <TableLayout
         android:id="@+id/items"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/cap"
+        android:layout_below="@+id/ctype"
         android:paddingBottom="30dp"
         android:paddingTop="15dp">
 

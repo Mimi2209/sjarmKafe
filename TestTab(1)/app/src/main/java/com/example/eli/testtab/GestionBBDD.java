@@ -142,6 +142,7 @@ public class GestionBBDD {
                 nom = rs.getString(2);
                 address = rs.getString(3);
                 descripcion = rs.getString(4);
+                tip_cafe = rs.getInt(5);
                 mesas = rs.getBoolean(8);
                 terraza = rs.getBoolean(9);
                 wifi = rs.getBoolean(10);
@@ -155,7 +156,7 @@ public class GestionBBDD {
                 BitmapFactory.Options options = new BitmapFactory.Options();
                 nom_cafe = rs.getString(19);
                 bitmap = BitmapFactory.decodeByteArray(image, 0, image.length, options); //Convert bytearray to bitmap
-                miCafeteria = new Cafeteria(id_cafeteria, nom, address, descripcion,  mesas, terraza, wifi, comida, tienda, perros, horario, servicio_expres, valoracion, bitmap, nom_cafe);
+                miCafeteria = new Cafeteria(id_cafeteria, nom, address, descripcion,tip_cafe, mesas, terraza, wifi, comida, tienda, perros, horario, servicio_expres, valoracion, bitmap);
             }
 
             rs.close();
