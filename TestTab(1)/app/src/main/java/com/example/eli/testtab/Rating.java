@@ -1,5 +1,6 @@
 package com.example.eli.testtab;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Build;
@@ -35,12 +36,7 @@ public class Rating extends Fragment {
     RatingBar ratGlobal, ratLimpieza, ratRapidez, ratTrato, ratAmbiente, ratPrecios, ratDiseño, ratAccesibilidad, ratAparcar;
     Valoracion valoraciones;
     FloatingActionButton add;
-
-    static Rating newInstance(int num) {
-        Rating r = new Rating();
-        return r;
-    }
-
+    ProgressDialog progreso;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -121,6 +117,13 @@ public class Rating extends Fragment {
         @Override
         protected void onPreExecute() {
             idCafeteria = gs.getId_cafeteria(); // recupero id cafeteria de la variable global
+            progreso = new ProgressDialog(getActivity());
+            progreso.setTitle("Downloading...");
+            progreso.setMessage("Please wait while downloading data for this Cafe");
+            progreso.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+            progreso.setIndeterminate(false);
+            progreso.setProgress(0);
+            progreso.show();
 
         }
 
@@ -140,7 +143,7 @@ public class Rating extends Fragment {
 
         @Override
         protected void onPostExecute(String result) {
-
+            progreso.dismiss();
             if (valoraciones != null) {
                 ratLimpieza.setRating(valoraciones.getLimpieza());
                 ratRapidez.setRating(valoraciones.getRapidez_servicio());

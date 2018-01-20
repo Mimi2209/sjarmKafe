@@ -1,6 +1,7 @@
 package com.example.eli.testtab;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.AsyncTask;
@@ -40,6 +41,7 @@ public class Comments extends Fragment {
     RatingBar rating_cafeteria;
     FloatingActionButton add;
     ArrayList<Valoracion> comentarios = new ArrayList<Valoracion>();
+    ProgressDialog progreso;
 
     static Comments newInstance(int num) {
         Comments c = new Comments();
@@ -132,6 +134,13 @@ public class Comments extends Fragment {
             idCafeteria = gs.getId_cafeteria(); // recupero id cafeteria de la variable global
             nom_cafeteria.setText(gs.getNom_cafeteria());
             rating_cafeteria.setRating(idCafeteria);
+            progreso = new ProgressDialog(getActivity());
+            progreso.setTitle("Downloading...");
+            progreso.setMessage("Please wait while downloading data for this Cafe");
+            progreso.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+            progreso.setIndeterminate(false);
+            progreso.setProgress(0);
+            progreso.show();
         }
 
         @Override
@@ -150,7 +159,7 @@ public class Comments extends Fragment {
 
         @Override
         protected void onPostExecute(String result) {
-
+            progreso.dismiss();
 
             if (comentarios.size() == 0) {
                 comentarios.add(new Valoracion(0, "No hay Comentarios todavia para esta cafeteria", "", null, null, null));

@@ -1,6 +1,7 @@
 package com.example.eli.testtab;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
@@ -11,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 import android.widget.Toast;
+
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -26,9 +28,9 @@ public class Listing extends Fragment {
     String resultat;
     String sql;
     GlobalState gs;
-
     MyAdapter adapter;
- //-------------------------------------------------------------------------
+    ProgressDialog progreso;
+    //-------------------------------------------------------------------------
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -50,6 +52,14 @@ public class Listing extends Fragment {
 
         @Override
         protected void onPreExecute() {
+            progreso = new ProgressDialog(getActivity());
+            progreso.setTitle("Downloading...");
+            progreso.setMessage("Please wait while dowloading data is in progress ");
+            progreso.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+            progreso.setIndeterminate(false);
+            progreso.setProgress(0);
+            progreso.show();
+
 
         }
 
@@ -59,7 +69,7 @@ public class Listing extends Fragment {
             try {
                 GestionBBDD baseDatos = new GestionBBDD(); // conecta con servidor SQL
 
-                    misCafeterias = baseDatos.verListCafeterias(gs.getLongitut(),gs.getLatitut()); // obtiene cafeteria
+                misCafeterias = baseDatos.verListCafeterias(gs.getLongitut(), gs.getLatitut()); // obtiene cafeteria
 
 
             } catch (SQLException se) {
@@ -72,14 +82,15 @@ public class Listing extends Fragment {
 
         @Override
         protected void onPostExecute(String result) {
-             if (misCafeterias.size() == 0 || misCafeterias==null) {
-                if(misCafeteriasBak.size()> 1){
-                    misCafeterias=misCafeteriasBak;
-                }else {
+            progreso.dismiss();
+            if (misCafeterias.size() == 0 || misCafeterias == null) {
+                if (misCafeteriasBak.size() > 1) {
+                    misCafeterias = misCafeteriasBak;
+                } else {
                     Bitmap foto = Bitmap.createBitmap(1, 1, Bitmap.Config.ARGB_8888);
                     misCafeterias.add(new Cafeteria("ERROR CONEXION a BBDD, vuelva a intentarlo mas tarde", "", "", 1, 1, 1, true, false, true, true, false, false, "17", true, 4, foto));
                 }
-                }else {
+            } else {
                 misCafeteriasBak = misCafeterias;
             }
             adapter = new MyAdapter(getActivity(), misCafeterias, "cafe", "");

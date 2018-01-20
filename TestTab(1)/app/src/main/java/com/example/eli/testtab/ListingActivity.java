@@ -1,5 +1,6 @@
 package com.example.eli.testtab;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.os.AsyncTask;
@@ -23,7 +24,7 @@ public class ListingActivity extends AppCompatActivity {
     String resultat;
     GlobalState gs;
     String sql;
-    boolean sql_search;
+    ProgressDialog progreso;
     MyAdapter adapter;
     Context c;
 
@@ -33,17 +34,25 @@ public class ListingActivity extends AppCompatActivity {
         setContentView(R.layout.activity_listing);
         gs = (GlobalState) getApplication();
         cafes = (ListView) findViewById(R.id.cafeteria_list);
+        c= this;
         Descarga_listing nuevaDescarga_listing = new Descarga_listing();
         nuevaDescarga_listing.execute(gs.getSql_search());
-        c= getBaseContext();
-        Toast.makeText(c, "Searching,  please wait, filtering by criteria and distance "+gs.getDistancia_search()+" km", Toast.LENGTH_SHORT).show();
+    //    Toast.makeText(c, "Searching,  please wait, filtering by criteria and distance "+gs.getDistancia_search()+" km", Toast.LENGTH_SHORT).show();
     }
     //---------------------------------------------------------------------------
     public class Descarga_listing extends AsyncTask<String, Integer, String> {
 
         @Override
         protected void onPreExecute() {
-            }
+            progreso = new ProgressDialog(c);
+            progreso.setTitle("Downloading...");
+            progreso.setMessage("Searching,  please wait, filtering by criteria and distance "+gs.getDistancia_search()+" km");
+            progreso.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+            progreso.setIndeterminate(false);
+            progreso.setProgress(0);
+            progreso.show();
+
+        }
 
         @Override
         protected String doInBackground(String... urls) {
@@ -66,6 +75,7 @@ public class ListingActivity extends AppCompatActivity {
         protected void onPostExecute(String result) {
             //      Cafeteria[] cafeterias = misCafeterias.toArray(new Cafeteria[misCafeterias.size()]);
             //      MyAdapter adapter = new MyAdapter(getActivity(), cafeterias,"cafe");
+            progreso.dismiss();
             if (misCafeterias.size() == 0 || misCafeterias==null) {
                 if(misCafeteriasBak.size()> 1){
                     misCafeterias=misCafeteriasBak;

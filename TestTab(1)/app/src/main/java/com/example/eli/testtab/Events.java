@@ -1,6 +1,7 @@
 package com.example.eli.testtab;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.AsyncTask;
@@ -40,6 +41,7 @@ import static android.app.Activity.RESULT_OK;
     TextView tNameCafe;
     RatingBar ratGlobal;
     FloatingActionButton add;
+    ProgressDialog progreso;
 
     static Events newInstance(int num) {
         Events e = new Events();
@@ -126,7 +128,13 @@ import static android.app.Activity.RESULT_OK;
 
         @Override
         protected void onPreExecute() {
-
+            progreso = new ProgressDialog(getActivity());
+            progreso.setTitle("Downloading...");
+            progreso.setMessage("Please wait while downloading data for this Cafe");
+            progreso.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+            progreso.setIndeterminate(false);
+            progreso.setProgress(0);
+            progreso.show();
         }
 
         @Override
@@ -145,8 +153,7 @@ import static android.app.Activity.RESULT_OK;
 
         @Override
         protected void onPostExecute(String result) {
-            //      Cafeteria[] cafeterias = misCafeterias.toArray(new Cafeteria[misCafeterias.size()]);
-            //      MyAdapter adapter = new MyAdapter(getActivity(), cafeterias,"cafe");
+            progreso.dismiss();
             Bitmap foto = Bitmap.createBitmap(1,1, Bitmap.Config.ARGB_8888);
             if(eventos.size()==0) {
                 eventos.add(new Evento( 0,0, "NO HAY EVENTOS CREADOS PARA ESTA CAFETERIA", "", "", "",""));
