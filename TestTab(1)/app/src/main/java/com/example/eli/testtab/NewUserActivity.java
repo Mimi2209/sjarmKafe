@@ -128,6 +128,7 @@ public class NewUserActivity extends AppCompatActivity {
 
             } catch (SQLException se) {
                 System.out.println("oops! No se puede conectar. Error: " + se.toString());
+                return "error";
             } finally {
 
                 //         estatus=tNameCafe.getText().toString()+"/"+tAddress.getText().toString()+"/"+ tDescrip.getText().toString()+2+"/"+ cTables.isChecked()+"/"+ cTerrace.isChecked()+"/"+rRating2.getNumStars() ;
@@ -141,13 +142,17 @@ public class NewUserActivity extends AppCompatActivity {
             newname.setText(null);
             newpass.setText(null);
             newemail.setText(null);
-            Toast.makeText(getApplicationContext(), " USER WITH ID "+ id_usr+ " ADDED FINE !! ", Toast.LENGTH_SHORT).show();
-            gs.setId_usr(id_usr);
-            gs.setNom_usr(Uname);
-            Intent resultIntent = new Intent();
-       //     resultIntent.putExtra("user", Uemail);
-            setResult(Activity.RESULT_OK, resultIntent);
-            finish();
+            if (id_usr >0) {
+                Toast.makeText(getApplicationContext(), " USER WITH ID " + id_usr + " ADDED FINE !! ", Toast.LENGTH_SHORT).show();
+                gs.setId_usr(id_usr);
+                gs.setNom_usr(Uname);
+                Intent resultIntent = new Intent();
+                //     resultIntent.putExtra("user", Uemail);
+                setResult(Activity.RESULT_OK, resultIntent);
+                finish();
+            }else{
+                Toast.makeText(getApplicationContext(), " ERROR another profile is using this e-mail " + Uemail + " please do check ", Toast.LENGTH_SHORT).show();
+            }
         }
     }
 }

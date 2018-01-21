@@ -1,6 +1,7 @@
 package com.example.eli.testtab;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
@@ -33,10 +34,12 @@ public class UsuarioActivity extends AppCompatActivity {
     String pwd;
     static final int NEW_USER_REQUEST = 1;
     GlobalState gs;
+    ProgressDialog progreso;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        c=this;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_usuario);
         gs = (GlobalState) getApplication();
@@ -104,7 +107,13 @@ public class UsuarioActivity extends AppCompatActivity {
 
             @Override
             protected void onPreExecute() {
-
+                progreso = new ProgressDialog(c);
+                progreso.setTitle("Checking user...");
+                progreso.setMessage("Please wait while checking your profile");
+                progreso.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+                progreso.setIndeterminate(false);
+                progreso.setProgress(0);
+                progreso.show();
             }
 
             @Override
@@ -123,7 +132,7 @@ public class UsuarioActivity extends AppCompatActivity {
             @Override
             protected void onPostExecute(String result) {
                 try {
-
+                    progreso.dismiss();
                     if (miUser!=null) {
 
                         Intent resultIntent = new Intent();

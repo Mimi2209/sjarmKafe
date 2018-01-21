@@ -37,8 +37,8 @@ public class Comments extends Fragment {
     ListView comments;
     int idCafeteria;
     String resultat;
-    TextView nom_cafeteria;
-    RatingBar rating_cafeteria;
+    TextView tNameCafe;
+    RatingBar ratGlobal;
     FloatingActionButton add;
     ArrayList<Valoracion> comentarios = new ArrayList<Valoracion>();
     ProgressDialog progreso;
@@ -72,9 +72,12 @@ public class Comments extends Fragment {
     public void onActivityCreated(Bundle state) {
         super.onActivityCreated(state);
         comments = (ListView) getView().findViewById(R.id.comment_list);
-        nom_cafeteria = (TextView) getView().findViewById(R.id.cafe);
-        rating_cafeteria = (RatingBar) getView().findViewById(R.id.rating2);
+        tNameCafe = (TextView) getView().findViewById(R.id.cafe);
+        ratGlobal = (RatingBar) getView().findViewById(R.id.rating2);
         add = (FloatingActionButton) getView().findViewById(R.id.addValoracion);
+        idCafeteria = gs.getId_cafeteria();
+        tNameCafe.setText(gs.getNom_cafeteria());
+        ratGlobal.setRating(gs.getRating_cafeteria());
 
         Descarga nuevaDescarga = new Descarga();
         nuevaDescarga.execute();
@@ -131,9 +134,6 @@ public class Comments extends Fragment {
 
         @Override
         protected void onPreExecute() {
-            idCafeteria = gs.getId_cafeteria(); // recupero id cafeteria de la variable global
-            nom_cafeteria.setText(gs.getNom_cafeteria());
-            rating_cafeteria.setRating(idCafeteria);
             progreso = new ProgressDialog(getActivity());
             progreso.setTitle("Downloading...");
             progreso.setMessage("Please wait while downloading data for this Cafe");

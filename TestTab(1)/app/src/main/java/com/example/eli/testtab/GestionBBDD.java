@@ -385,7 +385,7 @@ public class GestionBBDD {
     public ArrayList<Valoracion> verComentarios(int id_cafeteria) throws SQLException {
         // Vis libro
 
-        String query = "SELECT * FROM u125322db1.valoracion left join u125322db1.usuario on id_val_usuario=id_usuario where id_val_cafeteria  = " + id_cafeteria + ";";
+        String query = "SELECT * FROM u125322db1.valoracion left join u125322db1.usuario on id_val_usuario=id_usuario where id_val_cafeteria  = " + id_cafeteria + " and titulo_comentario != '';";
         Statement stmt = null;
         ArrayList<Valoracion> comentarios = new ArrayList<>();
         try {

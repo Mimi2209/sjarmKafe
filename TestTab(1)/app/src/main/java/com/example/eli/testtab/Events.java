@@ -73,10 +73,10 @@ import static android.app.Activity.RESULT_OK;
     public void onActivityCreated(Bundle state) {
         super.onActivityCreated(state);
         gs = (GlobalState) getActivity().getApplication();
-        idCafeteria = gs.getId_cafeteria();
         events = (ListView) getView().findViewById(R.id.event_list);
         tNameCafe = (TextView) getView().findViewById(R.id.cafe);
         ratGlobal = (RatingBar) getView().findViewById(R.id.rating2);
+        idCafeteria = gs.getId_cafeteria();
         tNameCafe.setText(gs.getNom_cafeteria());
         ratGlobal.setRating(gs.getRating_cafeteria());
         add = (FloatingActionButton) getView().findViewById(R.id.addEvent);

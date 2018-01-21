@@ -63,7 +63,7 @@ public class Rating extends Fragment {
         add = (FloatingActionButton) getView().findViewById(R.id.addValoracion);
         tNameCafe.setText(gs.getNom_cafeteria());
         ratGlobal.setRating(gs.getRating_cafeteria());
-
+        idCafeteria = gs.getId_cafeteria(); // recupero id cafeteria de la variable global
         Descarga nuevaDescarga = new Descarga();
         nuevaDescarga.execute();
 
@@ -116,7 +116,6 @@ public class Rating extends Fragment {
 
         @Override
         protected void onPreExecute() {
-            idCafeteria = gs.getId_cafeteria(); // recupero id cafeteria de la variable global
             progreso = new ProgressDialog(getActivity());
             progreso.setTitle("Downloading...");
             progreso.setMessage("Please wait while downloading data for this Cafe");
