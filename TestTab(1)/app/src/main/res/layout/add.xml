@@ -142,18 +142,16 @@
                 android:paddingBottom="25dp">
 
 
-
                 <Spinner
                     android:id="@+id/tcafe"
                     style="@style/Widget.AppCompat.Spinner.DropDown"
-                    android:layout_width="250dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="50dp"
                     android:layout_weight="1"
-                    android:textSize="15sp"
-                    android:textColor="#7c5106"
                     android:entries="@string/cafet"
-                    android:paddingBottom="25dp" />
+                    android:paddingBottom="25dp"
+                    android:textColor="#7c5106"
+                    android:textSize="15sp" />
 
 
             </LinearLayout>

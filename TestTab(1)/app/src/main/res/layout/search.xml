@@ -10,21 +10,18 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/cap"
         android:orientation="horizontal"
-        android:paddingBottom="25dp">
-
+        android:paddingBottom="10dp">
 
 
         <Spinner
             android:id="@+id/tcafe"
-            android:layout_width="250dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="50dp"
-            android:textSize="15sp"
             style="@style/Widget.AppCompat.Spinner.DropDown"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:backgroundTint="@color/colorPrimary"
-            android:layout_weight="1"
             android:entries="@string/cafet"
-            android:paddingBottom="25dp" />
+            android:paddingBottom="10dp"
+            android:textSize="15sp" />
 
 
     </LinearLayout>
@@ -51,8 +48,9 @@
 
             <CheckBox
                 android:id="@+id/Tables"
-                android:layout_width="200dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_weight="2"
                 android:text="@string/tables"
                 android:textColor="@color/colorPrimary" />
 
@@ -74,6 +72,7 @@
                 android:id="@+id/shop"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_weight="2"
                 android:text="@string/shop"
                 android:textColor="@color/colorPrimary" />
         </TableRow>
@@ -94,6 +93,7 @@
                 android:id="@+id/Xpress"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_weight="2"
                 android:text="@string/express_service"
                 android:textColor="@color/colorPrimary" />
 
@@ -121,7 +121,8 @@
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="20dp"
         android:layout_marginTop="20dp"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:paddingBottom="20dp">
 
         <LinearLayout
             android:id="@+id/distant"
@@ -136,16 +137,18 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="@string/distance"
-                android:textAppearance="@style/TextAppearance.AppCompat"
-                android:textColor="@color/colorPrimaryDark" />
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="18sp" />
 
             <SeekBar
                 android:id="@+id/seekDistancia"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:max="20"
-                android:clickable="true" android:focusable="true"/>
+                android:clickable="true"
+                android:focusable="true"
+                android:max="20" />
 
             <TextView
                 android:id="@+id/valDistancia"
@@ -164,13 +167,13 @@
 
             <TextView
                 android:id="@+id/Rating"
-                android:layout_width="0dp"
+                android:layout_width="146dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_weight="1"
                 android:gravity="center"
                 android:text="@string/rating"
-                android:textColor="@color/colorPrimaryDark" />
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="18sp" />
 
             <RatingBar
                 android:id="@+id/rating"
@@ -178,9 +181,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:clickable="true"
+                android:focusable="true"
                 android:isIndicator="false"
                 android:numStars="5"
-                android:stepSize="0.1" android:focusable="true" />
+                android:stepSize="0.1" />
 
         </LinearLayout>
 

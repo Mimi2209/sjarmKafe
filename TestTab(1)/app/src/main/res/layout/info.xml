@@ -12,15 +12,15 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/time"
         android:orientation="horizontal"
-        android:paddingBottom="25dp">
+        android:paddingBottom="15dp">
 
         <TextView
             android:id="@+id/ctyp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:textColor="@color/colorPrimary"
-            android:text="@string/coffee_type" />
+            android:text="@string/coffee_type"
+            android:textColor="@color/colorPrimary" />
 
         <TextView
             android:id="@+id/tcafe"
@@ -36,7 +36,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/ctype"
-        android:paddingBottom="30dp"
+        android:paddingBottom="15dp"
         android:paddingTop="15dp">
 
         <TableRow
