@@ -201,12 +201,12 @@ public class Search extends Fragment {
             sql_string += "valoracion >= " + ratGlobal.getRating();
             chk_criterios++;
         }
-        //  aplicar distancia 5 km max.
+        //  aplicar distancia 20 km max.
         if (distancia.getProgress() > 0) {
             gs.setDistancia_search(distancia.getProgress());
         }
 
-        sql_string += " ;";
+        sql_string += " order by valoracion desc;";
         return sql_string;
 
     }

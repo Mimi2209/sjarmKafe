@@ -173,7 +173,7 @@ public class GestionBBDD {
     // ------- Recupero lista  cafeterias por distancia (para Listing y para Map)
     public ArrayList<Cafeteria> verListCafeterias(float longi, float ltg) throws SQLException {
 
-        String query = "SELECT * FROM u125322db1.cafeteria order by valoracion desc;";
+        String query = "SELECT * FROM u125322db1.cafeteria ;";
         Statement stmt = null;
         ArrayList<Cafeteria> listCafeterias = new ArrayList<>();
         try {
